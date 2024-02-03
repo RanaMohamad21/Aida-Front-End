@@ -1,0 +1,1 @@
+This folder will contain all User pages including user profiel and so on.
