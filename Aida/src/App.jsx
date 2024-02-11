@@ -1,5 +1,4 @@
 import Footer from "./UI/Footer";
-import "./index.css";
 function App() {
   return (
     <>
