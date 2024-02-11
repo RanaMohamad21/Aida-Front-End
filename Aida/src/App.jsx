@@ -1,9 +1,9 @@
+import Signup from "./Authentication/Signup";
 import Footer from "./UI/Footer";
 function App() {
   return (
     <>
-      <div> Header</div>
-      <div> Main</div>
+      <Signup />
       <Footer />
     </>
   );
