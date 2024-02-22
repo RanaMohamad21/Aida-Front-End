@@ -1,9 +1,9 @@
 import Footer from "./UI/Footer";
-import Login from "./Authentication/Login";
+import Signup from "./Authentication/Signup";
 function App() {
   return (
     <>
-      <Login />
+      <Signup />
       <Footer />
     </>
   );

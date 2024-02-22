@@ -1,4 +1,4 @@
-import LogoTealText from "../assets/LogoTealText.svg";
+import LogoTealText from "../assets/logo/LogoTealText.svg";
 function Signup() {
   return (
     <>
@@ -10,7 +10,7 @@ function Signup() {
             className="w-full object-fill"
           />
         </div>
-        <div className=" w-9/12">
+        <div className=" w-9/12 px-14">
           <img
             src={LogoTealText}
             alt="Logo"
@@ -21,17 +21,21 @@ function Signup() {
               <div>
                 <div>
                   <label>First Name</label> <br />
-                  <input type="text " />
+                  <input type="text " placeholder="Ahmad" />
                 </div>
                 <div>
                   <label>Email</label>
                   <br />
-                  <input type="email" />
+                  <input type="email" placeholder="example@example.com" />
                 </div>
                 <div>
                   <label>Adress</label>
                   <br />
-                  <input type="text" />
+                  <input
+                    type="text"
+                    placeholder="Qesm ElMoqatam, Cairo, Egypt"
+                  />
+                  <span>This will be the delivery address</span>
                 </div>
                 <div>
                   <label>Date of birth</label>
@@ -53,7 +57,7 @@ function Signup() {
                 <div>
                   <label>Second Name</label>
                   <br />
-                  <input type="text" />
+                  <input type="text" placeholder="Taha" />
                 </div>
                 <div>
                   <label>Password</label>
@@ -63,7 +67,7 @@ function Signup() {
                 <div>
                   <label>Phone</label>
                   <br />
-                  <input type="tel" />
+                  <input type="tel" placeholder="+201232453123" />
                 </div>
                 <div>
                   <label>Gender</label>
