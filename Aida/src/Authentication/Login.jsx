@@ -2,7 +2,6 @@ import logoWhiteTxtAida from "/src/assets/logo/LogoWhiteTextAida.svg";
 import LoginImg from "/src/assets/Authentication/login.jpeg";
 function Login() {
   return (
-    // <div className=" min-h-screen w-full grid grid-cols-2 gap-4">
     <div className=" h-screen w-full flex items-start pb-10">
       <div className="relative w-3/5 h-full flex flex-col">
         <img
