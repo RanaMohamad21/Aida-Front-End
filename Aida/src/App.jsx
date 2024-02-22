@@ -1,14 +1,10 @@
-
 import Footer from "./UI/Footer";
-
-import UpperFooter from "./UI/UpperFooter";
+import Login from "./Authentication/Login";
 function App() {
   return (
-    <><div className="h-[600px]">
-      bab
-    </div>
-      <UpperFooter/>
-      <Footer/>
+    <>
+      <Login />
+      <Footer />
     </>
   );
 }

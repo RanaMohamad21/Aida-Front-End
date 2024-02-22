@@ -1,33 +1,22 @@
-/** @type {import('tailwindcss').Config} */
+// /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    extend: {
+      fontFamily: {
+        sans: ["Roboto", "Arial", "san-serif"],
+      },
+    },
     colors: {
       white: "#FFFFFF",
-      // teal: "#03BCBF",
+      black: "#000",
       teal: "#25b5ba",
-      IceBlue: "#EFF7FC",
+      IceBlue: "#EDF6FB",
+      // IceBlue: "#EFF7FC",
       gray: "#bac0c4",
       EggshellGray: "#FAFBFD",
       FlamingoPink: "#FF897F",
     },
-    fontFamily: {
-      sans: ["Roboto", "Arial", "san-serif"],
-    },
-    // container: {
-    //   center: true,
-    //   padding: {
-    //     default: "1rem",
-    //     sm: "3rem",
-    //   },
-    // },
   },
   plugins: [],
 };
-// export default {
-//   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-//   theme: {
-//     extend: {},
-//   },
-//   plugins: [],
-// };

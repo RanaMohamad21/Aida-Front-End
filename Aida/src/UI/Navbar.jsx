@@ -1,4 +1,4 @@
-// Alhamdulillah Done 
+// Alhamdulillah Done
 const NavbarLinks = [
   { name: "Fashion", link: "/#fashion" },
   { name: "Electronics", link: "/#electronics" },
@@ -13,7 +13,7 @@ const NavbarLinks = [
 
 function Navbar() {
   return (
-    <nav className="w-full bg-teal h-[30px]">
+    <nav className="w-[100%] bg-teal h-[30px] ">
       <div className="   text-white font-sans py-3 px-5 w-full h-full">
         {/*Menu items*/}
         <ul className="flex justify-between text-nowrap items-center gap-12 h-full">

@@ -19,7 +19,7 @@ const iconList = [
 ];
 function UpperFooter() {
   return (
-    <div className="bg-teal  flex justify-between items-center px-4 text-white">
+    <div className="bg-teal  flex justify-between items-center px-4 text-white absolute w-[100%] mb-0 bottom-[49px] ">
       <div className="justify-self-start ">
         <img src={logoWhiteTxtAida} alt="logo" />
         <p className="font-semibold ">Developers</p>
@@ -32,7 +32,7 @@ function UpperFooter() {
         </ul>
       </div>
       <div className="justify-self-end">
-        <div className="border-2 p-3px w-[20px]  transition-all duration-200 hover:border-IceBlue">
+        <div className="border-2 p-3px w-[20px]  transition-all duration-200 hover:border-IceBlue ">
           <button>&uarr;</button>
         </div>
         <p>Categories</p>
