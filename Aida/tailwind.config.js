@@ -2,14 +2,25 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    colors:{
-      'white': "#FFFFFF",
-      'teal': '#03BCBF',
-      'IceBlue': '#EDF6FB',
-      'gray': '#86959F',
-      'EggshellGray':'#FAFBFD',
-      'FlamingoPink':'#FF897F',
+    colors: {
+      white: "#FFFFFF",
+      // teal: "#03BCBF",
+      teal: "#25b5ba",
+      IceBlue: "#EFF7FC",
+      gray: "#bac0c4",
+      EggshellGray: "#FAFBFD",
+      FlamingoPink: "#FF897F",
     },
+    fontFamily: {
+      sans: ["Roboto", "Arial", "san-serif"],
+    },
+    // container: {
+    //   center: true,
+    //   padding: {
+    //     default: "1rem",
+    //     sm: "3rem",
+    //   },
+    // },
   },
   plugins: [],
 };

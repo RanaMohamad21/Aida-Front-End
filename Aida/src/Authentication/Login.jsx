@@ -1,4 +1,4 @@
-import logoWhiteTxtAida from "/src/assets/LogoWhiteTextAida.svg";
+import logoWhiteTxtAida from "/src/assets/logo/LogoWhiteTextAida.svg";
 function Login() {
   return (
     <div className=" h-screen grid grid-cols-2 gap-4">

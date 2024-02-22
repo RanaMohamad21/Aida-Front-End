@@ -1,10 +1,14 @@
-import Signup from "./Authentication/Signup";
+
 import Footer from "./UI/Footer";
+
+import UpperFooter from "./UI/UpperFooter";
 function App() {
   return (
-    <>
-      <Signup />
-      <Footer />
+    <><div className="h-[600px]">
+      bab
+    </div>
+      <UpperFooter/>
+      <Footer/>
     </>
   );
 }

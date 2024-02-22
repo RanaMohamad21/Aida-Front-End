@@ -5,7 +5,7 @@ function Signup() {
       <main className="flex ">
         <div className=" w-3/12 ">
           <img
-            src="/src/assets/SidebarSignup.jpeg"
+            src="/src/assets/Authentication/SidebarSignup.jpeg"
             alt="Side Bar"
             className="w-full object-fill"
           />
