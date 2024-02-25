@@ -4,12 +4,12 @@ const inputStyle = "border-solid border-2 border-gray px-2 py-1 mx-2 mt-2 mb-4";
 const labelStyle = "font-semibold mx-2  ";
 import sport from "../assets/Authentication/Categories/sport1.jpeg";
 import petSupplies from "../assets/Authentication/Categories/petsupplies.jpeg";
-import officeSupplies from "../assets/Authentication/Categories/office supplies.jpeg";
+import officeSupplies from "../assets/Authentication/Categories/officesupplies.jpeg";
 import fashion from "../assets/Authentication/Categories/fashion2.jpeg";
 import healthCare from "../assets/Authentication/Categories/healthcare1.jpeg";
 import electronics from "../assets/Authentication/Categories/Electronics2.jpeg";
 import books from "../assets/Authentication/Categories/books2.jpeg";
-import homeSupplies from "../assets/Authentication/Categories/home supplies.jpeg";
+import homeSupplies from "../assets/Authentication/Categories/homesupplies.jpeg";
 
 const categories = [
   { name: "Fashion", link: fashion },
@@ -125,10 +125,21 @@ function Signup() {
             </p>
             <div className="text-center w-2/3 mx-auto grid grid-cols-[repeat(3,auto)] gap-1">
               {categories.map((cat, index) => (
-                 <div className="bg-cover bg-center rounded-lg h-24 flex flex-col justify-center items-center" key={index} style={{ backgroundImage: `url(${cat.link})` }}>
-                 <span className="text-white font-semibold text-xs">{cat.name}</span>
-                 <input type="checkbox" className="mr-2" />
-               </div>
+                <div
+                  className="bg-cover bg-center rounded-lg h-24 relative"
+                  key={index}
+                  style={{ backgroundImage: `url(${cat.link})` }}
+                >
+                  <div className="bg-black bg-opacity-50 w-full h-full absolute top-0 left-0 flex flex-col justify-center items-center ">
+                    <span className="text-white font-semibold text-xs ">
+                      {cat.name}
+                    </span>
+                    <input
+                      type="checkbox"
+                      className="mr-2 mb-3  "
+                    />
+                  </div>
+                </div>
               ))}
             </div>
           </form>
@@ -146,29 +157,3 @@ function Signup() {
 }
 
 export default Signup;
-
-{
-  /* <div className="   text-center w-2/3 mx-auto grid grid-cols-[repeat(3,auto)] gap-1">
-            {categories.map((cat, index)=>(
-              <div className="  " key={index} ><img src={cat.link} alt={cat.name} className="w-full h-full"/>
-              
-              </div>
-            ))}
-          </div> */
-}
-
-// <div
-//                   className="bg-cover bg-center rounded-lg h-24 relative"
-//                   key={index}
-//                   style={{ backgroundImage: `url(${cat.link})` }}
-//                 >
-//                   <div className="bg-black bg-opacity-50 w-full h-full absolute top-0 left-0">
-//                     <input
-//                       type="checkbox"
-//                       className="mr-2 absolute top-1/2 left-2"
-//                     />
-//                     <span className="text-white font-semibold absolute top-1/2 left-1/2">
-//                       {cat.name}
-//                     </span>
-//                   </div>
-//                 </div>
