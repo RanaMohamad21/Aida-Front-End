@@ -1,4 +1,4 @@
-import HomePage from "./User/HomePage";
+import HomePage from "./Products/HomePage";
 import Login from "./Authentication/Login";
 import Signup from "./Authentication/Signup";
 import Footer from "./UI/Footer";

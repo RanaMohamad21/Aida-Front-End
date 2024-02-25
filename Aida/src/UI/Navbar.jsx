@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 // Alhamdulillah Done
 const NavbarLinks = [
@@ -20,12 +20,12 @@ function Navbar() {
         <ul className="flex justify-between text-nowrap items-center gap-12 h-full">
           {NavbarLinks.map((link, index) => (
             <li key={index}>
-              <Link
+              <NavLink
                 to={link.link}
                 className="inline-block hover:text-IceBlue hover:bg-[#03bbbf] duration-200"
               >
                 {link.name}
-              </Link>
+              </NavLink>
             </li>
           ))}
         </ul>
