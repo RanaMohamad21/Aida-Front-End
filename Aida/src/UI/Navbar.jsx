@@ -1,14 +1,15 @@
+import { Link } from "react-router-dom";
+
 // Alhamdulillah Done
 const NavbarLinks = [
-  { name: "Fashion", link: "/#fashion" },
-  { name: "Electronics", link: "/#electronics" },
-  { name: "Sports", link: "/#sports" },
-  { name: "Health & wellness", link: "/#health-wellness" },
-  { name: "Pet supplies", link: "/#pet-supplies" },
-  { name: "Children's goods", link: "/#children-goods" },
-  { name: "Books", link: "/#books" },
-  { name: "Home essentials", link: "/#home-essentials" },
-  { name: "Office supplies", link: "/#office-supplies" },
+  { name: "Fashion", link: "/fashion" },
+  { name: "Electronics", link: "/electronics" },
+  { name: "Sports", link: "/sports" },
+  { name: "Health & wellness", link: "/health" },
+  { name: "Pet supplies", link: "/pets" },
+  { name: "Books", link: "/books" },
+  { name: "Home essentials", link: "/homeessentials" },
+  { name: "Office supplies", link: "/officesupplies" },
 ];
 
 function Navbar() {
@@ -19,12 +20,12 @@ function Navbar() {
         <ul className="flex justify-between text-nowrap items-center gap-12 h-full">
           {NavbarLinks.map((link, index) => (
             <li key={index}>
-              <a
-                href={link.link}
+              <Link
+                to={link.link}
                 className="inline-block hover:text-IceBlue hover:bg-[#03bbbf] duration-200"
               >
                 {link.name}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

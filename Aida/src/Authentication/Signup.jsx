@@ -41,7 +41,7 @@ function Signup() {
           />
           <form className="mb-3">
             <div className="flex justify-around  w-2/3 relative h-3/4 mx-auto font-sans">
-              <div className="w-1/2 bg-gray">
+              <div className="w-1/2 ">
                 <div>
                   <label className={labelStyle}>First Name</label> <br />
                   <input
@@ -87,7 +87,7 @@ function Signup() {
                   </p>
                 </div>
               </div>
-              <div className="w-1/2 bg-IceBlue">
+              <div className="w-1/2 ">
                 <div>
                   <label className={labelStyle}>Second Name</label>
                   <br />
@@ -134,10 +134,7 @@ function Signup() {
                     <span className="text-white font-semibold text-xs ">
                       {cat.name}
                     </span>
-                    <input
-                      type="checkbox"
-                      className="mr-2 mb-3  "
-                    />
+                    <input type="checkbox" className="mr-2 mb-3  " />
                   </div>
                 </div>
               ))}
