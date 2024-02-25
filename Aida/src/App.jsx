@@ -1,37 +1,16 @@
-import HomePage from "./Products/HomePage";
-import Login from "./Authentication/Login";
-import Signup from "./Authentication/Signup";
 import Footer from "./UI/Footer";
-import FashionPage from "./Products/FashionPage";
-import ElectronicsPage from "./Products/ElectronicsPage";
-import SportsPage from "./Products/SportsPage";
-import HealthPage from "./Products/HealthPage";
-import PetsPage from "./Products/PetSuppliesPage";
-import BooksPage from "./Products/BooksPage";
-import HomeEssentialsPage from "./Products/HomeEssentialsPage";
-import OfficeSuppliesPage from "./Products/OfficeSuppliesPage";
-
+import routes from "./Routes/index";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 function App() {
+  console.log(routes[0].component);
   return (
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-
-          {/* Authentication Pages */}
-          <Route path="login" element={<Login />} />
-          <Route path="signUp" element={<Signup />} />
-
-          {/* Products Pages  */}
-          <Route path="/fashion" element={<FashionPage />} />
-          <Route path="/electronics" element={<ElectronicsPage />} />
-          <Route path="/sports" element={<SportsPage />} />
-          <Route path="/health" element={<HealthPage />} />
-          <Route path="/pets" element={<PetsPage />} />
-          <Route path="/books" element={<BooksPage />} />
-          <Route path="/homeessentials" element={<HomeEssentialsPage />} />
-          <Route path="/officesupplies" element={<OfficeSuppliesPage />} />
+          {routes.map((route, index) => (
+            <Route key={index} path={route.path} element={route.element} />
+          ))}
         </Routes>
       </BrowserRouter>
       <Footer />
