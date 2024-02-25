@@ -18,9 +18,10 @@ input {
   outline: 2px solid transparent;
   outline-ofset: 2px;
   border-style: none;
-  border-radius: 0.25rem /* 4px */;
+  border-radius: 0.25rem  ;
   caret-color: #25b5ba;
   border-radius: 8px;
+  
 }
 
 input:hover {
@@ -34,6 +35,9 @@ input:focus {
 }
 button {
   border-radius: 8px;
+}
+label{
+  margin: 2px;
 }
 
 
