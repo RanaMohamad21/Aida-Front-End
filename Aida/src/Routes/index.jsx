@@ -10,6 +10,7 @@ import PetsPage from "../Products/PetSuppliesPage";
 import BooksPage from "../Products/BooksPage";
 import HomeEssentialsPage from "../Products/HomeEssentialsPage";
 import OfficeSuppliesPage from "../Products/OfficeSuppliesPage";
+import UnavailablePage from "../User/UnavailablePage";
 
 // const routes = [
 //   { path: "/", element: <HomePage /> },
@@ -111,6 +112,14 @@ const routes = [
     element: (
       <React.Fragment>
         <OfficeSuppliesPage />
+      </React.Fragment>
+    ),
+  },
+  {
+    path: "*",
+    element: (
+      <React.Fragment>
+        <UnavailablePage />
       </React.Fragment>
     ),
   },

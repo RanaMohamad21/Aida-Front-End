@@ -25,7 +25,7 @@ const categories = [
 function Signup() {
   return (
     <>
-      <main className="flex ">
+      <div className="flex ">
         <div className=" w-3/12 ">
           <img
             src="/src/assets/Authentication/SidebarSignup.jpeg"
@@ -148,7 +148,7 @@ function Signup() {
             </a>
           </div>
         </div>
-      </main>
+      </div>
     </>
   );
 }
