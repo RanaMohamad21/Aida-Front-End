@@ -3,29 +3,35 @@ import LogoTealText from "../assets/logo/LogoTealText.svg";
 import categories from "../UI/SignupCategories";
 const inputStyle = "border-solid border-2 border-gray px-2 py-1  mt-2 mb-4 ";
 const labelStyle = "font-semibold mx-2  ";
+const radioLabel = "text-gray hover:cursor-pointer";
+
 
 function Signup() {
+
   const navigate = useNavigate();
   function handleSubmit(e) {
     e.preventDefault();
 
     navigate("/login");
   }
+  function handleChecked(e) {
+    console.log(e.targed.value);
+  }
   return (
     <>
-      <div className="flex mb-[100px]">
-        <div className=" w-3/12 ">
+      <div className="flex   h-screan">
+        <div className=" w-3/12  ">
           <img
             src="/src/assets/Authentication/SidebarSignup.jpeg"
             alt="Side Bar"
-            className="w-full object-cover"
+            className="w-full h-full object-cover  lg:h-[1200px]"
           />
         </div>
-        <div className=" w-9/12 px-14">
+        <div className=" bg-IceBlue sm:w-full md:w-8/12  lg:w-6/12 mx-auto px-14 sm:pb-[60px] ">
           <img
             src={LogoTealText}
             alt="Logo"
-            className="w-[410px]  ml-auto mr-auto "
+            className="w-[410px] mx-auto my-10  "
           />
           <form className="mb-3" onSubmit={handleSubmit}>
             <div className="flex justify-around  w-2/3 relative h-3/4 mx-auto gap-[70px] font-sans">
@@ -48,11 +54,11 @@ function Signup() {
                   />
                 </div>
                 <div>
-                  <label className={labelStyle}>Adress</label>
+                  <label className={labelStyle}>Address</label>
                   <br />
                   <input
                     type="text"
-                    placeholder="Qesm ElMoqatam, Cairo, Egypt"
+                    placeholder="ElMoqatam, Cairo, Egypt"
                     className={inputStyle}
                   />
                   <p className="font-thin text-xs ">
@@ -67,9 +73,30 @@ function Signup() {
                 <div>
                   <label className={labelStyle}>Account</label>
                   <br />
-                  <input type="radio" value="Shopping" className={inputStyle} />
-                  <label className={labelStyle}>Shopping</label>
-                  <input type="radio" value="Selling" /> <label>Selling</label>
+                  <div>
+                    <input
+                      type="radio"
+                      id="Shopping"
+                      value="Shopping"
+                      name="account"
+                      className={`${radioLabel} `}
+                      checked
+                    />
+                    <label className={`${radioLabel} `} htmlFor="Shopping">
+                      Shopping
+                    </label>
+                  </div>
+                  <div>
+                    <input
+                      type="radio"
+                      id="selling"
+                      value="Selling"
+                      name="account"
+                    />{" "}
+                    <label className={`${radioLabel} `} htmlFor="selling">
+                      Selling
+                    </label>
+                  </div>
                   <p className="text-FlamingoPink">
                     This cannot be changed later
                   </p>
@@ -99,19 +126,39 @@ function Signup() {
                     className={inputStyle}
                   />
                 </div>
-                <div className="mt-8">
+                <div className="mt-[50px] lg:mt-[38px]">
                   <label className={labelStyle}>Gender</label>
                   <br />
-                  <input type="radio" value="Male" /> <label>Male</label>
-                  <input type="radio" value="Female" />{" "}
-                  <label className={labelStyle}>Female</label>
+                  <div>
+                    <input
+                      type="radio"
+                      id="male"
+                      value="Male"
+                      name="gender"
+                      checked
+                    />{" "}
+                    <label className={`${radioLabel} `} htmlFor="male">
+                      Male
+                    </label>
+                  </div>
+                  <div>
+                    <input
+                      type="radio"
+                      id="Female"
+                      name="gender"
+                      value="Female"
+                    />
+                    <label htmlFor="Female" className={`${radioLabel} `}>
+                      Female
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
-            <p className="bold ">
+            <p className="font-bold mx-10 my-4 ">
               Select categories that you might be interested in
             </p>
-            <div className="text-center w-4/5 mx-auto grid grid-cols-[repeat(3,auto)] gap-1">
+            <div className="text-center w-4/5 mx-auto grid grid-cols-[repeat(3,auto)] gap-1 lg:w-[75%] ">
               {categories.map((cat, index) => (
                 <div
                   className="bg-cover bg-center rounded-lg h-24 relative"
@@ -122,7 +169,11 @@ function Signup() {
                     <span className="text-white font-semibold text-xs ">
                       {cat.name}
                     </span>
-                    <input type="checkbox" className="mr-2 mb-3  " />
+                    <input
+                      type="checkbox"
+                      className="mr-2 mb-3  "
+                      onChange={handleChecked}
+                    />
                   </div>
                 </div>
               ))}
@@ -152,3 +203,8 @@ function Signup() {
 }
 
 export default Signup;
+
+/* 
+@TODO: 
+Change the background of the radio button to be gray
+*/

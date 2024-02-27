@@ -1,24 +1,35 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import logoWhiteTxtAida from "/src/assets/logo/LogoWhiteTextAida.svg";
 import LoginImg from "/src/assets/Authentication/login.jpeg";
+import { useAuthentication } from "./AuthenticationContext";
 
-// Will take the method: "setIsLoggedIn() to set it to true"
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("example@example.com");
   const [password, setPassword] = useState("");
 
-  
+  const { login, isAuthenticated, error } = useAuthentication();
+
+  function resetInputs() {
+    setEmail(" ");
+    setPassword(" ");
+  }
   function handleSubmit(e) {
     e.preventDefault();
-    const account = { emal: email, pass: password };
-    console.log(account);
-    setEmail("");
-    setPassword("");
-    navigate("/");
+    if (email && password) login(email, password);
+    resetInputs();
   }
+  useEffect(
+    function () {
+      if (isAuthenticated) navigate("/",{replace: true});
+      else {
+        console.log(error);
+      }
+    },
+    [isAuthenticated, navigate]
+  );
   return (
     <div className=" h-screen w-full flex items-start pb-10 ">
       <div className="relative w-3/5 h-full flex flex-col">
@@ -58,13 +69,11 @@ function Login() {
           <p className="font-thin text-IceBlue text-xs">
             forgot your password?
           </p>
-          <input
-            className="bg-FlamingoPink w-full rounded-md h-8 my-5 cursor-pointer hover:translate-x-[2px] hover:translate-y-[2px] transition-all "
-            type="submit"
-            value="Login"
-          />
+          <button className="bg-FlamingoPink w-full rounded-md h-8 my-5 cursor-pointer hover:translate-x-[2px] hover:translate-y-[2px] transition-all uppercase">
+            Login
+          </button>
+          {!isAuthenticated && <p className="text-black mb-4">{error}</p>}
         </form>
-
         <div className=" justify-center items-center w-3/4 mx-auto text-center">
           <hr className="mb-1" />
           <span className="px-2 text-xs">New here?</span>

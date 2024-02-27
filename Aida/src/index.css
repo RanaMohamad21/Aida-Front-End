@@ -15,19 +15,22 @@
   padding: 0;
 }
 
-body{
+body {
   display: flex;
   flex-direction: column;
 }
 
+input[type="radio"]:checked ~ .checkmark {
+  background-color: black;
+  outline: none;
+}
 input {
   outline: 2px solid transparent;
   outline-ofset: 2px;
   border-style: none;
-  border-radius: 0.25rem  ;
+  border-radius: 0.25rem;
   caret-color: #25b5ba;
   border-radius: 8px;
-  
 }
 
 input:hover {
@@ -36,19 +39,19 @@ input:hover {
   padding-left: 0.25rem /* 4px */;
   padding-right: 0.25rem /* 4px */;
 }
-input:focus {
+input[type = "text"]:focus {
   outline: 2px solid #ff897f;
 }
 button {
   border-radius: 8px;
 }
-label{
+label {
   margin: 2px;
 }
-
 
 .transition-all {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
+
