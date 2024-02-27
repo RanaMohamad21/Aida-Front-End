@@ -1,8 +1,26 @@
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 import logoWhiteTxtAida from "/src/assets/logo/LogoWhiteTextAida.svg";
 import LoginImg from "/src/assets/Authentication/login.jpeg";
+
+// Will take the method: "setIsLoggedIn() to set it to true"
 function Login() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("example@example.com");
+  const [password, setPassword] = useState("");
+
+  
+  function handleSubmit(e) {
+    e.preventDefault();
+    const account = { emal: email, pass: password };
+    console.log(account);
+    setEmail("");
+    setPassword("");
+    navigate("/");
+  }
   return (
-    <div className=" h-screen w-full flex items-start pb-10">
+    <div className=" h-screen w-full flex items-start pb-10 ">
       <div className="relative w-3/5 h-full flex flex-col">
         <img
           src={LoginImg}
@@ -16,13 +34,15 @@ function Login() {
           className="font-semibold  justify-center items-center w-3/4 mx-auto "
           method="POST"
           action=""
+          onSubmit={handleSubmit}
         >
           <div className="py-4">
             <label className="text-xl">Email</label>
             <input
               type="email"
-              placeholder="example@example.com"
+              placeholder={email}
               className="w-full text-black bg-none px-2 py-1 mt-1 font-thin "
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -31,6 +51,7 @@ function Login() {
             <input
               type="password"
               className="w-full text-black bg-none px-2 py-1 mt-1 font-thin"
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
@@ -47,12 +68,12 @@ function Login() {
         <div className=" justify-center items-center w-3/4 mx-auto text-center">
           <hr className="mb-1" />
           <span className="px-2 text-xs">New here?</span>
-          <a
-            href="/"
-            className="hover:px-1 hover:italic hover:text-IceBlue transition-all  text-s underline"
+          <Link
+            to="/signup"
+            className=" hover:italic hover:text-IceBlue transition-all  text-s underline"
           >
             Sign up
-          </a>
+          </Link>
         </div>
       </div>
     </div>

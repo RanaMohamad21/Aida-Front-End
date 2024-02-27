@@ -1,12 +1,19 @@
+import { Link, useNavigate } from "react-router-dom";
 import LogoTealText from "../assets/logo/LogoTealText.svg";
 import categories from "../UI/SignupCategories";
-const inputStyle = "border-solid border-2 border-gray px-2 py-1 mx-2 mt-2 mb-4";
+const inputStyle = "border-solid border-2 border-gray px-2 py-1  mt-2 mb-4 ";
 const labelStyle = "font-semibold mx-2  ";
 
 function Signup() {
+  const navigate = useNavigate();
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    navigate("/login");
+  }
   return (
     <>
-      <div className="flex ">
+      <div className="flex mb-[100px]">
         <div className=" w-3/12 ">
           <img
             src="/src/assets/Authentication/SidebarSignup.jpeg"
@@ -18,11 +25,11 @@ function Signup() {
           <img
             src={LogoTealText}
             alt="Logo"
-            className="w-[410px] h-[211px] ml-auto mr-auto"
+            className="w-[410px]  ml-auto mr-auto "
           />
-          <form className="mb-3">
-            <div className="flex justify-around  w-2/3 relative h-3/4 mx-auto font-sans">
-              <div className="w-1/2 ">
+          <form className="mb-3" onSubmit={handleSubmit}>
+            <div className="flex justify-around  w-2/3 relative h-3/4 mx-auto gap-[70px] font-sans">
+              <div className="w-1/2 flex flex-col ">
                 <div>
                   <label className={labelStyle}>First Name</label> <br />
                   <input
@@ -101,10 +108,10 @@ function Signup() {
                 </div>
               </div>
             </div>
-            <p className="bold text-center">
+            <p className="bold ">
               Select categories that you might be interested in
             </p>
-            <div className="text-center w-2/3 mx-auto grid grid-cols-[repeat(3,auto)] gap-1">
+            <div className="text-center w-4/5 mx-auto grid grid-cols-[repeat(3,auto)] gap-1">
               {categories.map((cat, index) => (
                 <div
                   className="bg-cover bg-center rounded-lg h-24 relative"
@@ -120,13 +127,23 @@ function Signup() {
                 </div>
               ))}
             </div>
+            <div className="items-center flex justify-center w-full ">
+              <input
+                className="text-white bg-FlamingoPink w-1/2  rounded-md h-8 uppercase my-5 cursor-pointer hover:translate-x-[2px] hover:translate-y-[2px] transition-all "
+                type="submit"
+                value="Signup"
+              />
+            </div>
           </form>
-          <hr className="bg-gray" />
+          <hr className="bg-gray mb-2 border-none h-[1px]" />
           <div className=" text-center">
             <span>Already have an account?</span>{" "}
-            <a href="/" className="text-gray">
+            <Link
+              to="/login"
+              className="text-gray hover:italic  transition-all"
+            >
               Log in
-            </a>
+            </Link>
           </div>
         </div>
       </div>
