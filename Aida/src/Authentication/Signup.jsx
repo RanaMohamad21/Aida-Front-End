@@ -27,7 +27,7 @@ function Signup() {
             className="w-full h-full object-cover  lg:h-[1200px]"
           />
         </div>
-        <div className=" bg-IceBlue sm:w-full md:w-8/12  lg:w-6/12 mx-auto px-14 sm:pb-[60px] ">
+        <div className="  sm:w-full md:w-8/12  lg:w-6/12 mx-auto px-14 sm:pb-[60px] ">
           <img
             src={LogoTealText}
             alt="Logo"

@@ -61,3 +61,6 @@ What is left in the Login page:
    > The button to make the password visible.
    > Adjusting the font to be Roboto but it is not working for some reason
    > The image needs to be changed as it has low quality!
+
+
+Notes: After the signup process, a user is redirected to the login page while the vendor is redirected to the home page without logging him in.

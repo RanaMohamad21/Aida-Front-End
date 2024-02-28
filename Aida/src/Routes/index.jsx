@@ -11,7 +11,7 @@ import BooksPage from "../Products/BooksPage";
 import HomeEssentialsPage from "../Products/HomeEssentialsPage";
 import OfficeSuppliesPage from "../Products/OfficeSuppliesPage";
 import UnavailablePage from "../User/UnavailablePage";
-
+import RegistrationReview from "../Authentication/RegistrationReview";
 // const routes = [
 //   { path: "/", element: <HomePage /> },
 //   { path: "/login", component: <Login /> },
@@ -120,6 +120,14 @@ const routes = [
     element: (
       <React.Fragment>
         <UnavailablePage />
+      </React.Fragment>
+    ),
+  },
+  {
+    path: "/review",
+    element: (
+      <React.Fragment>
+        <RegistrationReview />
       </React.Fragment>
     ),
   },

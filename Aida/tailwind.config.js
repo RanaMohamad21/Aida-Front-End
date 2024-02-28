@@ -11,6 +11,7 @@ export default {
       white: "#FFFFFF",
       black: "#000",
       teal: "#25b5ba",
+      // teal: "#03BCBF",
       IceBlue: "#EDF6FB",
       // IceBlue: "#EFF7FC",
       gray: "#bac0c4",
