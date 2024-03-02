@@ -12,7 +12,7 @@ function TextOnlyPage({ children, route, buttonName, backgroundImage }) {
   return (
     <div
       style={{ backgroundImage: `url(${backgroundImage})` }}
-      className="h-full w-full bg-cover"
+      className="h-full w-full bg-cover sm:bg-contain"
     >
       <div className="sm:w-2/5 md:w-1/3  h-full flex flex-col mx-auto items-center bg-teal text-white bg-cover bg-center p-3">
         <img src={logoWhiteTxtAida} alt="Logo" />
@@ -21,7 +21,7 @@ function TextOnlyPage({ children, route, buttonName, backgroundImage }) {
           <div className="mt-7">
             <Link
               to={route}
-              className={`border-[1px] p-2  rounded-xl bg-IceBlue text-teal cursor pointer text-[35px] hover:bg-opacity-20 hover:bg-IceBlue hover:text-white `}
+              className={`border-[1px] p-2  rounded-xl bg-IceBlue text-teal cursor pointer  hover:bg-opacity-20 hover:bg-IceBlue hover:text-white `}
             >
               {buttonName}
             </Link>
