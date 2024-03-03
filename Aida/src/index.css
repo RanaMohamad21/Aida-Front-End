@@ -55,3 +55,6 @@ label {
   transition-duration: 150ms;
 }
 
+input:disabled{
+  background-color: gray;
+}
