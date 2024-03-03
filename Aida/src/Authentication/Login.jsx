@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import logoWhiteTxtAida from "/src/assets/logo/LogoWhiteTextAida.svg";
-import LoginImg from "/src/assets/Authentication/login.jpeg";
+import LoginImg from "../assets/Authentication/login.png";
 import { useAuthentication } from "./AuthenticationContext";
 
 function Login() {

@@ -2,6 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import LogoTealText from "../assets/logo/LogoTealText.svg";
 import categories from "../UI/SignupCategories";
 import { useState } from "react";
+import Sidebar from "../assets/Authentication/SidebarSignup.png"
+
 const inputStyle = "border-solid border-2 border-gray px-2 py-1  mt-2 mb-4 ";
 const labelStyle = "font-semibold mx-2  ";
 const radioLabel = "text-gray hover:cursor-pointer";
@@ -28,8 +30,15 @@ function Signup() {
 
   const navigate = useNavigate();
   function handleChange(e) {
-    const { name, value } = e.target;
-    setFormData((prevFormDate) => ({ ...prevFormDate, [name]: value }));
+    if (e.target.type === "checkbox") {
+      setFormData((prevFormDate) => ({
+        ...prevFormDate,
+        termsChecked: e.target.checked,
+      }));
+    } else {
+      const { name, value } = e.target;
+      setFormData((prevFormDate) => ({ ...prevFormDate, [name]: value }));
+    }
   }
   function handleSubmit(e) {
     e.preventDefault();
@@ -38,7 +47,7 @@ function Signup() {
       categories: checkedCategories,
     };
     console.log(userData);
-    // navigate("/login");
+    navigate("/login");
   }
 
   // Sets an array of booleans for the categories
@@ -54,7 +63,7 @@ function Signup() {
       <div className="flex   h-screan">
         <div className=" w-3/12  ">
           <img
-            src="/src/assets/Authentication/SidebarSignup.jpeg"
+            src={Sidebar}
             alt="Side Bar"
             className="w-full h-full object-cover  lg:h-[1200px]"
           />
@@ -254,13 +263,13 @@ function Signup() {
               />
               <p className="inline">
                 I accept{" "}
-                <span className="text-teal underline italic ">
+                <span className="cursor-pointer text-teal underline italic ">
                   Terms of services
                 </span>{" "}
                 and{" "}
-                <span className="text-teal underline italic ">
+                <span className="cursor-pointer text-teal underline italic ">
                   Privacy Policy
-                </span>
+                </span>.
               </p>
             </div>
             <div className="items-center flex justify-center w-full ">
@@ -279,7 +288,7 @@ function Signup() {
             <span>Already have an account?</span>{" "}
             <Link
               to="/login"
-              className="text-gray hover:italic  transition-all"
+              className="text-gray font-semibold hover:italic  transition-all"
             >
               Log in
             </Link>

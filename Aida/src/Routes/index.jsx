@@ -12,6 +12,8 @@ import HomeEssentialsPage from "../Products/HomeEssentialsPage";
 import OfficeSuppliesPage from "../Products/OfficeSuppliesPage";
 import UnavailablePage from "../User/UnavailablePage";
 import RegistrationReview from "../Authentication/RegistrationReview";
+import AccountType from "../Authentication/AccountType";
+import VendorGeneralInfo from "../Authentication/VendorGeneralInfo";
 // const routes = [
 //   { path: "/", element: <HomePage /> },
 //   { path: "/login", component: <Login /> },
@@ -44,10 +46,26 @@ const routes = [
     ),
   },
   {
+    path: "/accountType",
+    element: (
+      <React.Fragment>
+        <AccountType />
+      </React.Fragment>
+    ),
+  },
+  {
     path: "/signup",
     element: (
       <React.Fragment>
         <Signup />
+      </React.Fragment>
+    ),
+  },
+  {
+    path: "/vendorgeneralinfo",
+    element: (
+      <React.Fragment>
+        <VendorGeneralInfo />
       </React.Fragment>
     ),
   },
