@@ -122,7 +122,7 @@ function SignUpVendor1() {
             name="storeName"
             type="text"
             placeholder="Example"
-            className={`${inputStyle}  md:w-[40%]`}
+            className={`${inputStyle}  `}
             maxLength="50"
             onChange={handleChange}
             required

@@ -61,6 +61,7 @@ function Login() {
             <label className="text-xl">Password</label>
             <input
               type="password"
+              
               className="w-full text-black bg-none px-2 py-1 mt-1 font-thin"
               onChange={(e) => setPassword(e.target.value)}
               required

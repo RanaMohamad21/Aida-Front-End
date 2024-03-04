@@ -8,7 +8,7 @@ function App() {
   return (
     <VendorSignUpProvider>
       <AuthenticationProvider>
-        <div>
+        <div className="grid grid-rows-[1fr,auto]">
           <BrowserRouter>
             <Routes>
               {routes.map((route, index) => (
