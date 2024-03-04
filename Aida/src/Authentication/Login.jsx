@@ -23,12 +23,12 @@ function Login() {
   }
   useEffect(
     function () {
-      if (isAuthenticated) navigate("/",{replace: true});
+      if (isAuthenticated) navigate("/", { replace: true });
       else {
         console.log(error);
       }
     },
-    [isAuthenticated, navigate]
+    [isAuthenticated, navigate, error]
   );
   return (
     <div className=" h-screen w-full flex items-start pb-10 ">
@@ -78,7 +78,7 @@ function Login() {
           <hr className="mb-1" />
           <span className="px-2 text-xs">New here?</span>
           <Link
-            to="/signup"
+            to="/accounttype"
             className=" hover:italic hover:text-IceBlue transition-all  text-s underline"
           >
             Sign up

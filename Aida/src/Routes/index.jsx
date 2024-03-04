@@ -13,8 +13,9 @@ import OfficeSuppliesPage from "../Products/OfficeSuppliesPage";
 import UnavailablePage from "../User/UnavailablePage";
 import RegistrationReview from "../Authentication/RegistrationReview";
 import AccountType from "../Authentication/AccountType";
-import VendorGeneralInfo from "../Authentication/VendorGeneralInfo";
-// const routes = [
+import SignUpVendor1 from "../Authentication/SignUpVendor1";
+import SignUpVendor2 from "../Authentication/SignUpVendor2";
+
 //   { path: "/", element: <HomePage /> },
 //   { path: "/login", component: <Login /> },
 //   { path: "/signup", component: <Signup /> },
@@ -62,10 +63,18 @@ const routes = [
     ),
   },
   {
-    path: "/vendorgeneralinfo",
+    path: "/SignUpVendor1",
     element: (
       <React.Fragment>
-        <VendorGeneralInfo />
+        <SignUpVendor1 />
+      </React.Fragment>
+    ),
+  },
+  {
+    path: "/SignUpVendor2",
+    element: (
+      <React.Fragment>
+        <SignUpVendor2 />
       </React.Fragment>
     ),
   },

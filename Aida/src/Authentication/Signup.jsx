@@ -188,7 +188,7 @@ function Signup() {
             <div className="">
               <label className={`${labelStyle} pl-16`}>Billing Address</label>
               <br />
-              <div className="flex">
+              <div className="md:flex">
                 <input
                   type="text"
                   placeholder="City"

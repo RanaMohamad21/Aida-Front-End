@@ -26,6 +26,7 @@ function reducer(state, action) {
       throw new Error("Unknown action");
   }
 }
+// eslint-disable-next-line react/prop-types
 function AuthenticationProvider({ children }) {
   const [{ user, isAuthenticated }, dispatch] = useReducer(
     reducer,
