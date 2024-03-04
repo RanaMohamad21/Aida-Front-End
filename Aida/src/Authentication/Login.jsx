@@ -32,14 +32,14 @@ function Login() {
   );
   return (
     <div className=" h-screen w-full flex items-start pb-10 ">
-      <div className="relative w-3/5 h-full flex flex-col">
+      <div className="relative w-3/5 h-full flex flex-col ">
         <img
           src={LoginImg}
           alt="Login Page"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover "
         />
       </div>
-      <div className="font-sans w-2/5 h-full bg-teal text-white pb-10  flex flex-col justify-between border-solid border-l-[1px] border-IceBlue">
+      <div className="font-sans w-2/5 h-full bg-teal text-white pb-10  flex flex-col justify-between border-solid border-l-[1px] border-l-gray">
         <img src={logoWhiteTxtAida} alt="Logo" className="h-1/2 " />
         <form
           className="font-semibold  justify-center items-center w-3/4 mx-auto "

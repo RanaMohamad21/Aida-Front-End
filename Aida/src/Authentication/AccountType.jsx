@@ -1,7 +1,7 @@
 import Button from "../UI/Button";
 import LoginPrompt from "../UI/LoginPrompt";
 import Background from "../assets/Authentication/MixedVendorCustomer.png";
-import Logo from "../assets/logo/LogoWhiteTransparent.svg";
+import Logo from "../assets/logo/wordmark_white.png";
 
 function AccountType() {
   return (
@@ -21,7 +21,7 @@ function AccountType() {
         {/* Content container */}
         <div className="relative z-10 text-white">
           <div className="pb-10">
-            <img src={Logo} className="h-[100px] mt-4 w-full" />
+            <img src={Logo} className="h-[100px] mt-4 mx-auto" />
           </div>
           <div className="bg-teal text-center py-3">
             <p className="font-semibold text-xl">Choose account type</p>
