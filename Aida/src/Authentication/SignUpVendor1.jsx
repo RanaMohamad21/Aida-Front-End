@@ -1,26 +1,28 @@
 import SignUpTemplate from "./SignUpTemplate";
 import SideBar from "../assets/Authentication/SideBarVendor.jpg";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useVendor } from "../Contexts/VendorSignUpProvider";
 
-import { useState } from "react";
+//import { useState } from "react";
 const inputStyle =
   "border-solid border-2 border-gray px-2 py-1  mt-2 mb-4 sm:w-[80%] md:w-[300px]";
 
 function SignUpVendor1() {
-  const [formData, setFormData ] = useState({
-    firstName: "",
-    secondName: "",
-    email: "",
-    password: "",
-    phone: "",
-    dateOfBirth: "",
-    city: "",
-    street: "",
-    buildingNumber: "",
-    apartmentNumber: "",
-  });
-//   const navigate = useNavigate();
+  // const [formData, setFormData ] = useState({
+  //   firstName: "",
+  //   secondName: "",
+  //   email: "",
+  //   password: "",
+  //   phone: "",
+  //   dateOfBirth: "",
+  //   city: "",
+  //   street: "",
+  //   buildingNumber: "",
+  //   apartmentNumber: "",
+  // });
 
+    const navigate = useNavigate();
+  const { formData, setFormData } = useVendor();
   function handleChange(e) {
     const { name, value } = e.target;
     setFormData((prevFormDate) => ({ ...prevFormDate, [name]: value }));
@@ -29,7 +31,7 @@ function SignUpVendor1() {
   function handleSubmit(e) {
     e.preventDefault();
     console.log(formData);
-    // navigate("/signupvendor2");
+    navigate("/signupvendor2");
   }
   return (
     <SignUpTemplate imgSrc={SideBar}>

@@ -30,7 +30,7 @@ function VendorSignUpProvider({ children }) {
 }
 
 function useVendor() {
-  const context = useContext(VendorSignUpProvider);
+  const context = useContext(SignUpContext);
   if (context === undefined)
     throw new Error(
       "VendorContext was used outside VendorProvider"

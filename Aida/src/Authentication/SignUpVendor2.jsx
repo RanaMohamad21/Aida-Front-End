@@ -1,10 +1,14 @@
-
-// import {useVendor} from "../Contexts/VendorSignUpProvider";
+import { useVendor } from "../Contexts/VendorSignUpProvider";
 
 function SignUpVendor2() {
-//   const { formData } = useVendor();
+  const { formData } = useVendor();
 
-  return <div>v2</div>;
+  return (
+    <>
+      <h1>Hello</h1>
+      <div>{formData.firstName}</div>
+    </>
+  );
 }
 
 export default SignUpVendor2;
