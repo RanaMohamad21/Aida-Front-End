@@ -7,7 +7,7 @@ const inputStyle =
   "border-solid border-2 border-gray px-2 py-1  mt-2 mb-4 sm:w-[80%] md:w-[300px]";
 
 function SignUpVendor1() {
-  const { formData, setFormData } = useState({
+  const [formData, setFormData ] = useState({
     firstName: "",
     secondName: "",
     email: "",
