@@ -16,6 +16,7 @@ export default {
       IceBlue: "#EDF6FB",
       // IceBlue: "#EFF7FC",
       gray: "#bac0c4",
+      darkGray: "#333333",
       EggshellGray: "#FAFBFD",
       FlamingoPink: "#FF897F",
     },

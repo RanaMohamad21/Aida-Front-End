@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from "react";
 const SignUpContext = createContext();
 // eslint-disable-next-line react/prop-types
 function VendorSignUpProvider({ children }) {
-  const [formData, setFormData] = useState({
+  const initialState = {
     firstName: "",
     secondName: "",
     email: "",
@@ -14,14 +14,15 @@ function VendorSignUpProvider({ children }) {
     street: "",
     buildingNumber: "",
     apartmentNumber: "",
-    businessRgistrationDocument: "",
-    legalStructure: "",
+    registrationDocument: "",
     listOfPartnersDocument: "",
     partnershipAgreementDocument: "",
+    ownership: "",
     tradeLicense: "",
     vendorThoughts: "",
     termsChecked: false,
-  });
+  };
+  const [formData, setFormData] = useState(initialState);
   return (
     <SignUpContext.Provider value={{ formData, setFormData }}>
       {children}
@@ -32,10 +33,8 @@ function VendorSignUpProvider({ children }) {
 function useVendor() {
   const context = useContext(SignUpContext);
   if (context === undefined)
-    throw new Error(
-      "VendorContext was used outside VendorProvider"
-    );
+    throw new Error("VendorContext was used outside VendorProvider");
   return context;
 }
 
-export  {VendorSignUpProvider, useVendor};
+export { VendorSignUpProvider, useVendor };

@@ -11,10 +11,10 @@ import BooksPage from "../Products/BooksPage";
 import HomeEssentialsPage from "../Products/HomeEssentialsPage";
 import OfficeSuppliesPage from "../Products/OfficeSuppliesPage";
 import UnavailablePage from "../User/UnavailablePage";
-import RegistrationReview from "../Authentication/RegistrationReview";
 import AccountType from "../Authentication/AccountType";
 import SignUpVendor1 from "../Authentication/SignUpVendor1";
 import SignUpVendor2 from "../Authentication/SignUpVendor2";
+import SignUpVendor3 from "../Authentication/SignUpVendor3";
 
 //   { path: "/", element: <HomePage /> },
 //   { path: "/login", component: <Login /> },
@@ -75,6 +75,14 @@ const routes = [
     element: (
       <React.Fragment>
         <SignUpVendor2 />
+      </React.Fragment>
+    ),
+  },
+  {
+    path: "/SignUpVendor3",
+    element: (
+      <React.Fragment>
+        <SignUpVendor3 />
       </React.Fragment>
     ),
   },
@@ -147,14 +155,6 @@ const routes = [
     element: (
       <React.Fragment>
         <UnavailablePage />
-      </React.Fragment>
-    ),
-  },
-  {
-    path: "/review",
-    element: (
-      <React.Fragment>
-        <RegistrationReview />
       </React.Fragment>
     ),
   },
