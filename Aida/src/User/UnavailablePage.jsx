@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import unavailablepage from "../assets/User/unavailablepage.jpg";
 // import { Link } from "react-router-dom";
 // import logoWhiteTxtAida from "/src/assets/logo/LogoWhiteTextAida.svg";
@@ -8,8 +9,7 @@ const margin = "m-[8px]";
 function UnavailablePage() {
   return (
     <TextOnlyPage
-      route={"/"}
-      buttonName={"Shop!"}
+      
       backgroundImage={unavailablepage}
     >
       <p className={`text-xl ${margin}`}>404</p>
@@ -19,6 +19,14 @@ function UnavailablePage() {
       <p className={`text-l capitalize text-center font-semibold mb-[16px]`}>
         but the shopping doesn&apos;t stop
       </p>
+      <div className="mt-7  justify-center    flex">
+            <Link
+              to="/"
+              className={`border-[1px] p-2  rounded-xl bg-IceBlue text-teal cursor pointer  hover:bg-opacity-20 hover:bg-IceBlue hover:text-white `}
+            >
+              Shop!
+            </Link>
+          </div>
     </TextOnlyPage>
   );
 }

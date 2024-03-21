@@ -15,6 +15,8 @@ import AccountType from "../Authentication/AccountType";
 import SignUpVendor1 from "../Authentication/SignUpVendor1";
 import SignUpVendor2 from "../Authentication/SignUpVendor2";
 import SignUpVendor3 from "../Authentication/SignUpVendor3";
+import DeletedAccount from "../UI/DeletedAccount";
+import SettingsDeleteAccount from "../UI/SettingsDeleteAccount";
 
 //   { path: "/", element: <HomePage /> },
 //   { path: "/login", component: <Login /> },
@@ -83,6 +85,22 @@ const routes = [
     element: (
       <React.Fragment>
         <SignUpVendor3 />
+      </React.Fragment>
+    ),
+  },
+  {
+    path: "/deletedacount",
+    element: (
+      <React.Fragment>
+        <DeletedAccount />
+      </React.Fragment>
+    ),
+  },
+  {
+    path: "/SettingsDeleteAccount",
+    element: (
+      <React.Fragment>
+        <SettingsDeleteAccount />
       </React.Fragment>
     ),
   },

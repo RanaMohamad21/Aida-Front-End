@@ -1,11 +1,10 @@
+import { Link } from "react-router-dom";
 import TextOnlyPage from "../UI/TextOnlyPage";
 import tempUnavailablepage from "../assets/User/unavailablepage.jpg";
 // This page is the final step in the vendor registration
 function SignUpVendor3() {
   return (
     <TextOnlyPage
-      route={"/"}
-      buttonName={`lets go back`}
       backgroundImage={tempUnavailablepage}
     >
       <div className="flex flex-col gap-5">
@@ -79,6 +78,14 @@ function SignUpVendor3() {
         </p>
         <p>Best regards</p>
         </div>
+        <div className="mt-7  justify-center    flex">
+            <Link
+              to="/"
+              className={`border-[1px] p-2  rounded-xl bg-IceBlue text-teal cursor pointer  hover:bg-opacity-20 hover:bg-IceBlue hover:text-white `}
+            >
+              let&apos;s go back
+            </Link>
+          </div>
       </div>
     </TextOnlyPage>
   );
