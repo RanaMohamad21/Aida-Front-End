@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
 
-import logoWhiteTxtAida from "/src/assets/logo/LogoWhiteTextAida.svg";
+
+import logoWhiteTxtAida from "../assets/logo/wordmark_white.png";
 
 {
   /*
@@ -14,9 +14,9 @@ function TextOnlyPage({ children, backgroundImage }) {
       style={{ backgroundImage: `url(${backgroundImage})` }}
       className="h-full w-full  sm:bg-contain "
     >
-      <div className="sm:w-3/5 md:w-[30%]  h-full flex flex-col mx-auto items-center bg-teal text-white bg-cover bg-center  p-3 px-8 ">
-        <img src={logoWhiteTxtAida} alt="Logo" />
-        <div className=" sm:my-[72px] md:mt-[40px]">
+      <div className="sm:w-3/5 md:w-[30%]  h-full  flex flex-col mx-auto items-center bg-teal text-white bg-cover bg-center  p px-8 py-5 ">
+        <img src={logoWhiteTxtAida} alt="Logo"  />
+        <div className=" sm:my-[72px] md:mt-[40px] ">
           {children}
          
         </div>

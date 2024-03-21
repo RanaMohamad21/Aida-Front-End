@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 import TextOnlyPage from "../UI/TextOnlyPage";
+import unavailablepage from "../assets/User/unavailablepage.jpg";
 function SettingsDeleteAccount() {
     return (
-        <TextOnlyPage>
+        <TextOnlyPage
+        backgroundImage={unavailablepage}
+        >
             <div className="flex flex-col gap-5">
                 <div className="text-center">
                     <h1 className= "font-semibold text-lg">Where are you going?</h1>
-                    <p className=" font-thin text-sm">There&apos;s still much shopping to do</p>
+                    <p className=" text-sm font-thin">There&apos;s still much shopping to do</p>
                 </div>
                 <div className="flex flex-col gap-2 text-sm">
                 <div>
