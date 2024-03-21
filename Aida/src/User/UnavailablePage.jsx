@@ -9,9 +9,11 @@ const margin = "m-[8px]";
 function UnavailablePage() {
   return (
     <TextOnlyPage
-      
+    height="h-lvh"
+    paddingTop = "pt-16"
       backgroundImage={unavailablepage}
     >
+      <div className="text-center mt-5">
       <p className={`text-xl ${margin}`}>404</p>
       <p className={`text-xs text-IceBlue ${margin} capitalize`}>
         oops this page is unavailable!{" "}
@@ -19,6 +21,7 @@ function UnavailablePage() {
       <p className={`text-l capitalize text-center font-semibold mb-[16px]`}>
         but the shopping doesn&apos;t stop
       </p>
+      </div>
       <div className="mt-7  justify-center    flex">
             <Link
               to="/"
