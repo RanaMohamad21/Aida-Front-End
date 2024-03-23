@@ -1,10 +1,11 @@
 import Button from "../UI/Button";
 import VendorNavBar from "./VendorNavBar";
 import add from "../assets/vendor/navBar/add.png"
+import ItemCard from "./ItemCard";
 function VendorShelves() {
     return (
         <>
-         <VendorNavBar/>
+         {/* <VendorNavBar/>
          <div className="grid grid-rows-[auto,1fr]">
             <div className=" flex flex-col gap-2">
                 <dev className = "flex">
@@ -18,10 +19,10 @@ function VendorShelves() {
                 Tip: placing products on the same shelf allows them to be recommended together when a customer buys your product, so placing products that are often bought together in the same shelf will increase your sales
                 </p>
                 </dev>
-            </div>
-
-            <div className="bg-gray">The shelves</div>
-         </div>
+            </div> */}
+                {/* The Shelves  */}
+            <div className=""><ItemCard/></div>
+         {/* </div> */}
             
         </>
     )
