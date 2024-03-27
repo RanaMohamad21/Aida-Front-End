@@ -18,6 +18,7 @@ import SignUpVendor3 from "../Authentication/SignUpVendor3";
 import DeletedAccount from "../UI/DeletedAccount";
 import SettingsDeleteAccount from "../UI/SettingsDeleteAccount";
 import VendorShelves from "../Vendor/VendorShelves";
+import AddProduct from "../Vendor/AddProduct";
 
 //   { path: "/", element: <HomePage /> },
 //   { path: "/login", component: <Login /> },
@@ -94,6 +95,14 @@ const routes = [
     element: (
       <React.Fragment>
         <VendorShelves />
+      </React.Fragment>
+    ),
+  },
+  {
+    path: "/addproduct",
+    element: (
+      <React.Fragment>
+        <AddProduct />
       </React.Fragment>
     ),
   },
