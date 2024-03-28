@@ -36,8 +36,8 @@ input {
 input:hover {
   outline: 2px solid transparent;
   outline-offset: 2px;
-  padding-left: 0.25rem /* 4px */;
-  padding-right: 0.25rem /* 4px */;
+  /* padding-left: 0.25rem; */
+  /* padding-right: 4px; */
 }
 input[type = "text"]:focus {
   outline: 2px solid #ff897f;
@@ -57,4 +57,8 @@ label {
 
 input:disabled{
   background-color: gray;
+}
+
+.specificationInput{
+  @apply border border-solid border-black text-black w-full md:w-1/2 pl-2
 }
