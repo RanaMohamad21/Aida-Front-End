@@ -1,0 +1,13 @@
+/* TextEditor.css */
+
+.ql-toolbar {
+  background-color: #25b5ba;
+  color: white;
+}
+
+.ql-toolbar .ql-picker-label,
+.ql-toolbar,
+.ql-strike {
+  color: white;
+}
+

@@ -2,6 +2,7 @@ import { useState } from "react";
 import info from "../assets/vendor/products/information-button.png";
 import pricing from "../assets/vendor/products/price-tag.png";
 import ToggleSwitch from "../UI/ToggleSwitch";
+import TitleAndLogo from "../UI/TitleAndLogo";
 
 function InfoAndPricing() {
   const [count, setCount] = useState(0);
@@ -26,12 +27,8 @@ function InfoAndPricing() {
       <div className=" sm:grid grid-cols-2">
         {/* Info  */}
         <div className="border-r-2 sm:border-gray pr-10 grid grid-rows-[repeat(6,min-content)] gap-4 ">
-          <div className=" flex justify-center ">
-            <span className="px-2  ">
-              <img src={info} alt={"information"} />
-            </span>
-            <p className=" text-FlamingoPink flex font-semibold"> Info</p>
-          </div>
+          
+          <TitleAndLogo imgURL={info} style="flex justify-center" >Info</TitleAndLogo>
 
           {/* Title  */}
           <div>
@@ -93,15 +90,10 @@ function InfoAndPricing() {
         </div>
 
         {/* Pricing */}
-        <div className=" grid grid-rows-[1fr,auto,1fr] pl-10 gap-4">
-          <div className=" flex justify-center ">
-            <span className="px-2  ">
-              <img src={pricing} alt={"pricing"} />
-            </span>
-            <p className=" text-FlamingoPink flex font-semibold mt-1 ">
-              Pricing
-            </p>
-          </div>
+        <div className=" grid grid-rows-[auto,1fr,1fr] pl-10 gap-4">
+          
+          <TitleAndLogo imgURL={pricing} imgStyle="h-8" style="flex justify-center" >Pricing</TitleAndLogo>
+
           {/* Price */}
           <div>
             <h1 className=" block">Price</h1>

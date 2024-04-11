@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import Specification from "./Specification";
-import Tags from "../assets/vendor/products/tag.png";
+import Tags from "../assets/vendor/products/filter.png";
 import add from "../assets/UI/addition.png";
+import TitleAndLogo from "../UI/TitleAndLogo";
 function SpecificationsCollection({ specifications, setSpecifications }) {
   function handleAddSpec(e) {
     e.preventDefault();
@@ -12,14 +13,8 @@ function SpecificationsCollection({ specifications, setSpecifications }) {
   }
   return (
     <>
-      <div className=" flex gap-3 my-2 text-FlamingoPink font-semibold text-lg">
-        <span>
-          <img src={Tags} />
-        </span>
-        <p >
-          Specification
-        </p>
-      </div>
+      
+      <TitleAndLogo imgURL={Tags}>Specification</TitleAndLogo>
       <div className="grid sm:grid-cols-3 sm:gap-4 md:grid-cols-4 md:gap-10 mx-2">
         {specifications.map((spec, index) => {
           return (
@@ -32,7 +27,7 @@ function SpecificationsCollection({ specifications, setSpecifications }) {
         })}
       </div>
       <button
-        className=" bg-teal flex p-2 gap-2 text-white font-semibold my-4 ml-3"
+        className=" bg-teal flex p-2 gap-2 text-white font-semibold mt-4 ml-3 mb-10 "
         onClick={handleAddSpec}
       >
         {" "}

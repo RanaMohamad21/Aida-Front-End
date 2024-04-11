@@ -11,7 +11,7 @@ import logo from "../assets/logo/LogoWhiteTextAida.svg"
 function VendorNavBar({storeName}) {
     return (
         <>
-        <dev className = "grid grid-cols-[1fr,auto,auto,3fr,auto] py-2 px-3 border-b-2 border-teal gap-3 ">
+        <dev className = "grid grid-cols-[1fr,auto,auto,3fr,auto] py-2 px-3 border-b-[3px] border-teal gap-3 ">
             <dev className = " rounded-lg">
             <img src={logo} alt="Logo" className="w-16" />
             </dev>
