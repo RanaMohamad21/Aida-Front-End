@@ -10,14 +10,22 @@ import descriptionTag from "../assets/vendor/products/pen.png";
 import TitleAndLogo from "../UI/TitleAndLogo";
 import TextEditor from "../UI/TextEditor";
 import Background from "../assets/vendor/products/header.jpeg";
-import Button from "../UI/Button";
+import { useForm } from "react-hook-form";
 
-/// 
+// / We Can change the onSubmit function to assynchronous like specified in the react hook form guide
+
+//* Discount Percentage is in percentage ranges[0-100] not [0-1]
+//* I am sending the tags as a single string joined by ","
+
 function AddProductPage() {
   // const { updateShelves, shelfID } = useShelves();
   // function handleAddProduct() {}
 
   // console.log("Shelf ID: ", shelfID);
+  const { register, handleSubmit } = useForm();
+  const [availableStockCount, setAvailableStockCountCount] = useState(0);
+  const [hasDiscount, setHasDiscount] = useState(false);
+  const [discountDurationType, setDiscountDurationType] = useState();
   const [specifications, setSpecifications] = useState([
     { name: "Color", specification: "Red" },
     { name: "Color", specification: "Red" },
@@ -30,9 +38,11 @@ function AddProductPage() {
     "Exclusive",
   ]);
   const [newTag, setNewTag] = useState("");
-  const [description, setDescription] = useState("");
   const [images, setImages] = useState([]);
   const [previewImages, setPreviewImages] = useState([]);
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [taxes, setTaxes] = useState("");
 
   function handleDeleteImage(index) {
     setPreviewImages((prevImages) => {
@@ -75,10 +85,35 @@ function AddProductPage() {
     };
   }, [images, setPreviewImages]);
 
+  const onSubmit = (data) => {
+    const formData = new FormData();
+    for (let i = 0; i < data.images.length; i++) {
+      formData.set(`images[${i}]`, data.images[i]);
+    }
+    formData.append("price", Number(price));
+    formData.append("taxes", Number(taxes));
+    formData.append("Specification", JSON.stringify(specifications));
+    formData.append("tags", tags.join(","));
+    formData.append("Description", description);
+    formData.append("availableStockCount", availableStockCount);
+    formData.append("hasDiscount", hasDiscount);
+    formData.append("discountDurationType", discountDurationType);
+    formData.append("title", data.title);
+    formData.append("category", data.category);
+    formData.append("enableSubscription", data.enableSubscription);
+    formData.append("isUsed", data.isUsed);
+    formData.append("discountPercentage", data.discountPercentage);
+    formData.append("durationInDays", data.durationInDays);
+    formData.append("hasDiscountCode", data.hasDiscountCode);
+
+    const formDataObj = Object.fromEntries(formData.entries());
+    console.log(formDataObj);
+  };
+
   return (
     <>
       <VendorNavBar />
-      <form className=" mb-10">
+      <form className=" mb-10" onSubmit={handleSubmit(onSubmit)}>
         <div className=" grid-rows-[auto,1fr] mb-14">
           {/* Upload Image  */}
 
@@ -124,6 +159,7 @@ function AddProductPage() {
                     type="file"
                     className="hidden"
                     accept="image/*"
+                    {...register("images[]")}
                     onChange={(e) => {
                       e.preventDefault();
                       if (e.target.files && e.target.files.length > 0) {
@@ -156,7 +192,19 @@ function AddProductPage() {
           </div>
 
           {/* Item Information */}
-          <InfoAndPricing />
+          <InfoAndPricing
+            register={register}
+            price={price}
+            setPrice={setPrice}
+            taxes={taxes}
+            setTaxes={setTaxes}
+            count={availableStockCount}
+            setCount={setAvailableStockCountCount}
+            hasDiscount={hasDiscount}
+            setHasDiscount={setHasDiscount}
+            discountDurationType={discountDurationType}
+            setDiscountDurationType={setDiscountDurationType}
+          />
           <SpecificationsCollection
             specifications={specifications}
             setSpecifications={setSpecifications}
@@ -206,9 +254,12 @@ function AddProductPage() {
           </TitleAndLogo>
           <TextEditor text={description} setText={setDescription} />
         </div>
-        <Button background="FlamingoPink" width="w-1/3">
-          Create
-        </Button>
+
+        <input
+          type="submit"
+          value="Create"
+          className="bg-FlamingoPink text-white w-1/3   rounded-md h-8 uppercase my-5 cursor-pointer hover:translate-x-[2px] hover:translate-y-[2px] transition-all text-center justify-center pt-1 mx-auto"
+        />
       </form>
     </>
   );
