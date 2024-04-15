@@ -3,22 +3,29 @@ import trash from "../assets/vendor/products/trash.png";
 import add from "../assets/UI/addition.png";
 import ItemCard from "../Vendor/ItemCard";
 import { useNavigate } from "react-router-dom";
-import { useShelves } from "../Contexts/VendorShelves";
 // import { set } from "react-hook-form";
 // eslint-disable-next-line react/prop-types
-function Shelves({ shelves, setShelves, deleteItem }) {
+
+//? IDs start at 0
+function Shelves({ shelves, setShelves, deleteItem, setshelfID }) {
   const navigate = useNavigate();
-  const { setshelfID } = useShelves();
   function handleDeleteShelf(shelveToDelete) {
     const updatedShelves = shelves.filter(
       (shelf) => shelf.shelveID !== shelveToDelete
     );
     console.log("Deleted Shelve number ", shelveToDelete);
+    updatedShelves.forEach((shelf, index) => {
+      shelf.shelveID = index;
+    });
     setShelves(updatedShelves);
   }
   function handleAddProduct(ID) {
+    console.log("The ID is: ", ID);
     setshelfID(ID);
-    navigate("/addproduct");
+    const productID = shelves[ID].shelveItems
+      ? shelves[ID].shelveItems[shelves[ID].shelveItems.length - 1].itemID + 1
+      : 0;
+    navigate("/addproduct", { state: { productID, shelfID: ID } });
   }
 
   return (
@@ -32,7 +39,7 @@ function Shelves({ shelves, setShelves, deleteItem }) {
               className={`flex justify-between md:mr-4  ${
                 index != 0 ? "mt-14" : ""
               }`}
-              key={index}
+              key={`shelf-${shelf.ID}`}
             >
               <div className="p-2 bg-teal inline-block max-w-max text-white ml-4 ">
                 {shelf.shelveName}
@@ -43,12 +50,15 @@ function Shelves({ shelves, setShelves, deleteItem }) {
                 </button>
               </div>
             </div>
-            <div className="grid lg:grid-cols-5 sm:grid-cols-3 gap-y-3 bg-teal rounded-[5%] bg-opacity-5">
+            <div
+              className="grid lg:grid-cols-5 sm:grid-cols-3 gap-y-3 bg-teal rounded-[5%] bg-opacity-5"
+              key={index}
+            >
               {/* Items in the shelf */}
               {items.map((item, index) => (
                 <ItemCard
                   dummyItem={item}
-                  key={index}
+                  key={`item-${index}`}
                   deleteItem={deleteItem}
                   shelfID={shelf.shelveID}
                 />

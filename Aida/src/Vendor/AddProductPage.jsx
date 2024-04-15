@@ -1,4 +1,3 @@
-// import { useShelves } from "../Contexts/VendorShelves";
 import { useEffect, useState } from "react";
 import InfoAndPricing from "./InfoAndPricing";
 import SpecificationsCollection from "./SpecificationsCollection";
@@ -11,6 +10,7 @@ import TitleAndLogo from "../UI/TitleAndLogo";
 import TextEditor from "../UI/TextEditor";
 import Background from "../assets/vendor/products/header.jpeg";
 import { useForm } from "react-hook-form";
+import { useLocation } from "react-router-dom";
 
 // / We Can change the onSubmit function to assynchronous like specified in the react hook form guide
 
@@ -18,8 +18,11 @@ import { useForm } from "react-hook-form";
 //* I am sending the tags as a single string joined by ","
 
 function AddProductPage() {
-  // const { updateShelves, shelfID } = useShelves();
+
   // function handleAddProduct() {}
+  const location = useLocation();
+  const details = location.state;
+  console.log("The product ID is ", details);
 
   // console.log("Shelf ID: ", shelfID);
   const { register, handleSubmit } = useForm();
@@ -90,16 +93,16 @@ function AddProductPage() {
     for (let i = 0; i < data.images.length; i++) {
       formData.set(`images[${i}]`, data.images[i]);
     }
-    formData.append("price", Number(price));
-    formData.append("taxes", Number(taxes));
-    formData.append("Specification", JSON.stringify(specifications));
-    formData.append("tags", tags.join(","));
-    formData.append("Description", description);
-    formData.append("availableStockCount", availableStockCount);
-    formData.append("hasDiscount", hasDiscount);
-    formData.append("discountDurationType", discountDurationType);
     formData.append("title", data.title);
     formData.append("category", data.category);
+    formData.append("availableStockCount", availableStockCount);
+    formData.append("price", Number(price));
+    formData.append("taxes", Number(taxes));
+    formData.append("specifications", JSON.stringify(specifications));
+    formData.append("tags", tags.join(","));
+    formData.append("description", description);
+    formData.append("hasDiscount", hasDiscount);
+    formData.append("discountDurationType", discountDurationType);
     formData.append("enableSubscription", data.enableSubscription);
     formData.append("isUsed", data.isUsed);
     formData.append("discountPercentage", data.discountPercentage);
@@ -113,7 +116,13 @@ function AddProductPage() {
   return (
     <>
       <VendorNavBar />
-      <form className=" mb-10" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className=" mb-10"
+        onSubmit={handleSubmit(onSubmit)}
+        action="/product"
+        method="post"
+        encType="multipart/form-data"
+      >
         <div className=" grid-rows-[auto,1fr] mb-14">
           {/* Upload Image  */}
 

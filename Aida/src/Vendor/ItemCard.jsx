@@ -10,9 +10,7 @@ import trash from "../assets/vendor/products/trash.png";
 function ItemCard({ dummyItem, deleteItem, shelfID }) {
   const priceAfterDiscount =
     (1 - dummyItem.discountValue) * dummyItem.pricebeforeDiscount;
-  console.log("Discount Value:", dummyItem.discountValue);
-  console.log("Price before Discount:", dummyItem.pricebeforeDiscount);
-
+  
   return (
     <div className=" mx-4 flex flex-col w-52 text-black p-2">
       <div className="flex text-teal text-2xl justify-between pl-3 ">

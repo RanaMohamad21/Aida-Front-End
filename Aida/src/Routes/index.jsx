@@ -99,7 +99,7 @@ const routes = [
     ),
   },
   {
-    path: "/addproduct",
+    path: "/addproduct/:productID?",
     element: (
       <React.Fragment>
         <AddProductPage />

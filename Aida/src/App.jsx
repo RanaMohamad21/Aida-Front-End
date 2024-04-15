@@ -3,12 +3,11 @@ import routes from "./Routes/index";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthenticationProvider } from "./Authentication/AuthenticationContext";
 import { VendorSignUpProvider } from "./Contexts/VendorSignUpProvider";
-import { VendorShelvesProvider } from "./Contexts/VendorShelves";
 function App() {
   console.log(routes[0].component);
   return (
     <VendorSignUpProvider>
-      <VendorShelvesProvider>
+      
         <AuthenticationProvider>
           <div className="grid grid-rows-[1fr,auto]">
             <BrowserRouter>
@@ -25,7 +24,7 @@ function App() {
             <Footer />
           </div>
         </AuthenticationProvider>
-      </VendorShelvesProvider>
+      
     </VendorSignUpProvider>
   );
 }
