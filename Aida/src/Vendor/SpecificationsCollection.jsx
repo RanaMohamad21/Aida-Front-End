@@ -3,25 +3,26 @@ import Specification from "./Specification";
 import Tags from "../assets/vendor/products/filter.png";
 import add from "../assets/UI/addition.png";
 import TitleAndLogo from "../UI/TitleAndLogo";
-function SpecificationsCollection({ specifications, setSpecifications }) {
-  function handleAddSpec(e) {
-    e.preventDefault();
-    setSpecifications((prevSpec) => [
-      ...prevSpec,
-      { name: "", specification: "" },
-    ]);
-  }
+function SpecificationsCollection({ fields, handleAddSpec, handleRemoveSpec, register }) {
+  // function handleAddSpec(e) {
+  //   e.preventDefault();
+  //   setSpecifications((prevSpec) => [
+  //     ...prevSpec,
+  //     { name: "", specification: "" },
+  //   ]);
+  // }
   return (
     <>
       
       <TitleAndLogo imgURL={Tags}>Specification</TitleAndLogo>
       <div className="grid sm:grid-cols-3 sm:gap-4 md:grid-cols-4 md:gap-10 mx-2">
-        {specifications.map((spec, index) => {
+      {fields.map((field, index) => {
           return (
             <Specification
-              name={spec.name}
-              specification={spec.specification}
-              key={index}
+              key={field.id}
+              index={index}
+              handleRemoveSpec={handleRemoveSpec}
+              register={register}
             />
           );
         })}

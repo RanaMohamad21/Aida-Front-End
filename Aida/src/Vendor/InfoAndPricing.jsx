@@ -7,14 +7,15 @@ import TitleAndLogo from "../UI/TitleAndLogo";
 
 
 
-function InfoAndPricing({ register, price, setPrice, taxes, setTaxes,hasDiscount,setHasDiscount,watch,setValue, discountDurationType,setDiscountDurationType }) {
-  
+function InfoAndPricing({ register,watch,setValue }) {
+  const [hasDiscount, setHasDiscount] = useState(false);
   function handleArrow() {
     setHasDiscount((prevState) => !prevState);
   }
   // get the current value of the stock count
   const availableStockCount = watch("availableStockCount");
 
+  const discountDurationType = watch("discountDurationType")
   const handleIncrement = ()=>{
     setValue("availableStockCount", availableStockCount +1);
   }
@@ -127,9 +128,8 @@ function InfoAndPricing({ register, price, setPrice, taxes, setTaxes,hasDiscount
             <input
   placeholder="00.00"
   className=" w-[48%] border border-solid h-5 p-2 mr-2 border-black"
-  name="priceBeforeDecimal"
-  value={price}
-  onChange={e=>setPrice(Number(e.target.value))}
+  name="price"
+  {...register("price")}
 />
             </div>
           </div>
@@ -142,8 +142,7 @@ function InfoAndPricing({ register, price, setPrice, taxes, setTaxes,hasDiscount
   placeholder="00.00"
   className=" w-[48%] border border-solid h-5 p-2 mr-2 border-black"
   name="taxesBeforeDecimal"
-  value={taxes}
-  onChange={e=>setTaxes(Number(e.target.value))}
+  {...register('taxes')}
 />
 
             </div>
@@ -177,10 +176,10 @@ function InfoAndPricing({ register, price, setPrice, taxes, setTaxes,hasDiscount
                   <input
                     type="radio"
                     value= "time"
-                    name="duration"
-                    id="time"
+                    id= "time"
+                    name="discountDurationType"
                     className=" appearance-none "
-                    onChange={(e) => setDiscountDurationType(e.target.value)}
+                    {...register('discountDurationType')}
                   />
                   <label htmlFor="time" className={` cursor-pointer  p-1 ${discountDurationType === 'time'?"bg-IceBlue rounded-md": ""}`}>
                     Time limited
@@ -188,10 +187,10 @@ function InfoAndPricing({ register, price, setPrice, taxes, setTaxes,hasDiscount
                   <input
                     type="radio"
                     value="number"
-                    name="duration"
                     id="number"
+                    name="discountDurationType"
                     className="appearance-none "
-                    onChange={(e) => setDiscountDurationType(e.target.value)}
+                    {...register('discountDurationType')}
                   />
                   <label htmlFor="number"  className={` cursor-pointer  p-1 ${discountDurationType === 'number'?"bg-IceBlue rounded-md": ""}`}>
                     Number limited
@@ -214,15 +213,6 @@ function InfoAndPricing({ register, price, setPrice, taxes, setTaxes,hasDiscount
           </div>
         </div>
       </div>
-
-      {/* Specification  */}
-      <div></div>
-
-      {/* Tags  */}
-      <div></div>
-
-      {/* Description  */}
-      <div></div>
     </div>
   );
 }
