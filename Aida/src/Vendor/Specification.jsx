@@ -5,14 +5,14 @@ function Specification({ name, specification }) {
       <p>specification name</p>
       <input
         type="text"
-        placeholder={name}
+        placeholder="Color"
         name={name}
         className="specificationInput"
       />
       <p>specification value</p>
       <input
         type="text"
-        placeholder={specification}
+        placeholder= "Red"
         name={specification}
         className="specificationInput"
       />

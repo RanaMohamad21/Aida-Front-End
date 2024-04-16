@@ -10,36 +10,49 @@ import TitleAndLogo from "../UI/TitleAndLogo";
 import TextEditor from "../UI/TextEditor";
 import Background from "../assets/vendor/products/header.jpeg";
 import { useForm } from "react-hook-form";
-import { useLocation } from "react-router-dom";
+import Loader from "../UI/Loader";
+// import { useLocation } from "react-router-dom";
 
 // / We Can change the onSubmit function to assynchronous like specified in the react hook form guide
 
 //* Discount Percentage is in percentage ranges[0-100] not [0-1]
 //* I am sending the tags as a single string joined by ","
 
+// const initialProduct = {
+//   productID:-1,
+//   title: "",
+//   category:"",
+//   availableStockCount: 0,
+//   price: 0,
+//   taxes: 0,
+//   specification: [],
+//   tags:[],
+//   description:"",
+//   hasDiscount:false,
+//   discountDurationType:"",
+//   enableSubscription:false,
+//   isUsed:false,
+//   discountPercentage:"",
+//   durationInDays:"",
+//   hasDiscountCode:""
+// };
 function AddProductPage() {
+// The `product` prop is used to pre-populate the form fields in case of product update
 
-  // function handleAddProduct() {}
-  const location = useLocation();
-  const details = location.state;
-  console.log("The product ID is ", details);
 
-  // console.log("Shelf ID: ", shelfID);
+  // const location = useLocation();
+  // // product ID incase of creating a nw product
+  // const productID = location.state?.productId;
+
+  //Sets the product to an empty product object in case of product creation and to the current product details in case of product update.
+
   const { register, handleSubmit } = useForm();
   const [availableStockCount, setAvailableStockCountCount] = useState(0);
   const [hasDiscount, setHasDiscount] = useState(false);
   const [discountDurationType, setDiscountDurationType] = useState();
-  const [specifications, setSpecifications] = useState([
-    { name: "Color", specification: "Red" },
-    { name: "Color", specification: "Red" },
-    { name: "Color", specification: "Red" },
-  ]);
+  const [specifications, setSpecifications] = useState([]);
 
-  const [tags, setTags] = useState([
-    "Electronic Devices",
-    "Dual SIM",
-    "Exclusive",
-  ]);
+  const [tags, setTags] = useState(["Add tags here",]);
   const [newTag, setNewTag] = useState("");
   const [images, setImages] = useState([]);
   const [previewImages, setPreviewImages] = useState([]);

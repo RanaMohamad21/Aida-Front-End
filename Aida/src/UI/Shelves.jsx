@@ -3,8 +3,8 @@ import trash from "../assets/vendor/products/trash.png";
 import add from "../assets/UI/addition.png";
 import ItemCard from "../Vendor/ItemCard";
 import { useNavigate } from "react-router-dom";
-// import { set } from "react-hook-form";
-// eslint-disable-next-line react/prop-types
+
+
 
 //? IDs start at 0
 function Shelves({ shelves, setShelves, deleteItem, setshelfID }) {
