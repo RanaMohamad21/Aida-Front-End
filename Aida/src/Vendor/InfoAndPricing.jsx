@@ -7,15 +7,24 @@ import TitleAndLogo from "../UI/TitleAndLogo";
 
 
 
-function InfoAndPricing({ register, price, setPrice, taxes, setTaxes,hasDiscount,setHasDiscount,count,setCount, discountDurationType,setDiscountDurationType }) {
+function InfoAndPricing({ register, price, setPrice, taxes, setTaxes,hasDiscount,setHasDiscount,watch,setValue, discountDurationType,setDiscountDurationType }) {
   
   function handleArrow() {
     setHasDiscount((prevState) => !prevState);
   }
+  // get the current value of the stock count
+  const availableStockCount = watch("availableStockCount");
 
-  function handleCount(val) {
-    setCount(Number(val));
+  const handleIncrement = ()=>{
+    setValue("availableStockCount", availableStockCount +1);
   }
+  const handleDecrement = ()=>{
+    if(availableStockCount>0){
+      setValue("availableStockCount", availableStockCount -1);
+  
+    }
+  }
+  
 
 
 
@@ -68,16 +77,17 @@ function InfoAndPricing({ register, price, setPrice, taxes, setTaxes,hasDiscount
           <div className="flex justify-between ">
             <div>Available stock</div>
             <div className="flex ">
-              <button type="button" onClick={() => setCount((ct) => ct - 1)}>
+              <button type="button" onClick={handleDecrement}>
                 -
               </button>
               <input
                 type="text"
                 className=" w-12 mx-2 pl-2 "
-                value={count}
-                onChange={(e) => handleCount(e.target.value)}
+                value={availableStockCount}
+                {...register('availableStockCount')}
+                readOnly
               />
-              <button type="button" onClick={() => setCount((ct) => ct + 1)}>
+              <button type="button" onClick={handleIncrement}>
                 +
               </button>
             </div>

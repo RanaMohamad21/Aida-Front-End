@@ -10,8 +10,7 @@ import TitleAndLogo from "../UI/TitleAndLogo";
 import TextEditor from "../UI/TextEditor";
 import Background from "../assets/vendor/products/header.jpeg";
 import { useForm } from "react-hook-form";
-import Loader from "../UI/Loader";
-import { DevTool } from "@hookform/devtools";
+// import Loader from "../UI/Loader";
 // import { useLocation } from "react-router-dom";
 
 // / We Can change the onSubmit function to assynchronous like specified in the react hook form guide
@@ -47,7 +46,7 @@ function AddProductPage() {
 
   //Sets the product to an empty product object in case of product creation and to the current product details in case of product update.
 
-  const { register, handleSubmit, control } = useForm();
+  const { register, handleSubmit } = useForm();
   const [availableStockCount, setAvailableStockCountCount] = useState(0);
   const [hasDiscount, setHasDiscount] = useState(false);
   const [discountDurationType, setDiscountDurationType] = useState();
@@ -284,7 +283,6 @@ function AddProductPage() {
           className="bg-FlamingoPink text-white w-1/3   rounded-md h-8 uppercase my-5 cursor-pointer hover:translate-x-[2px] hover:translate-y-[2px] transition-all text-center justify-center pt-1 mx-auto"
         />
       </form>
-      <DevTool control={control}/>
     </>
   );
 }

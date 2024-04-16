@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "./TextEditor.css";
+import PropTypes from 'prop-types';
 const modules = {
   toolbar: [
     [{ font: [] }],
@@ -59,5 +60,10 @@ function TextEditor({ text, setText }) {
     </div>
   );
 }
+
+TextEditor.propTypes = {
+  text: PropTypes.string.isRequired, // text prop is required and must be a string
+  setText: PropTypes.func.isRequired // setText prop is required and must be a function
+};
 
 export default TextEditor;
