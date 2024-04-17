@@ -12,11 +12,10 @@ const inputStyle =
  * Collects account information such as name, email, password, and address.
  */
 function SignUpVendor1() {
-
-// Navigate to the next step of the sign up process
+  // Navigate to the next step of the sign up process
   const navigate = useNavigate();
 
-// Access and update the form data state through useVendor
+  // Access and update the form data state through useVendor
   const { formData, setFormData } = useVendor();
 
   /**
@@ -40,7 +39,7 @@ function SignUpVendor1() {
   }
   return (
     <SignUpTemplate imgSrc={SideBar}>
-       {/* Display the form for collecting account information */}
+      {/* Display the form for collecting account information */}
       <form className="capitalize font-semibold" onSubmit={handleSubmit}>
         {/* Display the account info header */}
         <h1 className="text-teal text-xl ">account info</h1>
@@ -154,7 +153,7 @@ function SignUpVendor1() {
             <input
               type="text"
               placeholder="City"
-              name="address.city"
+              name="city"
               //   value=""
               className={`${inputStyle} md:w-[200px] `}
               onChange={handleChange}
@@ -163,7 +162,7 @@ function SignUpVendor1() {
             <input
               type="text"
               placeholder="Street address"
-              name="address.street"
+              name="street"
               //   value=""
               className={`${inputStyle}  `}
               onChange={handleChange}
@@ -172,7 +171,7 @@ function SignUpVendor1() {
             <input
               type="text"
               placeholder="Building number"
-              name="address.BuildingNo"
+              name="BuildingNo"
               //   value=""
               className={`${inputStyle} md:w-[200px] `}
               onChange={handleChange}
@@ -180,7 +179,7 @@ function SignUpVendor1() {
             <input
               type="text"
               placeholder="Apartment number"
-              name="address.apartmentNo"
+              name="apartmentNo"
               //   value=""
               className={`${inputStyle} md:w-[200px] `}
               onChange={handleChange}

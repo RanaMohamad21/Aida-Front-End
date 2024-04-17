@@ -24,12 +24,10 @@ function Signup() {
     phone: "",
     birthdate: "",
     gender: "",
-    address: {
-      city: "",
-      street: "",
-      BuildingNo: "",
-      apartmentNo: "",
-    },
+    city: "",
+    street: "",
+    BuildingNo: "",
+    apartmentNo: "",
     User_type: "customer",
   });
 
@@ -54,7 +52,16 @@ function Signup() {
    */
   async function handleSubmit(e) {
     e.preventDefault();
+    const { city, street, BuildingNo, apartmentNo, ...formDataWithoutAddress } = formData;
 
+  const address = {
+    city,
+    street,
+    BuildingNo,
+    apartmentNo
+  };
+
+  
     // Validate email format
     const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
     if (!emailRegex.test(formData.email)) {
@@ -68,9 +75,9 @@ function Signup() {
       alert("Please enter a valid password format.");
       return;
     }
-
     const userData = {
-      ...formData,
+      ...formDataWithoutAddress,
+      address, 
     };
 
     // Clear form data
@@ -82,12 +89,11 @@ function Signup() {
       phone: "",
       birthdate: "",
       gender: "",
-      address: {
+      
         city: "",
         street: "",
         BuildingNo: "",
         apartmentNo: "",
-      },
       User_type: "customer",
     });
 
@@ -283,7 +289,7 @@ function Signup() {
                 <input
                   type="text"
                   placeholder="City"
-                  name="address.city"
+                  name="city"
                   value={formData.city}
                   className={`${inputStyle} w-32 mx-2  `}
                   onChange={handleChange}
@@ -293,7 +299,7 @@ function Signup() {
                 <input
                   type="text"
                   placeholder="Street address"
-                  name="address.street"
+                  name="street"
                   value={formData.street}
                   className={`${inputStyle}  mx-2`}
                   onChange={handleChange}
@@ -303,7 +309,7 @@ function Signup() {
                 <input
                   type="text"
                   placeholder="Building number"
-                  name="address.BuildingNo"
+                  name="BuildingNo"
                   value={formData.buildingNumber}
                   className={`${inputStyle}w-32 mx-2 `}
                   onChange={handleChange}
@@ -312,7 +318,7 @@ function Signup() {
                 <input
                   type="text"
                   placeholder="Apartment number"
-                  name="address.apartmentNo"
+                  name="apartmentNo"
                   value={formData.apartmentNumber}
                   className={`${inputStyle}  mx-2 w-40`}
                   onChange={handleChange}

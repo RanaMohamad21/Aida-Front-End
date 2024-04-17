@@ -45,15 +45,27 @@ function SignUpVendor2() {
     //     ...prevFormData,
     //     key: data[key],
     //   }));
+    const { city, street, BuildingNo, apartmentNo, ...formDataWithoutAddress } =
+      formData;
+
+    const address = {
+      city,
+      street,
+      BuildingNo,
+      apartmentNo,
+    };
     const userData = {
-      ...formData,
+      ...formDataWithoutAddress,
+      address,
       ...data,
     };
 
     // Send the FormData to the server using Axios
     try {
       console.log("Form Data Object:", userData);
-      console.log("Form Data Object:", data);
+      console.log("Form Data with Address Object:", formData);
+      console.log("ِAddress Data Object:", address);
+
       const response = await axios.post(
         "http://localhost:8081/api/v1/auth/signup",
         formData
