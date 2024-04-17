@@ -2,13 +2,15 @@ import { Link, useNavigate } from "react-router-dom";
 import LogoTealText from "../assets/logo/LogoTealText.svg";
 import categories from "../UI/SignupCategories";
 import { useState } from "react";
-import Sidebar from "../assets/Authentication/SidebarSignup.png"
+import Sidebar from "../assets/Authentication/SidebarSignup2.png"
 
+// Styles
 const inputStyle = "border-solid border-2 border-gray px-2 py-1  mt-2 mb-4 ";
 const labelStyle = "font-semibold mx-2  ";
 const radioLabel = "text-gray hover:cursor-pointer";
 
 function Signup() {
+   // State
   const [checkedCategories, setCheckedCategories] = useState(
     new Array(categories.length).fill(false)
   );
@@ -28,7 +30,10 @@ function Signup() {
     termsChecked: false,
   });
 
+// Router navigation
   const navigate = useNavigate();
+
+  // Form change handlers
   function handleChange(e) {
     if (e.target.type === "checkbox") {
       setFormData((prevFormDate) => ({
@@ -40,6 +45,8 @@ function Signup() {
       setFormData((prevFormDate) => ({ ...prevFormDate, [name]: value }));
     }
   }
+
+  // Form submission
   function handleSubmit(e) {
     e.preventDefault();
     const userData = {
@@ -50,7 +57,7 @@ function Signup() {
     navigate("/login");
   }
 
-  // Sets an array of booleans for the categories
+   // Handle category checkbox changes
   function handleChecked(position) {
     const updatedCheckedCategories = checkedCategories.map((catState, index) =>
       index === position ? !catState : catState
@@ -60,7 +67,9 @@ function Signup() {
   }
   return (
     <>
+    {/* Sidebar */}
       <div className="flex   h-screan">
+         {/* Sidebar */}
         <div className=" w-3/12  ">
           <img
             src={Sidebar}
@@ -68,15 +77,22 @@ function Signup() {
             className="w-full h-full object-cover  lg:h-[1200px]"
           />
         </div>
+        {/* Signup Form */}
         <div className="  sm:w-full md:w-8/12  lg:w-6/12 mx-auto px-14 sm:pb-[60px] ">
           <img
             src={LogoTealText}
             alt="Logo"
             className="w-[410px] mx-auto my-10  "
           />
+
+          {/* Form */}
           <form className="mb-3" onSubmit={handleSubmit}>
+            {/* Form fields */}
+            {/* Personal Information */}
             <div className="flex justify-around  w-2/3 relative h-3/4 mx-auto gap-[70px] font-sans">
+               {/* Left Column */}
               <div className="w-1/2 flex flex-col ">
+                {/* First Name */}
                 <div>
                   <label className={labelStyle}>First Name</label> <br />
                   <input
@@ -89,6 +105,7 @@ function Signup() {
                     onChange={handleChange}
                   />
                 </div>
+                 {/* Email */}
                 <div>
                   <label className={labelStyle}>Email</label>
                   <br />
@@ -102,7 +119,7 @@ function Signup() {
                     required
                   />
                 </div>
-
+                  {/* Date of Birth */}
                 <div className="mt-4">
                   <label className={labelStyle}>Date of birth</label>
                   <br />
@@ -114,7 +131,9 @@ function Signup() {
                   />
                 </div>
               </div>
+              {/* Right Column */}
               <div className="w-1/2 ">
+                {/* Second Name */}
                 <div>
                   <label className={labelStyle}>Second Name</label>
                   <br />
@@ -128,6 +147,7 @@ function Signup() {
                     required
                   />
                 </div>
+                {/* Password */}
                 <div>
                   <label className={labelStyle}>Password</label>
                   <br />
@@ -140,6 +160,7 @@ function Signup() {
                     required
                   />
                 </div>
+                {/* Phone */}
                 <div>
                   <label className={labelStyle}>Phone</label>
                   <br />
@@ -155,6 +176,7 @@ function Signup() {
                 </div>
               </div>
             </div>
+            {/* Gender */}
             <div className="mt-6 lg:mt-[38px]  mb-5 pl-16">
               <label className={labelStyle}>Gender</label>
               <br />
@@ -185,9 +207,11 @@ function Signup() {
                 </div>
               </div>
             </div>
+            {/* Billing Address */}
             <div className="">
               <label className={`${labelStyle} pl-16`}>Billing Address</label>
               <br />
+              {/* City */}
               <div className="md:flex">
                 <input
                   type="text"
@@ -198,6 +222,7 @@ function Signup() {
                   onChange={handleChange}
                   required
                 />
+                {/* Street Address */}
                 <input
                   type="text"
                   placeholder="Street address"
@@ -207,6 +232,7 @@ function Signup() {
                   onChange={handleChange}
                   required
                 />
+                {/* Building Number */}
                 <input
                   type="text"
                   placeholder="Building number"
@@ -215,6 +241,7 @@ function Signup() {
                   className={`${inputStyle}w-32 mx-2 `}
                   onChange={handleChange}
                 />
+                 {/* Apartment Number */}
                 <input
                   type="text"
                   placeholder="Apartment number"
