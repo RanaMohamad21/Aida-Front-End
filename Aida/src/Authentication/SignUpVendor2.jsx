@@ -2,7 +2,7 @@ import { useVendor } from "../Contexts/VendorSignUpProvider";
 import { useForm } from "react-hook-form";
 
 import { useNavigate } from "react-router-dom";
-
+import axios from 'axios';
 import SignUpTemplate from "./SignUpTemplate";
 import SideBar from "../assets/Authentication/SideBarVendor.jpg";
 import Uploader from "../UI/Uploader";
@@ -36,33 +36,33 @@ function SignUpVendor2() {
  * @returns {Promise} A promise that resolves when the form data is successfully submitted
  */
    const onSubmit = async (data) => {
-    // try {
-      const formDataObject = new FormData();
+      const formDataObject = new FormData;
       formDataObject.append("registrationDocument", registrationDocument);
       formDataObject.append("listOfPartnersDocument", listOfPartnersDocument);
       formDataObject.append("partnershipAgreementDocument", partnershipAgreementDocument);
       formDataObject.append("tradeLicense", tradeLicense);
       for (let key in data) {
-        formDataObject.append(key, data[key]);
-      // }
-  
-      {/*//* Send to the server */}
-    //   const response = await fetch("/api/signup/vendor2", {
-    //     method: "POST",
-    //     body: formDataObject,
-    //   });
-  
-    //   if (response.ok) {
-    //     navigate("/SignUpVendor3");
-    //   } else {
-    //     console.error("Failed to submit form data:", await response.json());
-    //   }
-    // } catch (error) {
-    //   console.error("Failed to submit form data:", error);
-    // }
-    //* For Testing Purposes
-    navigate("/SignUpVendor3");
-  }
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          key: data[key],
+        }));
+}
+   // Send the FormData to the server using Axios
+   try {
+     console.log("Form Data Object:", formData);
+     const response = await axios.post("http://localhost:8081/api/v1/auth/signup", formData);
+
+     if (response.status === 200) {
+       navigate("/SignUpVendor3");
+     } else {
+       console.error("Failed to submit form data:", response.data);
+     }
+   } catch (error) {
+     console.error("Failed to submit form data:", error);
+   }
+
+   // navigate("/SignUpVendor3");
+
 }
 
   // Log the updated form data when it changes

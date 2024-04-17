@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-
 import { useAuthentication } from "./AuthenticationContext";
 import logoWhiteTxtAida from "/src/assets/logo/LogoWhiteTextAida.svg";
 import LoginImg from "../assets/Authentication/login.png";

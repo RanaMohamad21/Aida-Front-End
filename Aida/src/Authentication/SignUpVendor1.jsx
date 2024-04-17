@@ -52,7 +52,7 @@ function SignUpVendor1() {
             <div className="flex flex-col">
               <label>first name</label>
               <input
-                name="firstName"
+                name="fname"
                 type="text "
                 placeholder="Ahmad"
                 className={inputStyle}
@@ -65,7 +65,7 @@ function SignUpVendor1() {
             <div className="flex flex-col">
               <label>Second Name</label>
               <input
-                name="secondName"
+                name="lname"
                 type="text"
                 placeholder="Taha"
                 className={inputStyle}
@@ -108,7 +108,7 @@ function SignUpVendor1() {
             <div className="flex flex-col">
               <label>Phone</label>
               <input
-                name="phone"
+                name="phoneNumber"
                 type="tel"
                 placeholder="+201232453123"
                 className={inputStyle}
@@ -137,7 +137,7 @@ function SignUpVendor1() {
         <div className="flex flex-col">
           <label>store name</label>
           <input
-            name="storeName"
+            name="businessInfo"
             type="text"
             placeholder="Example"
             className={`${inputStyle}  `}
@@ -154,7 +154,7 @@ function SignUpVendor1() {
             <input
               type="text"
               placeholder="City"
-              name="city"
+              name="address.city"
               //   value=""
               className={`${inputStyle} md:w-[200px] `}
               onChange={handleChange}
@@ -163,7 +163,7 @@ function SignUpVendor1() {
             <input
               type="text"
               placeholder="Street address"
-              name="street"
+              name="address.street"
               //   value=""
               className={`${inputStyle}  `}
               onChange={handleChange}
@@ -172,7 +172,7 @@ function SignUpVendor1() {
             <input
               type="text"
               placeholder="Building number"
-              name="buildingNumber"
+              name="address.BuildingNo"
               //   value=""
               className={`${inputStyle} md:w-[200px] `}
               onChange={handleChange}
@@ -180,7 +180,7 @@ function SignUpVendor1() {
             <input
               type="text"
               placeholder="Apartment number"
-              name="apartmentNumber"
+              name="address.apartmentNo"
               //   value=""
               className={`${inputStyle} md:w-[200px] `}
               onChange={handleChange}

@@ -4,22 +4,26 @@ const SignUpContext = createContext();
 // eslint-disable-next-line react/prop-types
 function VendorSignUpProvider({ children }) {
   const initialState = {
-    firstName: "",
-    secondName: "",
+    fname: "",
+    lname: "",
     email: "",
     password: "",
-    phone: "",
+    phoneNumber: "",
+    businessInfo: "",
     dateOfBirth: "",
-    city: "",
-    street: "",
-    buildingNumber: "",
-    apartmentNumber: "",
+    address: {
+        city: "",
+        street: "",
+        BuildingNo: "",
+        apartmentNo: "",
+    },
     registrationDocument: "",
     listOfPartnersDocument: "",
     partnershipAgreementDocument: "",
     ownership: "",
     tradeLicense: "",
     vendorThoughts: "",
+    User_type: "vendor",
     termsChecked: false,
   };
   const [formData, setFormData] = useState(initialState);

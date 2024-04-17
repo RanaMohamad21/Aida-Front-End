@@ -3,6 +3,7 @@ import LogoTealText from "../assets/logo/LogoTealText.svg";
 import categories from "../UI/SignupCategories";
 import { useState } from "react";
 import Sidebar from "../assets/Authentication/SidebarSignup2.png";
+import axios from 'axios';
 
 // Styles
 const inputStyle = "border-solid border-2 border-gray px-2 py-1  mt-2 mb-4 ";
@@ -15,19 +16,21 @@ function Signup() {
     new Array(categories.length).fill(false)
   );
   const [formData, setFormData] = useState({
-    firstName: "",
-    secondName: "",
+    fname: "",
+    lname: "",
     email: "",
     password: "",
     phone: "",
-    dateOfBirth: "",
+    birthdate: "",
     gender: "",
-    city: "",
-    street: "",
-    buildingNumber: "",
-    apartmentNumber: "",
-    categories: [],
-    termsChecked: false,
+    address: {
+      city: "",
+      street: "",
+      BuildingNo: "",
+      apartmentNo: "",
+    },
+    User_type: "customer",
+    termsChecked: false
   });
 
   // Router navigation
@@ -72,58 +75,52 @@ if (!passwordRegex.test(formData.password)) {
 }
 
 
-// Validate date of birth
-const today = new Date();
-const age = today.getFullYear() - formData.dateOfBirth.getFullYear();
-if (age < 18) {
-  alert("You must be at least 18 years old.");
-  return;
-}
 const userData = {
-  ...formData,
-  categories: checkedCategories,
+  ...formData
 };
+
 // Clear form data
 setFormData({
-  firstName: "",
-  secondName: "",
+   fname: "",
+   lname: "",
   email: "",
   password: "",
   phone: "",
-  dateOfBirth: "",
-  city: "",
-  street: "",
-  buildingNumber: "",
-  apartmentNumber: "",
-  categories: [],
-  termsChecked: false,
+  birthdate: "",
+  gender: "",
+  address: {
+    city: "",
+    street: "",
+    BuildingNo: "",
+    apartmentNo: "",
+  },
+  User_type: "customer",
+  termsChecked: false
 });
 
-    
     console.log(userData);
 
     ///Send data to the server
-  // try {
-  //   const response = await fetch("/api/signup", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(userData),
-  //   });
+    try {
+    console.log("User data:", userData);
+      const response = await axios.post("http://localhost:8081/api/v1/auth/signup", userData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-  //   if (!response.ok) {
-  //     throw new Error("Signup failed");
-  //   }
+      if (!response.status === 200) {
+        throw new Error("Signup failed");
+      }
 
-  //   const data = await response.json();
-  //   console.log("Signup successful", data);
-  //   navigate("/login");
-  // } catch (error) {
-  //   console.error("Signup error", error);
-  //   // Handle error
-  // }
-  navigate("/login");
+      console.log("Signup successful", response.data);
+      navigate("/login");
+    } catch (error) {
+      console.error("Signup error", error);
+      // Handle error
+    }
+
+  //navigate("/login");
 }
 
   // Handle category checkbox changes
@@ -165,7 +162,7 @@ setFormData({
                 <div>
                   <label className={labelStyle}>First Name</label> <br />
                   <input
-                    name="firstName"
+                    name="fname"
                     type="text "
                     placeholder="Ahmad"
                     className={inputStyle}
@@ -196,7 +193,7 @@ setFormData({
                   <input
                     type="date"
                     className={inputStyle}
-                    name="dateOfBirth"
+                    name="birthdate"
                     onChange={handleChange}
                     min="1900-01-01"
                     max="2008-12-31"
@@ -210,7 +207,7 @@ setFormData({
                   <label className={labelStyle}>Second Name</label>
                   <br />
                   <input
-                    name="secondName"
+                    name="lname"
                     type="text"
                     placeholder="Taha"
                     className={inputStyle}
@@ -289,7 +286,7 @@ setFormData({
                 <input
                   type="text"
                   placeholder="City"
-                  name="city"
+                  name="address.city"
                   value={formData.city}
                   className={`${inputStyle} w-32 mx-2  `}
                   onChange={handleChange}
@@ -299,7 +296,7 @@ setFormData({
                 <input
                   type="text"
                   placeholder="Street address"
-                  name="street"
+                  name="address.street"
                   value={formData.street}
                   className={`${inputStyle}  mx-2`}
                   onChange={handleChange}
@@ -309,7 +306,7 @@ setFormData({
                 <input
                   type="text"
                   placeholder="Building number"
-                  name="buildingNumber"
+                  name="address.BuildingNo"
                   value={formData.buildingNumber}
                   className={`${inputStyle}w-32 mx-2 `}
                   onChange={handleChange}
@@ -318,7 +315,7 @@ setFormData({
                 <input
                   type="text"
                   placeholder="Apartment number"
-                  name="apartmentNumber"
+                  name="address.apartmentNo"
                   value={formData.apartmentNumber}
                   className={`${inputStyle}  mx-2 w-40`}
                   onChange={handleChange}

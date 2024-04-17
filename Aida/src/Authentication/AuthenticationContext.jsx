@@ -1,8 +1,11 @@
 import { useContext, useReducer, useState } from "react";
 import { createContext } from "react";
+import axios from 'axios';
+
 
 // Create a new context for authentication state
 const AuthenticationContext = createContext();
+let token='';
 
 // Define the initial state for authentication
 const initialState = {
@@ -10,13 +13,6 @@ const initialState = {
   isAuthenticated: false,
 };
 
-// A fake user for testing purposes
-const FAKE_USER = {
-  name: "Rana",
-  email: "Rana@trial.com",
-  password: "Rana",
-  avatar: "link",
-};
 
 // Reducer function to handle state changes
 function reducer(state, action) {
@@ -73,27 +69,36 @@ function AuthenticationProvider({ children }) {
     setError("");
 
     try {
-      // Authenticate user
-      // const response = await api.login(email, password);
-      // dispatch({ type: "login", payload: response.data });
+       // Send a POST request to the server with the user credentials
+       console.log("Form Data Object:", email, password);
+       const response = await axios.post('http://localhost:8081/api/v1/auth/login', {
+              "email": email,
+              "password": password
+       });
 
-      // For testing purposes, we will just log in with the fake user
-      dispatch({ type: "login", payload: FAKE_USER });
+
+    // If the request is successful, update the state with the token
+     token = response.data.token;
+
+
     } catch (error) {
       console.error("Failed to login:", error);
       setError("Failed to log in. Please check your email and password");
     }
   }
+
   // Logout function to log out the user
   function logout() {
     dispatch({ type: "logout" });
+     //We need to remove token when logged out.
   }
+
   return (
     /* Provide the user, isAuthenticated, login & logout functions 
     and error properties to the context */
 
     <AuthenticationContext.Provider
-      value={{ user, isAuthenticated, login, logout, error }}
+      value={{ user, isAuthenticated, login, logout, error, token }}
     >
       {children}
     </AuthenticationContext.Provider>
