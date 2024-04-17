@@ -12,19 +12,16 @@ function VendorSignUpProvider({ children }) {
     businessInfo: "",
     dateOfBirth: "",
     address: {
-        city: "",
-        street: "",
-        BuildingNo: "",
-        apartmentNo: "",
+      city: "",
+      street: "",
+      BuildingNo: "",
+      apartmentNo: "",
     },
     registrationDocument: "",
     listOfPartnersDocument: "",
     partnershipAgreementDocument: "",
-    ownership: "",
     tradeLicense: "",
-    vendorThoughts: "",
     User_type: "vendor",
-    termsChecked: false,
   };
   const [formData, setFormData] = useState(initialState);
   return (

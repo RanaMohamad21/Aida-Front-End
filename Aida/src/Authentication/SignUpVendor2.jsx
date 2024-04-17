@@ -2,7 +2,7 @@ import { useVendor } from "../Contexts/VendorSignUpProvider";
 import { useForm } from "react-hook-form";
 
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import SignUpTemplate from "./SignUpTemplate";
 import SideBar from "../assets/Authentication/SideBarVendor.jpg";
 import Uploader from "../UI/Uploader";
@@ -14,12 +14,11 @@ import { useEffect, useState } from "react";
  * Collects business information such as registration document, legal structure, and ownership.
  */
 function SignUpVendor2() {
-
-   // Get the form data and setFormData functions from the VendorSignUpProvider context
+  // Get the form data and setFormData functions from the VendorSignUpProvider context
   const { formData, setFormData } = useVendor();
-   // Initialize the useForm hook to handle form 
+  // Initialize the useForm hook to handle form
   const { register, handleSubmit } = useForm();
-
+  const [termsChecked, setTermsChecked] = useState(false);
   // Initialize state management for legal documents
   const [registrationDocument, setRegistrationDocument] = useState(null);
   const [listOfPartnersDocument, setListOfPartnersDocument] = useState(null);
@@ -31,57 +30,58 @@ function SignUpVendor2() {
   const navigate = useNavigate();
 
   /**
- * Handles form submission and sends a POST request to the server with the form data.
- * @param {Object} data - The form data object
- * @returns {Promise} A promise that resolves when the form data is successfully submitted
- */
-   const onSubmit = async (data) => {
-      const formDataObject = new FormData;
-      formDataObject.append("registrationDocument", registrationDocument);
-      formDataObject.append("listOfPartnersDocument", listOfPartnersDocument);
-      formDataObject.append("partnershipAgreementDocument", partnershipAgreementDocument);
-      formDataObject.append("tradeLicense", tradeLicense);
-      for (let key in data) {
-        setFormData((prevFormData) => ({
-          ...prevFormData,
-          key: data[key],
-        }));
-}
-   // Send the FormData to the server using Axios
-   try {
-     console.log("Form Data Object:", formData);
-     const response = await axios.post("http://localhost:8081/api/v1/auth/signup", formData);
+   * Handles form submission and sends a POST request to the server with the form data.
+   * @param {Object} data - The form data object
+   * @returns {Promise} A promise that resolves when the form data is successfully submitted
+   */
+  const onSubmit = async (data) => {
+    // const formDataObject = new FormData;
+    // formDataObject.append("registrationDocument", registrationDocument);
+    // formDataObject.append("listOfPartnersDocument", listOfPartnersDocument);
+    // formDataObject.append("partnershipAgreementDocument", partnershipAgreementDocument);
+    // formDataObject.append("tradeLicense", tradeLicense);
+    // for (let key in data) {
+    //   setFormData((prevFormData) => ({
+    //     ...prevFormData,
+    //     key: data[key],
+    //   }));
+    const userData = {
+      ...formData,
+      ...data,
+    };
 
-     if (response.status === 200) {
-       navigate("/SignUpVendor3");
-     } else {
-       console.error("Failed to submit form data:", response.data);
-     }
-   } catch (error) {
-     console.error("Failed to submit form data:", error);
-   }
+    // Send the FormData to the server using Axios
+    try {
+      console.log("Form Data Object:", userData);
+      console.log("Form Data Object:", data);
+      const response = await axios.post(
+        "http://localhost:8081/api/v1/auth/signup",
+        formData
+      );
 
-   // navigate("/SignUpVendor3");
+      if (response.status === 200) {
+        navigate("/SignUpVendor3");
+      } else {
+        console.error("Failed to submit form data:", response.data);
+      }
+    } catch (error) {
+      console.error("Failed to submit form data:", error);
+    }
 
-}
+    // navigate("/SignUpVendor3");
+  };
 
   // Log the updated form data when it changes
   useEffect(() => {
     console.log("Updated FormData:", formData);
   }, [formData]);
 
-
   /**
-   * Handles changes to the termsChecked checkbox and updates the form data state
+   * Handles changes to the termsChecked checkbox
    * @param {Object} e - The event object for the checkbox change event
    */
   function handleChange(e) {
-    if (e.target.type === "checkbox") {
-      setFormData((prevFormDate) => ({
-        ...prevFormDate,
-        termsChecked: e.target.checked,
-      }));
-    }
+    setTermsChecked(e.target.checked);
   }
 
   // const [registration, setRegistration] = useState("No file choosen");
@@ -110,7 +110,7 @@ function SignUpVendor2() {
   //   }
   // };
 
-    // Render the form for collecting business information
+  // Render the form for collecting business information
   return (
     <SignUpTemplate imgSrc={SideBar}>
       <form className="capitalize " onSubmit={handleSubmit(onSubmit)}>
@@ -265,7 +265,7 @@ function SignUpVendor2() {
             className="text-white bg-FlamingoPink w-1/2  rounded-md h-8 uppercase my-5 cursor-pointer hover:translate-x-[2px] hover:translate-y-[2px] transition-all "
             type="submit"
             value="Signup"
-            disabled={!formData.termsChecked}
+            disabled={!termsChecked}
             required
           />
         </div>

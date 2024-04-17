@@ -3,7 +3,7 @@ import LogoTealText from "../assets/logo/LogoTealText.svg";
 import categories from "../UI/SignupCategories";
 import { useState } from "react";
 import Sidebar from "../assets/Authentication/SidebarSignup2.png";
-import axios from 'axios';
+import axios from "axios";
 
 // Styles
 const inputStyle = "border-solid border-2 border-gray px-2 py-1  mt-2 mb-4 ";
@@ -15,6 +15,7 @@ function Signup() {
   const [checkedCategories, setCheckedCategories] = useState(
     new Array(categories.length).fill(false)
   );
+  const [termsChecked, setTermsChecked] = useState(false);
   const [formData, setFormData] = useState({
     fname: "",
     lname: "",
@@ -30,7 +31,6 @@ function Signup() {
       apartmentNo: "",
     },
     User_type: "customer",
-    termsChecked: false
   });
 
   // Router navigation
@@ -39,75 +39,72 @@ function Signup() {
   // Form change handlers
   function handleChange(e) {
     if (e.target.type === "checkbox") {
-      setFormData((prevFormDate) => ({
-        ...prevFormDate,
-        termsChecked: e.target.checked,
-      }));
+      setTermsChecked(e.target.checked);
     } else {
       const { name, value } = e.target;
       setFormData((prevFormDate) => ({ ...prevFormDate, [name]: value }));
     }
   }
 
-
   /**
- * Handles form submission for the signup page.
- * Validates form data, sends a POST request to the server with the user data,
- * and navigates to the login page upon successful signup.
- * @param {React.FormEvent<HTMLFormElement>} e - The form submission event.
- */
+   * Handles form submission for the signup page.
+   * Validates form data, sends a POST request to the server with the user data,
+   * and navigates to the login page upon successful signup.
+   * @param {React.FormEvent<HTMLFormElement>} e - The form submission event.
+   */
   async function handleSubmit(e) {
     e.preventDefault();
 
+    // Validate email format
+    const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+    if (!emailRegex.test(formData.email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
 
-// Validate email format
-const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
-if (!emailRegex.test(formData.email)) {
-  alert("Please enter a valid email address.");
-  return;
-}
+    // Validate password format
+    const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+    if (!passwordRegex.test(formData.password)) {
+      alert("Please enter a valid password format.");
+      return;
+    }
 
-// Validate password format
-const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
-if (!passwordRegex.test(formData.password)) {
-  alert("Please enter a valid password format.");
-  return;
-}
+    const userData = {
+      ...formData,
+    };
 
-
-const userData = {
-  ...formData
-};
-
-// Clear form data
-setFormData({
-   fname: "",
-   lname: "",
-  email: "",
-  password: "",
-  phone: "",
-  birthdate: "",
-  gender: "",
-  address: {
-    city: "",
-    street: "",
-    BuildingNo: "",
-    apartmentNo: "",
-  },
-  User_type: "customer",
-  termsChecked: false
-});
+    // Clear form data
+    setFormData({
+      fname: "",
+      lname: "",
+      email: "",
+      password: "",
+      phone: "",
+      birthdate: "",
+      gender: "",
+      address: {
+        city: "",
+        street: "",
+        BuildingNo: "",
+        apartmentNo: "",
+      },
+      User_type: "customer",
+    });
 
     console.log(userData);
 
     ///Send data to the server
     try {
-    console.log("User data:", userData);
-      const response = await axios.post("http://localhost:8081/api/v1/auth/signup", userData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      console.log("User data:", userData);
+      const response = await axios.post(
+        "http://localhost:8081/api/v1/auth/signup",
+        userData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (!response.status === 200) {
         throw new Error("Signup failed");
@@ -120,8 +117,8 @@ setFormData({
       // Handle error
     }
 
-  //navigate("/login");
-}
+    //navigate("/login");
+  }
 
   // Handle category checkbox changes
   function handleChecked(position) {
@@ -353,7 +350,7 @@ setFormData({
             <div className="mt-4">
               <input
                 type="checkbox"
-                value={formData.termsChecked}
+                value={termsChecked}
                 name="termsChecked"
                 onChange={handleChange}
                 className="mr-2 mb-3  "
@@ -376,7 +373,7 @@ setFormData({
                 className="text-white bg-FlamingoPink w-1/2  rounded-md h-8 uppercase my-5 cursor-pointer hover:translate-x-[2px] hover:translate-y-[2px] transition-all "
                 type="submit"
                 value="Signup"
-                disabled={!formData.termsChecked}
+                disabled={!termsChecked}
                 onChange={handleSubmit}
                 required
               />
