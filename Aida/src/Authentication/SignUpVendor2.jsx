@@ -9,33 +9,72 @@ import Uploader from "../UI/Uploader";
 import { useEffect, useState } from "react";
 //import { useState } from "react";
 
+/**
+ * Component for the second step of vendor sign up process.
+ * Collects business information such as registration document, legal structure, and ownership.
+ */
 function SignUpVendor2() {
+
+   // Get the form data and setFormData functions from the VendorSignUpProvider context
   const { formData, setFormData } = useVendor();
+   // Initialize the useForm hook to handle form 
   const { register, handleSubmit } = useForm();
 
+  // Initialize state management for legal documents
   const [registrationDocument, setRegistrationDocument] = useState(null);
   const [listOfPartnersDocument, setListOfPartnersDocument] = useState(null);
   const [partnershipAgreementDocument, setPartnershipAgreementDocument] =
     useState(null);
   const [tradeLicense, setTradeLicense] = useState(null);
+
+  // Initialize the useNavigate hook to navigate to the next step of the sign up process
   const navigate = useNavigate();
-  const onSubmit = (data) => {
-    setFormData((prevFormData) => {
-      return {
-        ...prevFormData,
-        registrationDocument: registrationDocument,
-        listOfPartnersDocument: listOfPartnersDocument,
-        partnershipAgreementDocument: partnershipAgreementDocument,
-        tradeLicense: tradeLicense,
-        ...data,
-      };
-    });
+
+  /**
+ * Handles form submission and sends a POST request to the server with the form data.
+ * @param {Object} data - The form data object
+ * @returns {Promise} A promise that resolves when the form data is successfully submitted
+ */
+   const onSubmit = async (data) => {
+    // try {
+      const formDataObject = new FormData();
+      formDataObject.append("registrationDocument", registrationDocument);
+      formDataObject.append("listOfPartnersDocument", listOfPartnersDocument);
+      formDataObject.append("partnershipAgreementDocument", partnershipAgreementDocument);
+      formDataObject.append("tradeLicense", tradeLicense);
+      for (let key in data) {
+        formDataObject.append(key, data[key]);
+      // }
+  
+      {/*//* Send to the server */}
+    //   const response = await fetch("/api/signup/vendor2", {
+    //     method: "POST",
+    //     body: formDataObject,
+    //   });
+  
+    //   if (response.ok) {
+    //     navigate("/SignUpVendor3");
+    //   } else {
+    //     console.error("Failed to submit form data:", await response.json());
+    //   }
+    // } catch (error) {
+    //   console.error("Failed to submit form data:", error);
+    // }
+    //* For Testing Purposes
     navigate("/SignUpVendor3");
-  };
+  }
+}
+
+  // Log the updated form data when it changes
   useEffect(() => {
     console.log("Updated FormData:", formData);
   }, [formData]);
 
+
+  /**
+   * Handles changes to the termsChecked checkbox and updates the form data state
+   * @param {Object} e - The event object for the checkbox change event
+   */
   function handleChange(e) {
     if (e.target.type === "checkbox") {
       setFormData((prevFormDate) => ({
@@ -71,9 +110,11 @@ function SignUpVendor2() {
   //   }
   // };
 
+    // Render the form for collecting business information
   return (
     <SignUpTemplate imgSrc={SideBar}>
       <form className="capitalize " onSubmit={handleSubmit(onSubmit)}>
+        {/* Display the bussiness info header */}
         <div className="mb-20">
           <h1 className="text-teal text-xl font-semibold py-3">
             bussiness info
@@ -81,6 +122,7 @@ function SignUpVendor2() {
           <p>tell us more about your bussiness, your application</p>
         </div>
 
+        {/* Render the bussiness registration document input */}
         <div className="flex flex-col gap-5">
           <div>
             <h1 className=" text-xl font-semibold py-3">
@@ -101,11 +143,13 @@ function SignUpVendor2() {
             />
           </div>
 
+          {/* Render the legal structure and ownership inputs */}
           <div>
             <h1 className=" text-xl font-semibold py-3">
               legal structure and ownership
             </h1>
             <div className="lg:flex mb-5 lg:gap-4">
+              {/* Render the sole proprietorship input */}
               <div>
                 <input
                   type="radio"
