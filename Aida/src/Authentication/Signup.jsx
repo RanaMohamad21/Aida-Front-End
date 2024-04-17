@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import LogoTealText from "../assets/logo/LogoTealText.svg";
 import categories from "../UI/SignupCategories";
 import { useState } from "react";
-import Sidebar from "../assets/Authentication/SidebarSignup2.png"
+import Sidebar from "../assets/Authentication/SidebarSignup2.png";
 
 // Styles
 const inputStyle = "border-solid border-2 border-gray px-2 py-1  mt-2 mb-4 ";
@@ -10,7 +10,7 @@ const labelStyle = "font-semibold mx-2  ";
 const radioLabel = "text-gray hover:cursor-pointer";
 
 function Signup() {
-   // State
+  // State
   const [checkedCategories, setCheckedCategories] = useState(
     new Array(categories.length).fill(false)
   );
@@ -30,7 +30,7 @@ function Signup() {
     termsChecked: false,
   });
 
-// Router navigation
+  // Router navigation
   const navigate = useNavigate();
 
   // Form change handlers
@@ -46,18 +46,87 @@ function Signup() {
     }
   }
 
-  // Form submission
-  function handleSubmit(e) {
-    e.preventDefault();
-    const userData = {
-      ...formData,
-      categories: checkedCategories,
-    };
-    console.log(userData);
-    navigate("/login");
-  }
 
-   // Handle category checkbox changes
+  /**
+ * Handles form submission for the signup page.
+ * Validates form data, sends a POST request to the server with the user data,
+ * and navigates to the login page upon successful signup.
+ * @param {React.FormEvent<HTMLFormElement>} e - The form submission event.
+ */
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+
+// Validate email format
+const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+if (!emailRegex.test(formData.email)) {
+  alert("Please enter a valid email address.");
+  return;
+}
+
+// Validate password format
+const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+if (!passwordRegex.test(formData.password)) {
+  alert("Please enter a valid password format.");
+  return;
+}
+
+
+// Validate date of birth
+const today = new Date();
+const age = today.getFullYear() - formData.dateOfBirth.getFullYear();
+if (age < 18) {
+  alert("You must be at least 18 years old.");
+  return;
+}
+const userData = {
+  ...formData,
+  categories: checkedCategories,
+};
+// Clear form data
+setFormData({
+  firstName: "",
+  secondName: "",
+  email: "",
+  password: "",
+  phone: "",
+  dateOfBirth: "",
+  city: "",
+  street: "",
+  buildingNumber: "",
+  apartmentNumber: "",
+  categories: [],
+  termsChecked: false,
+});
+
+    
+    console.log(userData);
+
+    ///Send data to the server
+  // try {
+  //   const response = await fetch("/api/signup", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(userData),
+  //   });
+
+  //   if (!response.ok) {
+  //     throw new Error("Signup failed");
+  //   }
+
+  //   const data = await response.json();
+  //   console.log("Signup successful", data);
+  //   navigate("/login");
+  // } catch (error) {
+  //   console.error("Signup error", error);
+  //   // Handle error
+  // }
+  navigate("/login");
+}
+
+  // Handle category checkbox changes
   function handleChecked(position) {
     const updatedCheckedCategories = checkedCategories.map((catState, index) =>
       index === position ? !catState : catState
@@ -67,9 +136,9 @@ function Signup() {
   }
   return (
     <>
-    {/* Sidebar */}
+      {/* Sidebar */}
       <div className="flex   h-screan">
-         {/* Sidebar */}
+        {/* Sidebar */}
         <div className=" w-3/12  ">
           <img
             src={Sidebar}
@@ -90,7 +159,7 @@ function Signup() {
             {/* Form fields */}
             {/* Personal Information */}
             <div className="flex justify-around  w-2/3 relative h-3/4 mx-auto gap-[70px] font-sans">
-               {/* Left Column */}
+              {/* Left Column */}
               <div className="w-1/2 flex flex-col ">
                 {/* First Name */}
                 <div>
@@ -105,7 +174,7 @@ function Signup() {
                     onChange={handleChange}
                   />
                 </div>
-                 {/* Email */}
+                {/* Email */}
                 <div>
                   <label className={labelStyle}>Email</label>
                   <br />
@@ -116,10 +185,11 @@ function Signup() {
                     className={inputStyle}
                     maxLength="100"
                     onChange={handleChange}
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                     required
                   />
                 </div>
-                  {/* Date of Birth */}
+                {/* Date of Birth */}
                 <div className="mt-4">
                   <label className={labelStyle}>Date of birth</label>
                   <br />
@@ -128,6 +198,8 @@ function Signup() {
                     className={inputStyle}
                     name="dateOfBirth"
                     onChange={handleChange}
+                    min="1900-01-01"
+                    max="2008-12-31"
                   />
                 </div>
               </div>
@@ -157,6 +229,7 @@ function Signup() {
                     className={inputStyle}
                     maxLength="50"
                     onChange={handleChange}
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                     required
                   />
                 </div>
@@ -241,7 +314,7 @@ function Signup() {
                   className={`${inputStyle}w-32 mx-2 `}
                   onChange={handleChange}
                 />
-                 {/* Apartment Number */}
+                {/* Apartment Number */}
                 <input
                   type="text"
                   placeholder="Apartment number"
@@ -287,6 +360,7 @@ function Signup() {
                 name="termsChecked"
                 onChange={handleChange}
                 className="mr-2 mb-3  "
+                required
               />
               <p className="inline">
                 I accept{" "}
@@ -296,7 +370,8 @@ function Signup() {
                 and{" "}
                 <span className="cursor-pointer text-teal underline italic ">
                   Privacy Policy
-                </span>.
+                </span>
+                .
               </p>
             </div>
             <div className="items-center flex justify-center w-full ">
