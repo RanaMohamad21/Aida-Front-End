@@ -19,7 +19,7 @@ const iconList = [
 ];
 function UpperFooter() {
   return (
-    <div className="bg-teal  flex justify-between items-center px-4 text-white absolute w-[100%] mb-0 bottom-[49px] ">
+    <div className="bg-teal  flex justify-between items-center px-4 text-white  w-full mb-12  bottom-[49px] ">
       <div className="justify-self-start ">
         <img src={logoWhiteTxtAida} alt="logo" />
         <p className="font-semibold ">Developers</p>

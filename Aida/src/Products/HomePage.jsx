@@ -5,11 +5,14 @@ import UpperFooter from "../UI/UpperFooter";
 function HomePage() {
     // const {user} = useAuthentication();
     return (
-        <>
+        <div className="grid grid-rows-[auto,1fr,auto] h-screen">
+        <div>
         <Searchbar />
         <Navbar />
+        </div>
+        <div >Home Page</div>
         <UpperFooter/>
-        </>
+        </div>
     )
 }
 

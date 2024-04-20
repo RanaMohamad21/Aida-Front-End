@@ -1,9 +1,11 @@
 import logoWhiteTxtAida from "/src/assets/logo/LogoWhiteTextAida.svg";
 import microphone from "/src/assets/home/microphoneWhite.png";
 import search from "/src/assets/home/search.png";
+import Cart from "../assets/icons/Cart";
+import UserProfile from "../assets/icons/UserProfile";
 function Searchbar() {
   return (
-    <nav className="w-screen  bg-white px-9 my-[4px]  justify-between flex  ">
+    <nav className="w-full   px-9 my-[4px] flex justify-between   ">
       {/* Search Bar Section */}
       
         {/*Logo start*/}
@@ -16,6 +18,7 @@ function Searchbar() {
         </div>
         {/* Logo end */}
         {/* Search start */}
+        <div>
         <form action="">
           <div className="w-max flex items-center p-[1px]  rounded-2xl">
             <span className="bg-teal py-2 px-1 rounded-tl-2xl rounded-bl-2xl h-[40px]">
@@ -39,7 +42,16 @@ function Searchbar() {
             </span>
           </div>
         </form>
+        </div>
         {/* Search end */}
+
+        {/* Right part */}
+        <div className="flex gap-2 justify-center items-center text-gray">
+          <Cart color="#25b5ba" style="w-10 h-8"/>
+          <p>User name</p>
+          <UserProfile style = "w-10 h-10" color = "#25b5ba"/>
+        </div>
+
     </nav>
   );
 }
