@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 import trash from "../assets/vendor/products/trash.png";
 import add from "../assets/UI/addition.png";
-import ItemCard from "../Vendor/ItemCard";
+
 import { useNavigate } from "react-router-dom";
+import ItemCard from "../Vendor/ItemCard";
 
 
 
@@ -51,7 +52,7 @@ function Shelves({ shelves, setShelves, deleteItem, setshelfID }) {
               </div>
             </div>
             <div
-              className="grid lg:grid-cols-5 sm:grid-cols-3 gap-y-3 bg-teal rounded-[5%] bg-opacity-5"
+              className="grid lg:grid-cols-5 sm:grid-cols-3 gap-y-3 rounded-[5%] "
               key={index}
             >
               {/* Items in the shelf */}
@@ -61,7 +62,7 @@ function Shelves({ shelves, setShelves, deleteItem, setshelfID }) {
                   key={`item-${index}`}
                   deleteItem={deleteItem}
                   shelfID={shelf.shelveID}
-                />
+                >h</ItemCard>
               ))}
             </div>
             <div className=" flex justify-end">
