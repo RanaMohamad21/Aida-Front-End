@@ -5,29 +5,25 @@ import pricing from "../assets/vendor/products/price-tag.png";
 import ToggleSwitch from "../UI/ToggleSwitch";
 import TitleAndLogo from "../UI/TitleAndLogo";
 
-
-
-function InfoAndPricing({ register,watch,setValue }) {
-  const [hasDiscount, setHasDiscount] = useState(false);
-  function handleArrow() {
-    setHasDiscount((prevState) => !prevState);
-  }
+function InfoAndPricing({ register, watch, setValue , getValues, pHasDiscount}) {
+  const [hasDiscount, setHasDiscount] = useState(pHasDiscount);
+  
+  
   // get the current value of the stock count
-  const availableStockCount = watch("availableStockCount");
+  const initialStockCount = getValues("availableStockCount");
+  const [availableStockCount, setAvailableStockCount] = useState(initialStockCount);
 
-  const discountDurationType = watch("discountDurationType")
+  const discountDurationType = watch("discountDurationType");
   const handleIncrement = ()=>{
-    setValue("availableStockCount", availableStockCount +1);
+    setAvailableStockCount(availableStockCount + 1);
+    setValue("availableStockCount", availableStockCount + 1);
   }
   const handleDecrement = ()=>{
     if(availableStockCount>0){
-      setValue("availableStockCount", availableStockCount -1);
-  
+      setAvailableStockCount(availableStockCount - 1);
+      setValue("availableStockCount", availableStockCount - 1);
     }
   }
-  
-
-
 
   return (
     <div className="  pb-10  px-10 md:px-20 text-teal font-semibold  md:w-3/4 md:m-auto">
@@ -64,7 +60,7 @@ function InfoAndPricing({ register,watch,setValue }) {
               {...register("category")}
             >
               <option value="fashion">Fashion</option>
-              <option  value="electronics">Electronics</option >
+              <option value="electronics">Electronics</option>
               <option value="sports">Sports</option>
               <option value="health">Health &amp; wellness</option>
               <option value="pet supplies">Pet supplies</option>
@@ -84,8 +80,7 @@ function InfoAndPricing({ register,watch,setValue }) {
               <input
                 type="text"
                 className=" w-12 mx-2 pl-2 "
-                value={availableStockCount}
-                {...register('availableStockCount')}
+                {...register("availableStockCount")}
                 readOnly
               />
               <button type="button" onClick={handleIncrement}>
@@ -125,12 +120,12 @@ function InfoAndPricing({ register,watch,setValue }) {
           <div>
             <h1 className=" block">Price</h1>
             <div className=" flex">
-            <input
-  placeholder="00.00"
-  className=" w-[48%] border border-solid h-5 p-2 mr-2 border-black"
-  name="price"
-  {...register("price")}
-/>
+              <input
+                placeholder="00.00"
+                className=" w-[48%] border border-solid h-5 p-2 mr-2 border-black"
+                name="price"
+                {...register("price")}
+              />
             </div>
           </div>
 
@@ -138,13 +133,12 @@ function InfoAndPricing({ register,watch,setValue }) {
           <div>
             <h1 className=" block">Taxes</h1>
             <div className=" flex">
-            <input
-  placeholder="00.00"
-  className=" w-[48%] border border-solid h-5 p-2 mr-2 border-black"
-  name="taxesBeforeDecimal"
-  {...register('taxes')}
-/>
-
+              <input
+                placeholder="00.00"
+                className=" w-[48%] border border-solid h-5 p-2 mr-2 border-black"
+                name="taxesBeforeDecimal"
+                {...register("taxes")}
+              />
             </div>
           </div>
 
@@ -154,7 +148,7 @@ function InfoAndPricing({ register,watch,setValue }) {
               Want to create discounts?{" "}
               <span
                 className=" bg-white rounded-full h-3 px-1 mt-1 text-teal text-[10px] font-thin cursor-pointer"
-                onClick={() => handleArrow()}
+                onClick={() =>  setHasDiscount((prevState) => !prevState)}
               >
                 {hasDiscount ? "∧" : "V"}
               </span>
@@ -175,13 +169,20 @@ function InfoAndPricing({ register,watch,setValue }) {
                 <div className="flex bg-gray w-fit rounded-lg text-black">
                   <input
                     type="radio"
-                    value= "time"
-                    id= "time"
+                    value="time"
+                    id="time"
                     name="discountDurationType"
                     className=" appearance-none "
-                    {...register('discountDurationType')}
+                    {...register("discountDurationType")}
                   />
-                  <label htmlFor="time" className={` cursor-pointer  p-1 ${discountDurationType === 'time'?"bg-IceBlue rounded-md": ""}`}>
+                  <label
+                    htmlFor="time"
+                    className={` cursor-pointer  p-1 ${
+                      discountDurationType === "time"
+                        ? "bg-IceBlue rounded-md"
+                        : ""
+                    }`}
+                  >
                     Time limited
                   </label>
                   <input
@@ -190,9 +191,16 @@ function InfoAndPricing({ register,watch,setValue }) {
                     id="number"
                     name="discountDurationType"
                     className="appearance-none "
-                    {...register('discountDurationType')}
+                    {...register("discountDurationType")}
                   />
-                  <label htmlFor="number"  className={` cursor-pointer  p-1 ${discountDurationType === 'number'?"bg-IceBlue rounded-md": ""}`}>
+                  <label
+                    htmlFor="number"
+                    className={` cursor-pointer  p-1 ${
+                      discountDurationType === "number"
+                        ? "bg-IceBlue rounded-md"
+                        : ""
+                    }`}
+                  >
                     Number limited
                   </label>
                 </div>
@@ -218,3 +226,5 @@ function InfoAndPricing({ register,watch,setValue }) {
 }
 
 export default InfoAndPricing;
+
+// In this code handleIncrement and handleDecrement are not working correctly. When I try to increment it goes from 0 to 1 then the button doesn't work then when i click again it becomes 3 and when i try to decrement it goes from 3 to 0 also i feel like the change is so slow.

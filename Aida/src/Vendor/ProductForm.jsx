@@ -9,66 +9,71 @@ import descriptionTag from "../assets/vendor/products/pen.png";
 import TitleAndLogo from "../UI/TitleAndLogo";
 import TextEditor from "../UI/TextEditor";
 import Background from "../assets/vendor/products/header.jpeg";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm } from "react-hook-form";
 // import Loader from "../UI/Loader";
 import { DevTool } from "@hookform/devtools";
-
+import PropTypes from "prop-types";
+import CustomAlert from "../UI/CustomAlert";
 // import { useLocation } from "react-router-dom";
 
-const initialProduct = {
-  title: "Samsung A34",
-  category: "fashion",
-  availableStockCount: 0,
-  price: 0,
-  taxes: 0,
-  specification: [{ name: "Color", specification: "Red" }],
-  //* Tags must be an array of objects of the key called "value"
-  tags: [
-    { value: "Electronic Devices" },
-    { value: "Dual SIM" },
-    { value: "Exclusive" },
-  ],
-  description: "The best mobile To ever exist",
-  discountDurationType: "",
-  enableSubscription: true,
-  isUsed: true,
-  discountPercentage: "",
-  durationInDays: 0,
-  hasDiscountCode: "",
-};
-function ProductForm() {
-  // The `product` prop is used to pre-populate the form fields in case of product update
-  //? We will need to take the hasDiscount Initialvalue as a prop
+const maxImagesAllowed = 5;
 
+/**
+ * ProductForm Component
+ *
+ * This component renders a form for creating or editing a product. It takes in
+ * several props, including the initial product data, and uses React Hook Form
+ *Sets the product to an empty product object in case of product creation and to the current product details in case of product update.
+ *
+ * Props:
+ * - pDescription: The product description
+ * - pTags: The product tags
+ * - pSpecifications: The product specifications
+ * - pImages: The s and specifications images
+ * - handleProduct: A function that adds/updates the product in the shelf.
+ * - initialProduct: prop is used to pre-populate the useForm hook in case of product update page and includes everything except the tags, description, image/// Required!
+ * * The reason that I need some data out of the product data is that the initial product parameter contains only the data that is needed for the useForm hook.
+ *
+ */
+
+/* TODO: 
+      1. A specification can't be left empty 
+      2. Images must have max width and height
+      3. The button to add images must be removed when we reach the max number of images.
+
+
+*/
+function ProductForm({
+  pDescription,
+  pTags,
+  pSpecifications,
+  pImages,
+  pHasDiscount = false,
+  initialProduct,
+  handleProduct,
+}) {
   // const location = useLocation();
-  // // product ID incase of creating a nw product
+  // // product ID in case of creating a nw product
   // const productID = location.state?.productId;
-
-  //Sets the product to an empty product object in case of product creation and to the current product details in case of product update.
-
+  const [showAlert, setShowAlert] = useState(false);
   const { register, handleSubmit, control, getValues, setValue, watch } =
     useForm({
-      defaultValues: initialProduct,
+      defaultValues: initialProduct || {},
     });
 
-
-  const [images, setImages] = useState([]);
-  const [previewImages, setPreviewImages] = useState([]);
-  const [tags, setTags] = useState(["Add tags here",]);
+  const [images, setImages] = useState(pImages || []);
+  /* TODO: We may need to modify the initial value of the 
+  preview images as we don't need all the information in the
+   image object
+  */
+  const [previewImages, setPreviewImages] = useState(pImages || []);
+  const [tags, setTags] = useState(pTags || ["Add tags here"]);
   const [newTag, setNewTag] = useState("");
-  
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "specifications",
-  });
+  const [description, setDescription] = useState(pDescription || "");
 
-  const handleAddSpec = () => {
-    append({ name: "", specification: "" });
-  };
-
-  const handleRemoveSpec = (index) => {
-    remove(index);
-  };
+  const [specifications, setSpecifications] = useState(
+    pSpecifications || [{ name: "", specification: "" }]
+  );
   function handleDeleteImage(index) {
     setPreviewImages((prevImages) => {
       const newImages = [...prevImages];
@@ -81,7 +86,31 @@ function ProductForm() {
       return newImages;
     });
   }
+  /// Testing
+  // useEffect(() => {
+  //   console.log(specifications);
+  // }, [specifications]);
 
+  const handleImageChange = (e) => {
+    e.preventDefault();
+    if (e.target.files && e.target.files.length > 0) {
+      if (e.target.files.length > maxImagesAllowed) {
+        setShowAlert(true);
+        // Clear the input to prevent further files from being added
+        e.value = "";
+      } else {
+        const newImages = [...images];
+        for (
+          let i = 0;
+          i < e.target.files.length && e.target.files.length && i < 5;
+          i++
+        ) {
+          newImages.push(e.target.files[i]);
+        }
+        setImages(newImages);
+      }
+    }
+  };
   function handleDeleteTag(index) {
     setTags((prevTags) => {
       const newTags = [...prevTags];
@@ -124,7 +153,12 @@ function ProductForm() {
       >
         <div className=" grid-rows-[auto,1fr] mb-14">
           {/* Upload Image  */}
-
+          {showAlert && (
+            <CustomAlert
+              message={`You can only select up to ${maxImagesAllowed} images.`}
+              onClose={() => setShowAlert(false)}
+            />
+          )}
           <div
             className={` h-[500px] relative border-t-[8px] border-t-white`}
             style={{
@@ -168,22 +202,7 @@ function ProductForm() {
                     className="hidden"
                     accept="image/*"
                     {...register("images[]")}
-                    onChange={(e) => {
-                      e.preventDefault();
-                      if (e.target.files && e.target.files.length > 0) {
-                        const newImages = [...images];
-                        for (
-                          let i = 0;
-                          i < e.target.files.length &&
-                          e.target.files.length &&
-                          i < 5;
-                          i++
-                        ) {
-                          newImages.push(e.target.files[i]);
-                        }
-                        setImages(newImages);
-                      }
-                    }}
+                    onChange={handleImageChange}
                     multiple
                   />
                   <div className="bg-white text-teal p-4 text-3xl mb-2 rounded-lg">
@@ -204,13 +223,13 @@ function ProductForm() {
             register={register}
             watch={watch}
             setValue={setValue}
+            getValues={getValues}
+            pHasDiscount={pHasDiscount}
           />
           <SpecificationsCollection
-        fields={fields}
-        handleAddSpec={handleAddSpec}
-        handleRemoveSpec={handleRemoveSpec}
-        register={register}
-      />
+            specifications={specifications}
+            setSpecifications={setSpecifications}
+          />
 
           {/* Tags */}
           <TitleAndLogo imgURL={tag}>Tags</TitleAndLogo>
@@ -254,22 +273,40 @@ function ProductForm() {
           <TitleAndLogo imgURL={descriptionTag} style="mt-10">
             Description
           </TitleAndLogo>
-          <TextEditor
-              text={getValues("description")}
-              setValue={setValue}
-              name="description"
-              register={register}
-            />
+          <TextEditor value={description} setValue={setDescription} />
+          {/* <TextEditor
+            text={getValues("description")}
+            setValue={setValue}
+            name="description"
+            setDesc={setDescription}
+            des={description}
+            register={register}
+          /> */}
         </div>
 
-        <input
-          type="submit"
-          value="Create"
-          className="bg-FlamingoPink text-white w-1/3   rounded-md h-8 uppercase my-5 cursor-pointer hover:translate-x-[2px] hover:translate-y-[2px] transition-all text-center justify-center pt-1 mx-auto"
-        />
+        <div className="  flex mb-10 ">
+          <input
+            type="submit"
+            value="Create"
+            className="bg-FlamingoPink text-white w-1/3   rounded-md h-8 uppercase my-5 cursor-pointer hover:translate-x-[2px] hover:translate-y-[2px] transition-all text-center justify-center pt-1 mx-auto"
+          />
+        </div>
       </form>
       <DevTool control={control} />
     </>
   );
 }
 export default ProductForm;
+
+ProductForm.propTypes = {
+  pDescription: PropTypes.string, // required prop
+  pHasDiscount: PropTypes.bool, // required prop
+  pTags: PropTypes.arrayOf(PropTypes.object), // optional prop
+  pSpecifications: PropTypes.arrayOf(PropTypes.object), // optional prop
+  pImages: PropTypes.arrayOf(
+    PropTypes.shape({
+      url: PropTypes.string.isRequired,
+    })
+  ),
+  initialProduct: PropTypes.object.isRequired, // required prop
+};

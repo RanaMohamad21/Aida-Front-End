@@ -3,26 +3,45 @@ import Specification from "./Specification";
 import Tags from "../assets/vendor/products/filter.png";
 import add from "../assets/UI/addition.png";
 import TitleAndLogo from "../UI/TitleAndLogo";
-function SpecificationsCollection({ fields, handleAddSpec, handleRemoveSpec, register }) {
-  // function handleAddSpec(e) {
-  //   e.preventDefault();
-  //   setSpecifications((prevSpec) => [
-  //     ...prevSpec,
-  //     { name: "", specification: "" },
-  //   ]);
+function SpecificationsCollection({ specifications, setSpecifications }) {
+  const handleAddSpec = (e) => {
+    e.preventDefault();
+    setSpecifications((prevSpec) => [
+      ...prevSpec,
+      { name: "", specification: "" },
+    ]);
+  };
+
+  const handleDeleteSpecification = (index) => {
+    setSpecifications((prevSpec) => {
+      const updatedSpecs = prevSpec.filter((spec, idx) => idx !== index);
+      return updatedSpecs;
+    });
+  };
+
+  const updateSpecification = (index, name, value) => {
+    setSpecifications((prevSpec) => {
+      const updatedSpecs = [...prevSpec];
+      updatedSpecs[index][name] = value;
+      return updatedSpecs;
+    });
+  };
+  // function handleDeleteSpec( index) {
+  //   setSpecifications(prev=>prev.filter((specIndex)=>{return index !== specIndex})
+
   // }
   return (
     <>
-      
       <TitleAndLogo imgURL={Tags}>Specification</TitleAndLogo>
       <div className="grid sm:grid-cols-3 sm:gap-4 md:grid-cols-4 md:gap-10 mx-2">
-      {fields.map((field, index) => {
+        {specifications.map((spec, index) => {
           return (
             <Specification
-              key={field.id}
+              key={index}
               index={index}
-              handleRemoveSpec={handleRemoveSpec}
-              register={register}
+              spec={spec}
+              handleDeleteSpecification={() => handleDeleteSpecification(index)}
+              updateSpecification={updateSpecification}
             />
           );
         })}
