@@ -19,6 +19,7 @@ import DeletedAccount from "../UI/DeletedAccount";
 import SettingsDeleteAccount from "../UI/SettingsDeleteAccount";
 import VendorShelves from "../Vendor/VendorShelves";
 import AddProductPage from "../Vendor/AddProductPage";
+import SearchPage from "../Store/SearchPage";
 
 //   { path: "/", element: <HomePage /> },
 //   { path: "/login", component: <Login /> },
@@ -119,6 +120,14 @@ const routes = [
     element: (
       <React.Fragment>
         <SettingsDeleteAccount />
+      </React.Fragment>
+    ),
+  },
+  {
+    path: "/searchpage",
+    element: (
+      <React.Fragment>
+        <SearchPage/>
       </React.Fragment>
     ),
   },

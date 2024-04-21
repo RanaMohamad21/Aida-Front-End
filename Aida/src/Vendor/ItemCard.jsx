@@ -1,5 +1,13 @@
+
 import ProductCard from "../UI/ProductCard";
 import trash from "../assets/vendor/products/trash.png";
+import PropTypes from "prop-types";
+
+ItemCard.propTypes = {
+  dummyItem: PropTypes.object,
+  deleteItem: PropTypes.func,
+  shelfID: PropTypes.string
+}
 function ItemCard({ dummyItem, deleteItem, shelfID}) {
   return (
     <ProductCard dummyItem={dummyItem}

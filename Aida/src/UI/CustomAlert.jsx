@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 function CustomAlert({ message, onClose }) {
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -15,5 +16,10 @@ function CustomAlert({ message, onClose }) {
     </div>
   );
 }
+
+CustomAlert.propTypes = {
+    message: PropTypes.string.isRequired, // text prop is required and must be a string
+    onClose: PropTypes.func.isRequired, // setValue prop is required and must be a function
+    };
 
 export default CustomAlert;
