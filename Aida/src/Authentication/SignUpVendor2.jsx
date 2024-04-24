@@ -47,6 +47,7 @@ function SignUpVendor2() {
     //   }));
     const { city, street, BuildingNo, apartmentNo, ...formDataWithoutAddress } =
       formData;
+    
 
     const address = {
       city,
@@ -54,9 +55,18 @@ function SignUpVendor2() {
       BuildingNo,
       apartmentNo,
     };
+    const businessInfo={
+      aboutUsInfo,
+      businessType,
+      businessName,
+      expDay,
+      expMonth,
+      isVerified};
+
     const userData = {
       ...formDataWithoutAddress,
       address,
+      businessInfo,
       ...data,
     };
 
@@ -65,6 +75,7 @@ function SignUpVendor2() {
       console.log("Form Data Object:", userData);
       console.log("Form Data with Address Object:", formData);
       console.log("ِAddress Data Object:", address);
+      console.log("Business Info Data Object:", businessInfo);
 
       const response = await axios.post(
         "http://localhost:8081/api/v1/auth/signup",
