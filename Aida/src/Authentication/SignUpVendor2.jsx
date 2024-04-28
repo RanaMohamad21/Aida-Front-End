@@ -47,7 +47,6 @@ function SignUpVendor2() {
     //   }));
     const { city, street, BuildingNo, apartmentNo, ...formDataWithoutAddress } =
       formData;
-    
 
     const address = {
       city,
@@ -55,27 +54,30 @@ function SignUpVendor2() {
       BuildingNo,
       apartmentNo,
     };
-    const businessInfo={
-      aboutUsInfo,
-      businessType,
-      businessName,
-      expDay,
-      expMonth,
-      isVerified};
 
     const userData = {
       ...formDataWithoutAddress,
       address,
-      businessInfo,
       ...data,
     };
 
+    const { businessName, ...formDataWithoutbusinessName } =
+          userData;
+
+    const businessInfo = {
+        businessName,
+        aboutUsInfo: data.aboutUsInfo,
+        businessType:"fgd"
+    };
+    const updatedUserData = {
+          ...formDataWithoutbusinessName,
+          businessInfo,
+          ...data,
+        };
+
     // Send the FormData to the server using Axios
     try {
-      console.log("Form Data Object:", userData);
-      console.log("Form Data with Address Object:", formData);
-      console.log("ِAddress Data Object:", address);
-      console.log("Business Info Data Object:", businessInfo);
+      console.log("Last user data:", updatedUserData);
 
       const response = await axios.post(
         "http://localhost:8081/api/v1/auth/signup",
@@ -256,8 +258,7 @@ function SignUpVendor2() {
           <p>is there anything else you&apos;d like to share with us?</p>
           <input
             type="text"
-            name="vendorThoughts"
-            {...register("vendorThoughts")}
+            {...register("aboutUsInfo")}
             placeholder="leave a comment"
             className="h-20 border mt-2 text-darkGray border-solid px-3 pb-12 w-full md:w-[70%] "
           />
