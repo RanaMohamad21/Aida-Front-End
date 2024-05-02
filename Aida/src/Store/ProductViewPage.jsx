@@ -8,8 +8,9 @@ function ProductViewPage() {
   return (
     <div className=" grid grid-rows-[1fr,auto,auto,auto] h-screen mb-12 bg-IceBlue ">
       {/* Product details */}
-      <div className=" bg-teal grid sm:grid-cols-[40%,] md:grid-cols-[1fr,3fr] ">
-        <div className=" bg-FlamingoPink flex items-center justify-center uppercase">
+      <div className="  grid sm:grid-cols-[40%,] md:grid-cols-[1fr,3fr] ">
+        {/* Subscribe and add to cart */}
+        <div className="  flex items-center justify-center uppercase sm:w-[270px] lg:w-[350px]">
           <div className=" bg-white  w-[85%] flex-col justify-center border-t-2 rounded-b-xl border-gray rounded-tl-[30%] border-l-2 rounded-tr-[50%] p-5 text-teal">
             <img
               src={ProductsCart}
@@ -38,7 +39,12 @@ function ProductViewPage() {
             <Button style=" bg-teal">Subscribe</Button>
           </div>
         </div>
-        <div className=" bg-IceBlue">Product details</div>
+        {/* Product Features */}
+        <div className=" bg-IceBlue">
+          {/* Images */}
+          <div></div>
+          {/* Product Details */}
+        </div>
       </div>
       {/* Reviews */}
       <div className=" bg-darkTeal ">Reviews</div>
