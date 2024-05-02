@@ -11,10 +11,34 @@ function HomePage() {
         <Searchbar />
         <Navbar />
         </div>
-        <div  className=" p-4 font-semibold">
+        <div  className=" p-4 font-semibold flex flex-col gap-2">
             <h1 className=" text-2xl text-FlamingoPink font-semibold">All links are here for now</h1>
             <Link to="/productviewpage">
                 Product View Page
+            </Link>
+            <Link to="/searchpage">
+                Search Page
+            </Link>
+            <Link to="/login">
+               Login
+            </Link>
+            <Link to="/signup">
+               user Sign up
+            </Link>
+            <Link to="/SignUpVendor1">
+               vendor Sign up
+            </Link>
+            <Link to="/VendorShelves">
+               vendor shelves
+            </Link>
+            <Link to="/deletedacount">
+               Delete accont
+            </Link>
+            <Link to="/SettingsDeleteAccount">
+               Settings Delete accont
+            </Link>
+            <Link to="/gtgtgt">
+               Unavailable Page
             </Link>
         </div>
         <UpperFooter/>
