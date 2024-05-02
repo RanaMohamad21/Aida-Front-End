@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
  */
 function SignUpVendor2() {
   // Get the form data and setFormData functions from the VendorSignUpProvider context
-  const { formData, setFormData } = useVendor();
+  const { formData} = useVendor();
   // Initialize the useForm hook to handle form
   const { register, handleSubmit } = useForm();
   const [termsChecked, setTermsChecked] = useState(false);
