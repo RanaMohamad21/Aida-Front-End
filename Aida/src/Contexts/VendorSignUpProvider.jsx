@@ -9,7 +9,7 @@ function VendorSignUpProvider({ children }) {
     email: "",
     password: "",
     phoneNumber: "",
-    businessInfo: "",
+    businessName: "",
     dateOfBirth: "",
     city: "",
     street: "",
@@ -19,7 +19,7 @@ function VendorSignUpProvider({ children }) {
     listOfPartnersDocument: "",
     partnershipAgreementDocument: "",
     tradeLicense: "",
-    User_type: "vendor",
+    user_type: "vendor",
   };
   const [formData, setFormData] = useState(initialState);
   return (

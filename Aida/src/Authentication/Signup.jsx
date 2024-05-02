@@ -28,7 +28,7 @@ function Signup() {
     street: "",
     BuildingNo: "",
     apartmentNo: "",
-    User_type: "customer",
+    user_type: "customer",
   });
 
   // Router navigation
@@ -94,7 +94,7 @@ function Signup() {
         street: "",
         BuildingNo: "",
         apartmentNo: "",
-      User_type: "customer",
+      user_type: "customer",
     });
 
     console.log(userData);

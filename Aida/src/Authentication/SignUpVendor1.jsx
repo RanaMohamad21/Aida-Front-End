@@ -136,7 +136,7 @@ function SignUpVendor1() {
         <div className="flex flex-col">
           <label>store name</label>
           <input
-            name="businessInfo"
+            name="businessName"
             type="text"
             placeholder="Example"
             className={`${inputStyle}  `}
