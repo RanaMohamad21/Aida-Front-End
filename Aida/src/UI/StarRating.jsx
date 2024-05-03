@@ -1,6 +1,5 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-// When a component is placed outside the function, it won't be generated each time the function is called, This is better.
 const containerStyle = {
   display: "flex",
   alignItems: "center" /* aligns the items vertically*/,
