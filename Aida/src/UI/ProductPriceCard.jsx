@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 
-import Button from "../UI/Button";
 import StarRating from "../UI/StarRating";
 import ProductsCart from "../assets/Store/productsCart.jpeg";
 import { BellFill, CartFill } from "react-bootstrap-icons";
