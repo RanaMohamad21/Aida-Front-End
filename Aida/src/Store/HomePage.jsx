@@ -16,6 +16,12 @@ function HomePage() {
             <Link to="/productviewpage">
                 Product View Page
             </Link>
+            <Link to="/VendorProductViewPage">
+                Vendor Product View Page
+            </Link>
+            <Link to="/dummyPage">
+                DummyPage
+            </Link>
             <Link to="/searchpage">
                 Search Page
             </Link>
