@@ -1,59 +1,393 @@
-import Button from "../UI/Button";
+import { useState } from "react";
+import PropTypes from 'prop-types';
+
+import ProductPriceCard from "../UI/ProductPriceCard";
+import ProductDetails from "../UI/ProductDetails";
+import Shelf from "../UI/Shelf";
+import "react-multi-carousel/lib/styles.css";
+import CardSlider from "../UI/CardSlider";
+import Star from "../UI/Star";
 import StarRating from "../UI/StarRating";
-import ProductsCart from "../assets/Store/productsCart.jpeg";
+import background from "../assets/UI/productView.jpeg";
+// For testing
+import dummyImage1 from "../assets/dummy/Product images.png";
+import dummyImage2 from "../assets/dummy/Samsung.png";
+import ProductCard from "../UI/ProductCard";
+import { Link } from "react-router-dom";
+import Carousel from "react-multi-carousel";
 
+const similarItems = [
+  {
+    itemID: 0,
+    rating: 3.0,
+    isBestSeller: true,
+    itemName: "Men's suit",
+    discountValue: 0.05,
+    pricebeforeDiscount: 70000,
+    availableLeft: 10,
+    revenues: 12023,
+    subscribed: 20,
+    dummyImage: dummyImage1,
+  },
+  {
+    itemID: 1,
+    rating: 3.0,
+    isBestSeller: false,
+    itemName: "Armini Gold",
+    discountValue: 0,
+    pricebeforeDiscount: 70000,
+    availableLeft: 10,
+    revenues: 12023,
+    subscribed: 20,
+    dummyImage: dummyImage1,
+  },
+  {
+    itemID: 2,
+    rating: 3.0,
+    isBestSeller: true,
+    itemName: "Armini",
+    discountValue: 0,
+    pricebeforeDiscount: 70000,
+    availableLeft: 10,
+    revenues: 12023,
+    subscribed: 20,
+    dummyImage: dummyImage1,
+  },
+  {
+    itemID: 3,
+    rating: 3.0,
+    isBestSeller: true,
+    itemName: "Men's suit",
+    discountValue: 0.07,
+    pricebeforeDiscount: 70000,
+    availableLeft: 10,
+    revenues: 12023,
+    subscribed: 20,
+    dummyImage: dummyImage1,
+  },
+
+  {
+    itemID: 0,
+    rating: 3.0,
+    isBestSeller: true,
+    itemName: "Men's like",
+    discountValue: 0.05,
+    pricebeforeDiscount: 70000,
+    availableLeft: 10,
+    revenues: 12023,
+    subscribed: 20,
+    dummyImage: dummyImage2,
+  },
+  {
+    itemID: 1,
+    rating: 3.0,
+    isBestSeller: false,
+    itemName: "Samsung",
+    discountValue: 0,
+    pricebeforeDiscount: 70000,
+    availableLeft: 10,
+    revenues: 12023,
+    subscribed: 20,
+    dummyImage: dummyImage2,
+  },
+  {
+    itemID: 2,
+    rating: 3.0,
+    isBestSeller: true,
+    itemName: "Samsung the dup",
+    discountValue: 0,
+    pricebeforeDiscount: 70000,
+    availableLeft: 10,
+    revenues: 12023,
+    subscribed: 20,
+    dummyImage: dummyImage2,
+  },
+  {
+    itemID: 3,
+    rating: 3.0,
+    isBestSeller: true,
+    itemName: "Men's suit",
+    discountValue: 0.07,
+    pricebeforeDiscount: 70000,
+    availableLeft: 10,
+    revenues: 12023,
+    subscribed: 20,
+    dummyImage: dummyImage2,
+  },
+];
 // TODO: We must check that the amount available for the user to buy is <= the stock count
-const maxProductsCount = 100;
-function ProductViewPage() {
-  return (
-    <div className=" grid grid-rows-[1fr,auto,auto,auto] h-screen mb-12 bg-IceBlue ">
-      {/* Product details */}
-      <div className="  grid sm:grid-cols-[40%,] md:grid-cols-[1fr,3fr] ">
-        {/* Subscribe and add to cart */}
-        <div className="  flex items-center justify-center uppercase sm:w-[270px] lg:w-[350px]">
-          <div className=" bg-white  w-[85%] flex-col justify-center border-t-2 rounded-b-xl border-gray rounded-tl-[30%] border-l-2 rounded-tr-[50%] p-5 text-teal">
-            <img
-              src={ProductsCart}
-              className=" rounded-full w-32 h-32 mx-auto"
-            />
-            <p>Price EGP</p>
-            <p>
-              {" "}
-              <span className=" bg-FlamingoPink py-2 px-3">
-                percentage
-              </span>{" "}
-              price before discount{" "}
-            </p>
-            <h1>Rating</h1>
-            <StarRating />
-            <label>Quantity</label>
-            <select className="border  border-solid mx-3 rounded-lg active:border-teal ">
-              {Array.from({ length: maxProductsCount }, (_, index) => (
-                <option key={index + 1} value={index + 1}>
-                  {index + 1}
-                </option>
-              ))}
-            </select>
 
-            <Button style=" bg-FlamingoPink">Add to Cart</Button>
-            <Button style=" bg-teal">Subscribe</Button>
+
+// Dummy
+const dummyReviews = [
+  { name: "Rana Mohamad", rating: 4, review: "Such high quality!" },
+  {
+    name: "Sara Abdullah",
+    rating: 5,
+    review: "Absolutely fantastic, best product!",
+  },
+  {
+    name: "Mohammed Ahmed",
+    rating: 3,
+    review: "Acceptable quality, but can be improved",
+  },
+  { name: "Fatima Youssef", rating: 2, review: "Poor quality product" },
+  { name: "Ahmed Ali", rating: 4, review: "Good quality and reasonable price" },
+  {
+    name: "Nora Khalid",
+    rating: 5,
+    review: "Loved it so much, will definitely repurchase",
+  },
+  {
+    name: "Yaser Hassan",
+    rating: 1,
+    review: "Not worth buying, very poor quality",
+  },
+  {
+    name: "Salman Mohammed",
+    rating: 4,
+    review: "Excellent, highly recommend it",
+  },
+  {
+    name: "Mariam Jamal",
+    rating: 3,
+    review: "Decent product, meets expectations",
+  },
+];
+
+/**
+ * The product:
+ * An object consisting of:
+ *    - title: string  product name
+ *    - briefDescription: string placed next to the title
+ *    - description: string
+ *    - mainFeatures: An array of strings
+ *    - Specifications: An array of objects, each object consists of a specification name and value
+ *    -AvailableQuantity: Number
+ *    - Rating
+ *    - Discount: float discount amount if exists
+ */
+
+// Settings for reviews sliding window
+const largeScreanReviewsNumber = 3;
+const mediumScreanReviewsNumber = 2;
+
+const largeScreanSameStoreProductNumber = 4;
+const mediumScreanSameStoreProductNumber = 2;
+
+const largeScreanSimilarProductNumber = 5;
+const mediumScreanSimilarProductNumber = 3;
+
+const dummyProduct = {
+  availableQuantity: 11,
+  rating: 4,
+  discount: 0.5,
+  title: "ProSound XG700",
+  briefDescription: "Over-Ear Wireless Noise-Cancelling Headphones",
+  description:
+    "Experience the ultimate sound quality with the ProSond XG700. These over-ear headphoes offer superior noise-cancellation technology, ensuring an ummersive audio experience. With a sleek design and comfortable movement and the long0lasting battery ensures you can enjoy your favorite tunes all day long",
+  features: [
+    "Superior Sound Quality",
+    "Noise-cancellation Technology",
+    "advanced noise-cancellation technology",
+    "Wireless Connectivity",
+    "Comfortable filt",
+    "long-lasting battery",
+  ],
+  specifications: [
+    { name: "Color", value: "Classic black" },
+    { name: "Battery", value: "40 hours" },
+    { name: "Warranty", value: "2 years" },
+  ],
+  priceBeforeDiscount: 868.11,
+};
+
+// This is a reusable page that is viewed by both the vendor and the customer but with different details each,
+function ProductViewPage({ isVendor = false }) {
+  const [product] = useState(dummyProduct);
+  const [newReview, setNewReview] = useState("");
+  const [newRating, setNewRating] = useState();
+  const [commentAdded, setCommentAdded] = useState(false);
+  const [reviews, setReviews] = useState(dummyReviews);
+
+  function handleReview(e) {
+    setNewReview(e.target.value);
+  }
+  function handleAddReview() {
+    const newReviewObj = {
+      name: "Dummy Name",
+      rating: newRating,
+      review: newReview,
+    };
+    setReviews([...reviews, newReviewObj]);
+    setNewRating();
+    setNewReview("");
+    setCommentAdded(true);
+  }
+  return (
+    <div className=" mb-14  ">
+      <div className=" grid grid-rows-[1fr,auto,auto,auto] h-full  bg-IceBlue  ">
+        {/* Product details */}
+        <div className="  grid sm:grid-cols-[1fr,4fr] md:grid-cols-[1fr,3fr]   ">
+          {/* Subscribe and add to cart */}
+          <ProductPriceCard product={product} disable={isVendor} />
+          {/* Product Features */}
+          <ProductDetails product={product} />
+        </div>
+
+        {/* Reviews start */}
+
+        <Shelf shelfName={"Reviews"}>
+          <div className="  w-screen flex gap-4  mx-2">
+            <CardSlider
+              styles="w-2/3"
+              largeScreanSlidesNumber={largeScreanReviewsNumber}
+              mediumScreanSlidesNumber={mediumScreanReviewsNumber}
+            >
+              {reviews.map((review, index) => (
+                <div
+                  key={index}
+                  className="bg-white h-20 flex flex-col items-center justify-center w-56 mx-6 mt-2"
+                >
+                  <div className="flex">
+                    <span className="font-semibold text-md px-2">
+                      {review.name}
+                    </span>
+                    <span className="text-teal">
+                      {review.rating.toFixed(1)}
+                    </span>
+                    <Star
+                      color="#25b5ba"
+                      full={true}
+                      size="20"
+                      disable={false}
+                    />
+                  </div>
+                  <p className="text-xs px-2">{review.review}</p>
+                </div>
+              ))}
+            </CardSlider>
+            {commentAdded ? (
+              <p className=" flex items-center justify-center bg-white text-FlamingoPink p-2 rounded-xl mt-2">
+                Comment Added!
+              </p>
+            ) : (
+              <div className=" flex flex-col bg-white p-3 rounded-md ">
+                <StarRating disable={isVendor} onSetRating={setNewRating} />
+                <input
+                  type="text"
+                  maxLength={200}
+                  value={newReview}
+                  placeholder="Leave a comment"
+                  onChange={handleReview}
+                  className=" border border-solid px-2 border-darkGray"
+                  disabled={isVendor}
+                />
+                <div className=" flex items-center justify-center">
+                  <button
+                    onClick={handleAddReview}
+                    className={` mt-2 rounded-xl text-white w-24 ${
+                      isVendor ? "bg-gray cursor-auto" : " bg-teal"
+                    }`}
+                  >
+                    Add
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
-        </div>
-        {/* Product Features */}
-        <div className=" bg-IceBlue">
-          {/* Images */}
-          <div></div>
-          {/* Product Details */}
-        </div>
+        </Shelf>
+        {/* Reviews end */}
+
+        {/* From the same store */}
+        <Shelf shelfName={"From the same store"}>
+          <div className="  w-screen flex justify-between gap-2  mx-2">
+            <CardSlider
+              styles=" w-2/3"
+              largeScreanSlidesNumber={largeScreanSameStoreProductNumber}
+              mediumScreanSlidesNumber={mediumScreanSameStoreProductNumber}
+            >
+              {similarItems.map((item, index) => (
+                <div key={index} className="  my-2">
+                  <label className=" ">
+                    <input type="checkbox" style={{ color: "teal" }} />
+                    <ProductCard
+                      dummyItem={item}
+                      style={"mx-4 p-4 bg-white rounded-xl h-[400px]"}
+                    ></ProductCard>
+                  </label>
+                </div>
+              ))}
+            </CardSlider>
+            <div className=" flex justify-center w-full">
+              <div
+                style={{
+                  backgroundImage: `url(${background})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  width: "300px",
+                }}
+                className=" flex flex-col items-center justify-center text-FlamingoPink  rounded-xl mt-2 
+          
+          "
+              >
+                <div className="flex bg-FlamingoPink items-center w-full py-1  h-20 justify-center text-white mb-2">
+                  Total Price
+                </div>
+                <button
+                  className={`  capitalize  rounded-2xl px-4 py-2 ${
+                    isVendor
+                      ? "bg-gray text-white cursor-auto"
+                      : "bg-white text-black cursor-pointer"
+                  }`}
+                  disabled={isVendor}
+                >
+                  Add to cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </Shelf>
+        {/* Similar products */}
+        <Shelf shelfName={"Similar Products"}>
+          <div className="  w-screen mx-4   ">
+            <CardSlider
+              styles=" w-[90%]"
+              largeScreanSlidesNumber={largeScreanSimilarProductNumber}
+              mediumScreanSlidesNumber={mediumScreanSimilarProductNumber}
+            >
+              {similarItems.map((item, index) => (
+                <div key={index} className="">
+                  <ProductCard
+                    dummyItem={item}
+                    style={"mr-4 bg-white rounded-xl h-[400px] my-2 p-3"}
+                  />
+                </div>
+              ))}
+            </CardSlider>
+
+            {isVendor ? (
+              <p className=" bg-FlamingoPink text-white w-max  p-3 font-semibold">
+                This is how the customer will see your product
+              </p>
+            ) : (
+              <div className=" px-6 text-teal hover:text-FlamingoPink  hover:italic">
+                <Link to="/searchpage">Checkout more...</Link>
+              </div>
+            )}
+          </div>
+        </Shelf>
       </div>
-      {/* Reviews */}
-      <div className=" bg-darkTeal ">Reviews</div>
-      {/* From the same store */}
-      <div className=" bg-gray">Same store</div>
-      {/* Similar products */}
-      <div className=" bg-darkGray ">Similar product</div>
     </div>
   );
 }
+
+
+
+ProductViewPage.propTypes = {
+    isVendor: PropTypes.bool
+};
+
+
 
 export default ProductViewPage;
