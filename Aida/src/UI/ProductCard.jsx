@@ -1,4 +1,3 @@
-
 /* eslint-disable react/prop-types */
 import star from "../assets/UI/star.png";
 
@@ -7,13 +6,16 @@ import star from "../assets/UI/star.png";
 0<=discountValue < 1
 */
 
-// eslint-disable-next-line no-unused-vars, react/prop-types
-function ProductCard({ dummyItem,  children }) {
+// This is a component that views the important details
+// of a product to be displayed in the home page and vendor products pages.
+function ProductCard({ dummyItem , children ="", style=""}) {
+  const hasDiscount = dummyItem.discountValue>0?true:false
   const priceAfterDiscount =
     (1 - dummyItem.discountValue) * dummyItem.pricebeforeDiscount;
-  
+
   return (
-    <div className=" mx-4 flex flex-col w-52 text-black p-2">
+    <div className= {` ${style}
+     flex flex-col w-52 text-black `}>
       <div className="flex text-teal text-2xl justify-between pl-3 ">
         <div className="flex">
           <span className="pr-1">{dummyItem.rating.toFixed(2)}</span>
@@ -31,15 +33,15 @@ function ProductCard({ dummyItem,  children }) {
       <img src={dummyItem.dummyImage} className="w-full h-full" />
 
       <div className=" font-semibold text-xl">{dummyItem.itemName}</div>
-      {dummyItem.discountValue > 0 ? (
+      {hasDiscount ? (
         <>
           {" "}
           <div className="flex ">
             {" "}
-            <div className=" text-xl font-semibold">
+            <div className=" text-lg font-semibold text-FlamingoPink">
               {(dummyItem.discountValue * 100).toFixed(2)}%
             </div>
-            <div className=" line-through ml-6">
+            <div className=" line-through ml-6 text-teal">
               {dummyItem.pricebeforeDiscount}
             </div>
           </div>
@@ -51,7 +53,7 @@ function ProductCard({ dummyItem,  children }) {
       ) : (
         <div className=" text-lg">
           {dummyItem.pricebeforeDiscount}{" "}
-          <span className=" uppercase text-gray">egp</span>
+          <span className=" uppercase text-darkGray">egp</span>
         </div>
       )}
 
@@ -62,4 +64,3 @@ function ProductCard({ dummyItem,  children }) {
 }
 
 export default ProductCard;
-
