@@ -21,6 +21,8 @@ import VendorShelves from "../Vendor/VendorShelves";
 import AddProductPage from "../Vendor/AddProductPage";
 import SearchPage from "../Store/SearchPage";
 import ProductViewPage from "../Store/ProductViewPage";
+import DummyPage from "../UI/dummyPage";
+import VendorProductViewPage from "../Vendor/VendorProductViewPage";
 
 //   { path: "/", element: <HomePage /> },
 //   { path: "/login", component: <Login /> },
@@ -97,6 +99,14 @@ const routes = [
     element: (
       <React.Fragment>
         <VendorShelves />
+      </React.Fragment>
+    ),
+  },
+  {
+    path: "/VendorProductViewPage",
+    element: (
+      <React.Fragment>
+        <VendorProductViewPage />
       </React.Fragment>
     ),
   },
@@ -201,6 +211,14 @@ const routes = [
     element: (
       <React.Fragment>
         <OfficeSuppliesPage />
+      </React.Fragment>
+    ),
+  },
+  {
+    path: "/dummyPage",
+    element: (
+      <React.Fragment>
+        <DummyPage />
       </React.Fragment>
     ),
   },
