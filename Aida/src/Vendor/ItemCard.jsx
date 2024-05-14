@@ -13,6 +13,7 @@ function ItemCard({ dummyItem, deleteItem, shelfID}) {
     <ProductCard dummyItem={dummyItem}
       deleteItem={deleteItem}
       shelfID={shelfID}
+      style="p-2"
     >
       <div className=" flex justify-between text-teal">
         <span>available left</span>
