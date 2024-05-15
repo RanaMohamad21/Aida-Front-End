@@ -28,7 +28,8 @@ function CustomRightArrow({ onClick }) {
 /***
  * A reusable sliding window 
  * the children must be an array. To see an example,
- * view its use in thr Product View Page for the reviews.
+ * view its use in the Product View Page for the reviews.
+ * The SlidesNumber props are used to set the number of visible slides at  a time for different screen sizes.
  */
 function CardSlider({
   children,
@@ -41,7 +42,7 @@ function CardSlider({
       breakpoint: { max: 4000, min: 1024 },
       items: largeScreanSlidesNumber,
       slidesToSlide: 1,
-      
+
 
     },
     desktop: {
