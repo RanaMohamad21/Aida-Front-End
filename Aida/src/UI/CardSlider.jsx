@@ -7,7 +7,7 @@ function CustomLeftArrow({ onClick }) {
   return (
     <button
       onClick={onClick}
-      className="absolute top-1/2 left-0 transform -translate-y-1/2 z-10  w-10 h-10 rounded-full flex items-center justify-center text-black"
+      className="absolute top-1/2 left-0 transform -translate-y-1/2 z-10  w-10 h-10 rounded-full flex items-center justify-center "
     >
       {"<"}
     </button>
@@ -34,8 +34,8 @@ function CustomRightArrow({ onClick }) {
 function CardSlider({
   children,
   styles = "",
-  largeScreanSlidesNumber,
-  mediumScreanSlidesNumber,
+  largeScreanSlidesNumber = 1,
+  mediumScreanSlidesNumber = 1,
 }) {
   const responsive = {
     superLargeDesktop: {
