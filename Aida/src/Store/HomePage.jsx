@@ -11,8 +11,9 @@ function HomePage() {
         <Searchbar />
         <Navbar />
         </div>
+        <div className=" flex flex-col">
         <div  className=" p-4 font-semibold flex flex-col gap-2">
-            <h1 className=" text-2xl text-FlamingoPink font-semibold">All links are here for now</h1>
+            <h1 className=" text-2xl text-FlamingoPink font-semibold">Most of the links are here for now</h1>
             <Link to="/productviewpage">
                 Product View Page
             </Link>
@@ -46,6 +47,8 @@ function HomePage() {
             <Link to="/gtgtgt">
                Unavailable Page
             </Link>
+        
+        </div>
         </div>
         <UpperFooter/>
         </div>
