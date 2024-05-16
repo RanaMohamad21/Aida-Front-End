@@ -23,6 +23,7 @@ import SearchPage from "../Store/SearchPage";
 import ProductViewPage from "../Store/ProductViewPage";
 import DummyPage from "../UI/dummyPage";
 import VendorProductViewPage from "../Vendor/VendorProductViewPage";
+import ShoppingCartPage from "../Cart/ShoppingCartPage";
 
 //   { path: "/", element: <HomePage /> },
 //   { path: "/login", component: <Login /> },
@@ -211,6 +212,14 @@ const routes = [
     element: (
       <React.Fragment>
         <OfficeSuppliesPage />
+      </React.Fragment>
+    ),
+  },
+  {
+    path: "/shoppingCart",
+    element: (
+      <React.Fragment>
+        <ShoppingCartPage />
       </React.Fragment>
     ),
   },
