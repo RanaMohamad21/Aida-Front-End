@@ -151,7 +151,8 @@ function HomePage() {
           </h1>
           <Link to="/productviewpage">Product View Page</Link>
           <Link to="/VendorProductViewPage">Vendor Product View Page</Link>
-          <Link to="/shoppingCart">ٍShopping Cart Page</Link>
+          <Link to="/shoppingCart">Shopping Cart Page</Link>
+          <Link to="/shippingAddress">Shipping Address Page</Link>
           <Link to="/dummyPage">DummyPage</Link>
           <Link to="/searchpage">Search Page</Link>
           <Link to="/login">Login</Link>

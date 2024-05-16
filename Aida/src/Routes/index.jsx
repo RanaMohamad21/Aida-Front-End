@@ -24,6 +24,7 @@ import ProductViewPage from "../Store/ProductViewPage";
 import DummyPage from "../UI/dummyPage";
 import VendorProductViewPage from "../Vendor/VendorProductViewPage";
 import ShoppingCartPage from "../Cart/ShoppingCartPage";
+import ShippingAddress from "../Cart/ShippingAddress";
 
 //   { path: "/", element: <HomePage /> },
 //   { path: "/login", component: <Login /> },
@@ -220,6 +221,14 @@ const routes = [
     element: (
       <React.Fragment>
         <ShoppingCartPage />
+      </React.Fragment>
+    ),
+  },
+  {
+    path: "/shippingAddress",
+    element: (
+      <React.Fragment>
+        <ShippingAddress />
       </React.Fragment>
     ),
   },
