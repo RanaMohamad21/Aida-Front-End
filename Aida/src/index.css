@@ -55,7 +55,8 @@ label {
   transition-duration: 150ms;
 }
 
-input:disabled{
+input[type="button"]:disabled,
+input[type="submit"]:disabled {
   background-color: gray;
 }
 
