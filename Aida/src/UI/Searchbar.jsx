@@ -3,9 +3,13 @@ import microphone from "/src/assets/home/microphoneWhite.png";
 import search from "/src/assets/home/search.png";
 import Cart from "../assets/icons/Cart";
 import UserProfile from "../assets/icons/UserProfile";
+import { useAuthentication } from "../Authentication/AuthenticationContext";
+import { Link } from "react-router-dom";
+
 function Searchbar() {
+  const {isAuthenticated} = useAuthentication();
   return (
-    <nav className="w-full   px-9 my-[4px] flex justify-between   ">
+    <nav className="w-screen  px-9 my-[4px] flex justify-between   ">
       {/* Search Bar Section */}
       
         {/*Logo start*/}
@@ -48,8 +52,11 @@ function Searchbar() {
         {/* Right part */}
         <div className="flex gap-2 justify-center items-center text-gray">
           <Cart color="#25b5ba" style="w-10 h-8"/>
-          <p>User name</p>
-          <UserProfile style = "w-10 h-10" color = "#25b5ba"/>
+          <div>{isAuthenticated?<><span>User name</span> <UserProfile style = "w-10 h-10" color = "#25b5ba"/></>:
+          <Link to="/login" className=" pl-4">Login</Link>}
+
+          </div>
+         
         </div>
 
     </nav>
