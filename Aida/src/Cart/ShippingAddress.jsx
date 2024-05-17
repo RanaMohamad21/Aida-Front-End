@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 
 function ShippingAddress() {
   const [changeDeliveryAddress, setChangeDeliveryAddress] = useState(false);
+  const [addCard, setAddCard] = useState(false);
   const { register, handleSubmit } = useForm();
   function handleChangeAddress() {
     setChangeDeliveryAddress((prev) => !prev);
@@ -37,21 +38,25 @@ function ShippingAddress() {
                       type="text"
                       placeholder="City"
                       {...register("city")}
+                      required = {changeDeliveryAddress}
                     />
                     <input
                       type="text"
                       placeholder="Street address"
                       {...register("streetAddress")}
+                      required = {changeDeliveryAddress}
                     />
                     <input
                       type="text"
                       placeholder="Building number"
                       {...register("buildingNumber")}
+                      required = {changeDeliveryAddress}
                     />
                     <input
                       type="text"
                       placeholder="Floor number"
                       {...register("floorNumber")}
+                      required = {changeDeliveryAddress}
                     />
                   </div>
                   <div className="w-full flex justify-end   text-white">
