@@ -6,10 +6,10 @@ import { BellFill, CartFill } from "react-bootstrap-icons";
 
 const maxProductsCount = 100;
 
-
 // This is a reusable component used in the product view
 // page for both the vendor and the customer, but for the vendor, the buttons are disabled.
-function ProductPriceCard({ product, disable }) {
+function ProductPriceCard({ product, disable, subscription }) {
+  const { subscribe, setSubscribe } = subscription;
   const discountedPrice = product.priceBeforeDiscount * product.discount;
   const hasDiscount = Math.abs(product?.discount) > 0;
   const isOutOfStock = product?.availableQuantity < 1;
@@ -42,7 +42,10 @@ function ProductPriceCard({ product, disable }) {
         {isOutOfStock ? (
           <span className=" text-FlamingoPink   ">Out of stock</span>
         ) : (
-          <select className="border  border-solid mx-3 rounded-lg active:border-teal " disabled = {disable}>
+          <select
+            className="border  border-solid mx-3 rounded-lg active:border-teal max-h-32 overflow-y-auto "
+            disabled={disable}
+          >
             {/* Set the max count as the maximum number of products available */}
             {Array.from({ length: maxProductsCount }, (_, index) => (
               <option key={index + 1} value={index + 1}>
@@ -55,21 +58,37 @@ function ProductPriceCard({ product, disable }) {
         {isOutOfStock ? (
           ""
         ) : (
-          <button 
-          
-          className={`text-white   rounded-md h-8 uppercase my-5  w-full  text-center justify-center pt-1 mx-auto ${disable?"bg-gray cursor-auto":"bg-FlamingoPink cursor-pointer hover:translate-x-[2px] hover:translate-y-[2px] transition-all"} `}
-          disabled = {disable}>
+          <button
+            className={`text-white   rounded-md h-8 uppercase my-5  w-full  text-center justify-center pt-1 mx-auto ${
+              disable
+                ? "bg-gray cursor-auto"
+                : "bg-FlamingoPink cursor-pointer hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+            } `}
+            disabled={disable}
+          >
             <div className=" flex justify-center items-center gap-2">
               Add to Cart <CartFill />
             </div>
           </button>
         )}
-        <button 
-          className={`text-white   rounded-md h-8 uppercase my-5  w-full  text-center justify-center pt-1 mx-auto ${disable?"bg-gray cursor-auto":"bg-teal cursor-pointer hover:translate-x-[2px] hover:translate-y-[2px] transition-all"}  `}
-          disabled = {disable}>
-          <div className="  flex justify-center items-center gap-2">
-            Subscribe <BellFill />
-          </div>
+        <button
+          className={`text-white   rounded-md h-8 uppercase my-5  w-full  text-center justify-center pt-1 mx-auto ${
+            disable
+              ? "bg-gray cursor-auto"
+              : "bg-teal cursor-pointer hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+          }  `}
+          disabled={disable}
+          onClick={() => setSubscribe((prev) => !prev)}
+        >
+          {subscribe ? (
+            <div className="  flex justify-center items-center gap-2">
+              Unsubscribe <XLg />
+            </div>
+          ) : (
+            <div className="  flex justify-center items-center gap-2">
+              Subscribe <BellFill />
+            </div>
+          )}
         </button>
       </div>
     </div>

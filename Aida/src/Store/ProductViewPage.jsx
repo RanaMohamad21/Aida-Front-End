@@ -209,7 +209,7 @@ function ProductViewPage({ isVendor = false }) {
   const [newRating, setNewRating] = useState();
   const [commentAdded, setCommentAdded] = useState(false);
   const [reviews, setReviews] = useState(dummyReviews);
-
+  const [subscribe, setSubscribe] = useState(false);
   function handleReview(e) {
     setNewReview(e.target.value);
   }
@@ -230,7 +230,7 @@ function ProductViewPage({ isVendor = false }) {
         {/* Product details */}
         <div className="  grid sm:grid-cols-[1fr,4fr] md:grid-cols-[1fr,3fr]   ">
           {/* Subscribe and add to cart */}
-          <ProductPriceCard product={product} disable={isVendor} />
+          <ProductPriceCard product={product} disable={isVendor} subscription={{subscribe,setSubscribe}} />
           {/* Product Features */}
           <ProductDetails product={product} />
         </div>
