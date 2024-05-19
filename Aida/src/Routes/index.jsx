@@ -2,14 +2,6 @@ import HomePage from "../Store/HomePage";
 import Login from "../Authentication/Login";
 import Signup from "../Authentication/Signup";
 import React from "react";
-import FashionPage from "../Store/FashionPage";
-import ElectronicsPage from "../Store/ElectronicsPage";
-import SportsPage from "../Store/SportsPage";
-import HealthPage from "../Store/HealthPage";
-import PetsPage from "../Store/PetSuppliesPage";
-import BooksPage from "../Store/BooksPage";
-import HomeEssentialsPage from "../Store/HomeEssentialsPage";
-import OfficeSuppliesPage from "../Store/OfficeSuppliesPage";
 import UnavailablePage from "../User/UnavailablePage";
 import AccountType from "../Authentication/AccountType";
 import SignUpVendor1 from "../Authentication/SignUpVendor1";
@@ -26,18 +18,6 @@ import VendorProductViewPage from "../Vendor/VendorProductViewPage";
 import ShoppingCartPage from "../Cart/ShoppingCartPage";
 import ShippingAddress from "../Cart/ShippingAddress";
 
-//   { path: "/", element: <HomePage /> },
-//   { path: "/login", component: <Login /> },
-//   { path: "/signup", component: <Signup /> },
-//   { path: "/fashion", component: <FashionPage /> },
-//   { path: "/electronics", component: <ElectronicsPage /> },
-//   { path: "/sports", component: <SportsPage /> },
-//   { path: "/health", component: <HealthPage /> },
-//   { path: "/pets", component: <PetsPage /> },
-//   { path: "/books", component: <BooksPage /> },
-//   { path: "/homeessentials", component: <HomeEssentialsPage /> },
-//   { path: "/officesupplies", component: <OfficeSuppliesPage /> },
-// ];
 
 const routes = [
   {
@@ -152,70 +132,7 @@ const routes = [
       </React.Fragment>
     ),
   },
-  {
-    path: "/fashion",
-    element: (
-      <React.Fragment>
-        <FashionPage />
-      </React.Fragment>
-    ),
-  },
-  {
-    path: "/electronics",
-    element: (
-      <React.Fragment>
-        <ElectronicsPage />
-      </React.Fragment>
-    ),
-  },
-  {
-    path: "/sports",
-    element: (
-      <React.Fragment>
-        <SportsPage />
-      </React.Fragment>
-    ),
-  },
-  {
-    path: "/health",
-    element: (
-      <React.Fragment>
-        <HealthPage />
-      </React.Fragment>
-    ),
-  },
-  {
-    path: "/pets",
-    element: (
-      <React.Fragment>
-        <PetsPage />
-      </React.Fragment>
-    ),
-  },
-  {
-    path: "/books",
-    element: (
-      <React.Fragment>
-        <BooksPage />
-      </React.Fragment>
-    ),
-  },
-  {
-    path: "/homeessentials",
-    element: (
-      <React.Fragment>
-        <HomeEssentialsPage />
-      </React.Fragment>
-    ),
-  },
-  {
-    path: "/officesupplies",
-    element: (
-      <React.Fragment>
-        <OfficeSuppliesPage />
-      </React.Fragment>
-    ),
-  },
+ 
   {
     path: "/shoppingCart",
     element: (

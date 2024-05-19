@@ -3,14 +3,14 @@ import CreateShopIcon from "../assets/icons/CreateShopIcon";
 
 // Alhamdulillah Done
 const NavbarLinks = [
-  { name: "Fashion", link: "/fashion" },
-  { name: "Electronics", link: "/electronics" },
-  { name: "Sports", link: "/sports" },
-  { name: "Health & wellness", link: "/health" },
-  { name: "Pet supplies", link: "/pets" },
-  { name: "Books", link: "/books" },
-  { name: "Home essentials", link: "/homeessentials" },
-  { name: "Office supplies", link: "/officesupplies" },
+  { name: "Fashion", link: "/searchpage" },
+  { name: "Electronics", link: "/searchpage" },
+  { name: "Sports", link: "/searchpage" },
+  { name: "Health & wellness", link: "/searchpage" },
+  { name: "Pet supplies", link: "/searchpage" },
+  { name: "Books", link: "/searchpage" },
+  { name: "Home essentials", link: "/searchpage" },
+  { name: "Office supplies", link: "/searchpage" },
 ];
 
 function Navbar() {
