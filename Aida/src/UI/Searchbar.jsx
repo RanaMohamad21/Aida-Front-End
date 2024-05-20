@@ -5,24 +5,27 @@ import Cart from "../assets/icons/Cart";
 import UserProfile from "../assets/icons/UserProfile";
 import { useAuthentication } from "../Authentication/AuthenticationContext";
 import { Link } from "react-router-dom";
+import { useShoppingCart } from "../Contexts/ShoppingCartProvider";
 
 function Searchbar() {
-  const {isAuthenticated} = useAuthentication();
+  const { isAuthenticated } = useAuthentication();
+  const { getItemsQuantity } = useShoppingCart(); 
+  const cartItemCount = getItemsQuantity();
   return (
-    <nav className="w-screen  px-9 my-[4px] flex justify-between   ">
+    <nav className="w-full  px-9 my-[4px] flex justify-between   ">
       {/* Search Bar Section */}
-      
-        {/*Logo start*/}
-        <div className="  ">
-          <img
-            src={logoWhiteTxtAida}
-            alt="Logo"
-            className="h-[40px] mt-[2px]  "
-          />
-        </div>
-        {/* Logo end */}
-        {/* Search start */}
-        <div>
+
+      {/*Logo start*/}
+      <div className="  ">
+        <img
+          src={logoWhiteTxtAida}
+          alt="Logo"
+          className="h-[40px] mt-[2px]  "
+        />
+      </div>
+      {/* Logo end */}
+      {/* Search start */}
+      <div>
         <form action="">
           <div className="w-max flex items-center p-[1px]  rounded-2xl">
             <span className="bg-teal py-2 px-1 rounded-tl-2xl rounded-bl-2xl h-[40px]">
@@ -46,19 +49,36 @@ function Searchbar() {
             </span>
           </div>
         </form>
-        </div>
-        {/* Search end */}
+      </div>
+      {/* Search end */}
 
-        {/* Right part */}
-        <div className="flex gap-2 justify-center items-center text-gray">
-          <Cart color="#25b5ba" style="w-10 h-8"/>
-          <div>{isAuthenticated?<><span>User name</span> <UserProfile style = "w-10 h-10" color = "#25b5ba"/></>:
-          <Link to="/login" className=" pl-4">Login</Link>}
+      {/* Right part */}
 
+      <div className="flex gap-2 justify-center items-center text-gray">
+        {isAuthenticated ? (
+          <>
+            <Link to="/shoppingcart">
+             <div className="relative">
+              <Cart color="#25b5ba" style="w-10 h-8" />
+           
+            {cartItemCount > 0 && (
+              <span className="absolute top-0 right-0 bg-FlamingoPink text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                {cartItemCount}
+              </span>
+            )}
           </div>
-         
-        </div>
-
+          </Link>
+            <span>User name</span>{" "}
+            <Link to="">
+              <UserProfile style="w-10 h-10" color="#25b5ba" />
+            </Link>
+          </>
+        ) : (
+          <Link to="/login" className=" pl-4">
+            Login
+          </Link>
+        )}
+      </div>
     </nav>
   );
 }
