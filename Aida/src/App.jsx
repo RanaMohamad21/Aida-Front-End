@@ -1,7 +1,7 @@
 import Footer from "./UI/Footer";
 import routes from "./Routes/index";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { AuthenticationProvider } from "./Authentication/AuthenticationContext";
+import { AuthenticationProvider } from "./Contexts/AuthenticationContext";
 import { VendorSignUpProvider } from "./Contexts/VendorSignUpProvider";
 import ShoppingCartProvider from "./Contexts/ShoppingCartProvider";
 function App() {
