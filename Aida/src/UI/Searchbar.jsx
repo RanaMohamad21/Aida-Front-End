@@ -3,14 +3,14 @@ import microphone from "/src/assets/home/microphoneWhite.png";
 import search from "/src/assets/home/search.png";
 import Cart from "../assets/icons/Cart";
 import UserProfile from "../assets/icons/UserProfile";
-import { useAuthentication } from "../Authentication/AuthenticationContext";
+import { useAuthentication } from "../Contexts/AuthenticationContext";
 import { Link } from "react-router-dom";
 import { useShoppingCart } from "../Contexts/ShoppingCartProvider";
 
 function Searchbar() {
   const { isAuthenticated } = useAuthentication();
-  const { getItemsQuantity } = useShoppingCart(); 
-  const cartItemCount = getItemsQuantity();
+  const { getTotalQuantity } = useShoppingCart(); 
+  const cartItemCount = getTotalQuantity();
   return (
     <nav className="w-full  px-9 my-[4px] flex justify-between   ">
       {/* Search Bar Section */}

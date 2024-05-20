@@ -15,11 +15,17 @@ function ShoppingCartProvider({ children }) {
     console.log("Cart Items: ", cartItems);
   }, [cartItems]);
 
-  // Returns the quantity selected by the customer for the given product ID
-  function getItemsQuantity(id) {
-    return cartItems.find((item) => item.id === id)?.quantity || 0;
+  // Returns the total number of products in the cart
+    function getTotalQuantity() {
+      return cartItems.reduce((total, item) => total + item.quantity, 0);
   }
 
+
+  // Returns the quantity selected by the customer for the given product ID
+  function getItemQuantity(id){
+    return cartItems.find((item) => item.id === id)?.quantity || 0;
+  
+  }
   function addToCart(id, quantity =1) {
     setCartItems((currentItems) => {
       // Check if the item is already in the cart
@@ -96,7 +102,8 @@ function ShoppingCartProvider({ children }) {
         increaseItemQuantity,
         decreaseItemQuantity,
         removeItemFromCart,
-        getItemsQuantity,
+        getTotalQuantity,
+        getItemQuantity,
         addToCart
       }}
     >
