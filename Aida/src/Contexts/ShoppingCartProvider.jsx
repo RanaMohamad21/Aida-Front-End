@@ -15,11 +15,34 @@ function ShoppingCartProvider({ children }) {
     console.log("Cart Items: ", cartItems);
   }, [cartItems]);
 
-  // Returns the quantity selected by the customer for the given product ID
-  function getItemsQuantity(id) {
-    return cartItems.find((item) => item.id === id)?.quantity || 0;
+  // Returns the total number of products in the cart
+    function getTotalQuantity() {
+      return cartItems.reduce((total, item) => total + item.quantity, 0);
   }
 
+
+  // Returns the quantity selected by the customer for the given product ID
+  function getItemQuantity(id){
+    return cartItems.find((item) => item.id === id)?.quantity || 0;
+  
+  }
+  function addToCart(id, quantity =1) {
+    setCartItems((currentItems) => {
+      // Check if the item is already in the cart
+      const itemIndex = currentItems.findIndex(item => item.id === id);
+  
+      if (itemIndex === -1) {
+        // Item is not in the cart, add it
+        return [...currentItems, { id, quantity }];
+      } else {
+        // Item is already in the cart, update the quantity
+        const updatedItems = currentItems.map((item, index) =>
+          index === itemIndex ? { ...item,  quantity } : item
+        );
+        return updatedItems;
+      }
+    });
+  }
   // Function to add a new item to the cart or increase the quantity of an existing one
   function increaseItemQuantity(id) {
     setCartItems((currentItems) => {
@@ -79,7 +102,9 @@ function ShoppingCartProvider({ children }) {
         increaseItemQuantity,
         decreaseItemQuantity,
         removeItemFromCart,
-        getItemsQuantity,
+        getTotalQuantity,
+        getItemQuantity,
+        addToCart
       }}
     >
       {children}

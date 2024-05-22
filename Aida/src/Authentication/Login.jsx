@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useAuthentication } from "./AuthenticationContext";
 import logoWhiteTxtAida from "/src/assets/logo/LogoWhiteTextAida.svg";
 import LoginImg from "../assets/Authentication/login.png";
+import { useAuthentication } from "../Contexts/AuthenticationContext";
 
 function Login() {
   // Use the useNavigate hook to navigate to a different page

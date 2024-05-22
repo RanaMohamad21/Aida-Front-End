@@ -1,18 +1,16 @@
 import { useContext, useReducer, useState } from "react";
 import { createContext } from "react";
-import axios from 'axios';
-
+import axios from "axios";
 
 // Create a new context for authentication state
 const AuthenticationContext = createContext();
-let token='';
+let token = "";
 
 // Define the initial state for authentication
 const initialState = {
   user: null,
   isAuthenticated: false,
 };
-
 
 // Reducer function to handle state changes
 function reducer(state, action) {
@@ -69,18 +67,18 @@ function AuthenticationProvider({ children }) {
     setError("");
 
     try {
-       // Send a POST request to the server with the user credentials
-       console.log("Form Data Object:", email, password);
-       const response = await axios.post('http://localhost:8081/api/v1/auth/login', {
-              "email": email,
-              "password": password
-       });
+      // Send a POST request to the server with the user credentials
+      console.log("Form Data Object:", email, password);
+      const response = await axios.post(
+        "http://localhost:8081/api/v1/auth/login",
+        {
+          email: email,
+          password: password,
+        }
+      );
 
-
-    // If the request is successful, update the state with the token
-     token = response.data.token;
-
-
+      // If the request is successful, update the state with the token
+      token = response.data.token;
     } catch (error) {
       console.error("Failed to login:", error);
       setError("Failed to log in. Please check your email and password");
@@ -90,7 +88,7 @@ function AuthenticationProvider({ children }) {
   // Logout function to log out the user
   function logout() {
     dispatch({ type: "logout" });
-     //We need to remove token when logged out.
+    //We need to remove token when logged out.
   }
 
   return (

@@ -5,7 +5,16 @@ import { ChevronLeft, XLg } from "react-bootstrap-icons";
 import cartImage from "../assets/Cart/another cart icon.png";
 
 import Button from "../UI/Button";
+import { useShoppingCart } from "../Contexts/ShoppingCartProvider";
 function ShoppingCartPage() {
+  const {
+    cartItems,
+    getItemsQuantity,
+    increaseItemQuantity,
+    decreaseItemQuantity,
+    removeItemFromCart,
+  } = useShoppingCart();
+
   function incrementItems() {}
   function decrementItems() {}
   return (
@@ -22,7 +31,11 @@ function ShoppingCartPage() {
               className=" flex items-center justify-center  w-[70%] h-[200px] border-t-2
           border-b-2 border-t-IceBlue border-b-IceBlue  my-2"
             >
-              Table of products
+              {cartItems.length < 1 ? (
+                <span>Cart is empty.</span>
+              ) : (
+                <span>Table of Products</span>
+              )}
             </div>
             {/* Discounts */}
             <div>
@@ -67,6 +80,8 @@ function ShoppingCartPage() {
                 alt={"Cart image"}
                 className=" w-full object-cover rounded-xl"
               />
+              {cartItems.length<1?<span></span>:<>
+              
               <div className=" w-full px-3">
                 <p className=" text-2xl text-teal pb-3 ">Payment Info</p>
                 <div className="grid grid-cols-2 leading-relaxed w-full mb-4">
@@ -99,6 +114,7 @@ function ShoppingCartPage() {
               >
                 Proceed
               </Button>
+              </>}
             </div>
           </div>
         </div>
