@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import VendorNavBar from './VendorNavBar'; 
 import Pagination from '../Store/Pagination';
 import Footer from '../UI/Footer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faClock, faShippingFast, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+
 
 function VendorOrders() {
   const [orders, setOrders] = useState([]);
@@ -38,30 +41,35 @@ function VendorOrders() {
         <div className="bg-teal flex justify-around mb-6">
           <div className="text-center">
             <div className=" text-white text-2xl font-bold">5</div>
-            <div className="text-white">Unseen</div>
+            <div className="text-white"> <FontAwesomeIcon icon={faEye} className=" text-white text-2xl text-blue-500" /> Unseen</div>
           </div>
           <div className="text-center">
             <div className="text-white text-2xl font-bold">10</div>
-            <div className="text-white">Pending</div>
+            <div className="text-white"> <FontAwesomeIcon icon={faClock} className=" text-white text-2xl text-blue-500" /> Pending</div>
           </div>
           <div className="text-center">
+        
             <div className="text-white text-2xl font-bold">7</div>
-            <div className="text-white">Shipped</div>
+            <div className="text-white"><FontAwesomeIcon icon={faShippingFast} className=" text-white text-2xl text-blue-500" /> Shipped</div>
           </div>
           <div className="text-center">
             <div className="text-white text-2xl font-bold">12</div>
-            <div className="text-white text-gray-500">Arrived</div>
+            <div className="text-white text-gray-500"> <FontAwesomeIcon icon={faCheckCircle} className=" text-white text-2xl text-blue-500" /> Arrived</div>
           </div>
         </div>
 
-        <table className="min-w-full bg-white border">
+        <table className="min-w-full bg-white ">
           <thead>
             <tr>
-              <th className="py-2 px-4 border-b">Order</th>
-              <th className="py-2 px-4 border-b">Date</th>
-              <th className="py-2 px-4 border-b">Status</th>
-              <th className="py-2 px-4 border-b">Revenue</th>
+              <th className="py-2 px-4 ">Order</th>
+              <th className="py-2 px-4 ">Date</th>
+              <th className="py-2 px-4">Status</th>
+              <th className="py-2 px-4">Revenue</th>
             </tr>
+            <tr className="h-1 bg-teal">
+                <td colSpan="4"></td>
+            </tr>
+
           </thead>
           <tbody>
             {currentOrders.map((order) => (
