@@ -1,51 +1,104 @@
 import React, { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUp, faArrowDown, faChartSimple } from '@fortawesome/free-solid-svg-icons';
+import '@fortawesome/fontawesome-svg-core/styles.css';
 
+// Example data
 const dataThisYear = [
-  { name: 'January', uv: 4000, pv: 2400, amt: 2400 },
-  { name: 'February', uv: 3000, pv: 1398, amt: 2210 },
-  { name: 'March', uv: 2000, pv: 9800, amt: 2290 },
-  { name: 'April', uv: 2780, pv: 3908, amt: 2000 },
-  { name: 'May', uv: 1890, pv: 4800, amt: 2181 },
-  { name: 'June', uv: 2390, pv: 3800, amt: 2500 },
-  { name: 'July', uv: 3490, pv: 4300, amt: 2100 },
-  // Add more data for each month
+  { name: 'Jan', value: 24000 },
+  { name: 'Feb', value: 20000 },
+  { name: 'Mar', value: 28000 },
+  { name: 'Apr', value: 35000 },
+  { name: 'May', value: 40000 },
+  { name: 'Jun', value: 30000 },
+  { name: 'Jul', value: 27000 },
+  { name: 'Aug', value: 31000 },
+  { name: 'Sep', value: 20000 },
+  { name: 'Oct', value: 28000 },
+  { name: 'Nov', value: 35000 },
+  { name: 'Dec', value: 32000 },
 ];
 
 const dataLastYear = [
-  { name: 'January', uv: 3000, pv: 2400, amt: 2400 },
-  { name: 'February', uv: 2500, pv: 1398, amt: 2210 },
-  { name: 'March', uv: 1500, pv: 9800, amt: 2290 },
-  { name: 'April', uv: 2780, pv: 3908, amt: 2000 },
-  { name: 'May', uv: 1890, pv: 4800, amt: 2181 },
-  { name: 'June', uv: 2390, pv: 3800, amt: 2500 },
-  { name: 'July', uv: 3490, pv: 4300, amt: 2100 },
-  // Add more data for each month
+  { name: 'Jan', value: 21000 },
+  { name: 'Feb', value: 18000 },
+  { name: 'Mar', value: 26000 },
+  { name: 'Apr', value: 34000 },
+  { name: 'May', value: 39000 },
+  { name: 'Jun', value: 28000 },
+  { name: 'Jul', value: 26000 },
+  { name: 'Aug', value: 30000 },
+  { name: 'Sep', value: 19000 },
+  { name: 'Oct', value: 27000 },
+  { name: 'Nov', value: 33000 },
+  { name: 'Dec', value: 31000 },
 ];
 
 const SalesTrends = () => {
   const [year, setYear] = useState('thisYear');
+  const [period, setPeriod] = useState('year');
   const data = year === 'thisYear' ? dataThisYear : dataLastYear;
 
-  const monthlyAverage = data.reduce((acc, item) => acc + item.uv, 0) / data.length;
-  const raiseOrSink = (monthlyAverage - dataLastYear.reduce((acc, item) => acc + item.uv, 0) / dataLastYear.length).toFixed(2);
+  const monthlyAverage = data.reduce((acc, item) => acc + item.value, 0) / data.length;
+  const totalThisYear = dataThisYear.reduce((acc, item) => acc + item.value, 0);
+  const totalLastYear = dataLastYear.reduce((acc, item) => acc + item.value, 0);
+  const percentageChange = ((totalThisYear - totalLastYear) / totalLastYear) * 100;
 
   return (
-    <div className="p-6">
-      <div className="flex justify-between mb-4">
-        <div className="bg-white p-4 rounded shadow-md text-center">
-          <div className="text-lg font-semibold">Monthly Average</div>
-          <div className="text-2xl font-bold">${monthlyAverage.toFixed(2)}K</div>
+    <div className="p-6 bg-white shadow-md rounded-md w-full">
+     <div className="text-2xl font-semibold bg-teal text-white inline-block p-2"> <FontAwesomeIcon icon={faChartSimple} className="mr-1" /> Sales Trends</div>
+
+      <div className="mb-6 flex justify-between">
+    
+        <div className="bg-white p-4 rounded text-center">
+          <div className="text-lg font-semibold text-gray">Monthly Average</div>
+          <div className="text-2xl font-bold">${monthlyAverage.toLocaleString()}K</div>
+          <div className="text-teal flex items-center justify-center">
+            <FontAwesomeIcon icon={faArrowUp} className="mr-1" />
+            12.56%
+          </div>
         </div>
-        <div className="bg-white p-4 rounded shadow-md text-center">
-          <div className="text-lg font-semibold">Raise/Sink</div>
-          <div className={`text-2xl font-bold ${raiseOrSink >= 0 ? 'text-green-500' : 'text-red-500'}`}>{raiseOrSink >= 0 ? '+' : ''}${raiseOrSink}K</div>
+      
+        <div className="bg-white p-4 rounded text-left">
+          <div className="text-lg font-semibold text-gray">This Year</div>
+          <div className="text-2xl font-bold">${totalThisYear.toLocaleString()}K</div>
+          <div className={`flex items-center justify-center ${percentageChange >= 0 ? 'text-teal' : 'text-salmon'}`}>
+            <FontAwesomeIcon icon={percentageChange >= 0 ? faArrowUp : faArrowDown} className="mr-1" />
+            {percentageChange.toFixed(2)}%
+          </div>
         </div>
+
+        <div className="flex-row space-x-0">
+        <div className="flex border border-teal">
+  <button
+    className={`flex-1 px-4 py-1 rounded-none ${period === 'year' ? 'bg-white text-black border-black' : 'bg-teal text-white'}`}
+    onClick={() => setPeriod('year')}
+  >
+    Year
+  </button>
+  <button 
+    className={`flex-1 px-3 py-1 rounded-none ${period === 'month' ? 'bg-white text-black border-black' : 'bg-teal text-white'}`}
+    onClick={() => setPeriod('month')}
+  >
+    Month
+  </button>
+  <button
+    className={`flex-1 px-4 py-1 rounded-none ${period === 'week' ? 'bg-white text-black' : 'bg-teal text-white'}`}
+    onClick={() => setPeriod('week')}
+  >
+    Week
+  </button>
+</div>
+
+</div>
+
       </div>
 
+
       <BarChart
-        width={600}
-        height={300}
+        width={1000}
+        height={400}
         data={data}
         margin={{
           top: 5, right: 30, left: 20, bottom: 5,
@@ -53,12 +106,13 @@ const SalesTrends = () => {
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
-        <YAxis tickFormatter={(value) => `${value}K`} />
+        <YAxis tickFormatter={(value) => `${value / 1000}K`} />
         <Tooltip />
         <Legend />
-        <Bar dataKey="uv" fill="#8884d8" />
+        <Bar dataKey="value" fill="#00c2c2" />
       </BarChart>
 
+      
       <div className="mt-4 flex justify-center">
         <div>
           <label className="mr-4">
@@ -67,6 +121,7 @@ const SalesTrends = () => {
               value="thisYear"
               checked={year === 'thisYear'}
               onChange={() => setYear('thisYear')}
+              
             />
             This Year
           </label>
@@ -76,14 +131,14 @@ const SalesTrends = () => {
               value="lastYear"
               checked={year === 'lastYear'}
               onChange={() => setYear('lastYear')}
+              
             />
             Last Year
           </label>
         </div>
-      </div>
+        </div>
     </div>
   );
 };
 
 export default SalesTrends;
-
