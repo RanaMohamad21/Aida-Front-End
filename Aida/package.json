@@ -21,7 +21,8 @@
     "react-loading": "^2.0.3",
     "react-multi-carousel": "^2.8.5",
     "react-quill": "^2.0.0",
-    "react-router-dom": "^6.22.1"
+    "react-router-dom": "^6.22.1",
+    "recharts": "^2.12.7"
   },
   "devDependencies": {
     "@hookform/devtools": "^4.3.1",

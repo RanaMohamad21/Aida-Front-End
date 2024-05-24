@@ -17,8 +17,9 @@ import DummyPage from "../UI/dummyPage";
 import VendorProductViewPage from "../Vendor/VendorProductViewPage";
 import ShoppingCartPage from "../Cart/ShoppingCartPage";
 import ShippingAddress from "../Cart/ShippingAddress";
-
-
+import VendorAnalytics from "../Vendor/VendorAnalytics";
+import VendorOrders from "../Vendor/VendorOrders";
+import VendorSettings from "../Vendor/VendorSettings";
 const routes = [
   {
     path: "/",
@@ -89,6 +90,30 @@ const routes = [
     element: (
       <React.Fragment>
         <VendorProductViewPage />
+      </React.Fragment>
+    ),
+  },
+  {
+    path: "/VendorAnalytics",
+    element: (
+      <React.Fragment>
+        <VendorAnalytics />
+      </React.Fragment>
+    ),
+  },
+  {
+    path: "/VendorOrders",
+    element: (
+      <React.Fragment>
+        <VendorOrders />
+      </React.Fragment>
+    ),
+  },
+  {
+    path: "/VendorSettings",
+    element: (
+      <React.Fragment>
+        <VendorSettings />
       </React.Fragment>
     ),
   },
