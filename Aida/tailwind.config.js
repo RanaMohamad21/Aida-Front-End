@@ -12,7 +12,6 @@ export default {
       black: "#000",
       teal: "#25b5ba",
       salmon: "#ff897f",
-      black: "#000",
       indianred: "#cc574d",
       lightslategray: "#86959f",
       "design-theme-light-grey-500": "#212123",
