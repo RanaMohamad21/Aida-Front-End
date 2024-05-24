@@ -14,7 +14,7 @@ import SeasonalOffers from "../UI/SeasonalOffers";
 // import { useAuthentication } from "../Authentication/AuthenticationContext";
 
 // Sliding windows settings:
-const onSaleSlidesNumber = 1;
+// const onSaleSlidesNumber = 1;
 const largeScreanSimilarProductNumber = 5;
 const mediumScreanSimilarProductNumber = 3;
 
