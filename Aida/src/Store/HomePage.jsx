@@ -149,10 +149,9 @@ function HomePage() {
           <h1 className=" text-2xl text-FlamingoPink font-semibold">
             Most of the links are here for now
           </h1>
-          <h1 className=" text-2xl text-FlamingoPink font-semibold">
-            Most of the links are here for now
-          </h1>
+          
           <Link to="/productviewpage">Product View Page</Link>
+          <Link to="/customerprofile">Customer Profile</Link>
           <Link to="/VendorProductViewPage">Vendor Product View Page</Link>
           <Link to="/shoppingCart">Shopping Cart Page</Link>
           <Link to="/shippingAddress">Shipping Address Page</Link>

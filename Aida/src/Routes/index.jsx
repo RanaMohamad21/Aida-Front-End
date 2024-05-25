@@ -2,7 +2,7 @@ import HomePage from "../Store/HomePage";
 import Login from "../Authentication/Login";
 import Signup from "../Authentication/Signup";
 import React from "react";
-import UnavailablePage from "../User/UnavailablePage";
+import UnavailablePage from "../Customer/UnavailablePage";
 import AccountType from "../Authentication/AccountType";
 import SignUpVendor1 from "../Authentication/SignUpVendor1";
 import SignUpVendor2 from "../Authentication/SignUpVendor2";
@@ -20,6 +20,7 @@ import ShippingAddress from "../Cart/ShippingAddress";
 import VendorAnalytics from "../Vendor/VendorAnalytics";
 import VendorOrders from "../Vendor/VendorOrders";
 import VendorSettings from "../Vendor/VendorSettings";
+import CustomerProfilePage from "../Customer/CustomerProfilePage";
 const routes = [
   {
     path: "/",
@@ -114,6 +115,14 @@ const routes = [
     element: (
       <React.Fragment>
         <VendorSettings />
+      </React.Fragment>
+    ),
+  },
+  {
+    path: "/CustomerProfile",
+    element: (
+      <React.Fragment>
+        <CustomerProfilePage />
       </React.Fragment>
     ),
   },
