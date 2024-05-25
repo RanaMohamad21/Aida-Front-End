@@ -9,7 +9,7 @@ import { TbBellPlusFilled } from "react-icons/tb";
 function CustomerNavBar() {
   return (
     <div className=" h-full bg-lightTeal mt-3 ">
-      <div className=" grid grid-rows-[auto,1fr,1fr] h-full">
+      <div className=" grid grid-rows-[auto,1fr,auto] h-full">
         {/* Cutomer personal information */}
         <div className=" p-4  sm:flex-col flex md:flex-row md:gap-2 sm:items-center sm:justify-center  ">
           <img src={dummy} className=" rounded-full w-24 h-24 mr-1" />
@@ -78,7 +78,7 @@ function CustomerNavBar() {
 
         {/* Image */}
         <div
-          className=" bg-salmon  w-full opacity-80"
+          className=" bg-salmon h-[400px]  w-full opacity-80"
           style={{
             backgroundImage: `url(${NavbarImage})`,
             backgroundSize: "cover",
