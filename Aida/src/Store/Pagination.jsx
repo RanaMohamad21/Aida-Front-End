@@ -19,7 +19,7 @@ function Pagination({ totalPages, currentPage, paginate }) {
           <button
             onClick={() => paginate(currentPage - 1)}
             disabled={currentPage === 1}
-            className="flex items-center justify-center px-5 py-2 leading-tight text-white bg-teal border border-gray-500 rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
+            className="flex items-center justify-center px-5 py-2 leading-tight text-white bg-teal border border-gray-500 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 cursor-pointer"
             style={{ minWidth: '100px' }}
           >
             <svg
