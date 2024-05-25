@@ -36,7 +36,7 @@ function VendorNavBar({ storeName }) {
           <p className="text-teal mt-2 text-xs">Orders</p>
         </NavLink>
         <div>
-          <div className="flex hover:cursor-pointer ">
+          <div className="flex ">
             <NavLink className={({ isActive }) => 
           isActive ? 'text-teal mt-2 flex gap-2' : ' text-FlamingoPink mt-2 flex gap-2'}>
             <span className=" mt-1"><SiSimpleanalytics  /></span> <span>Analytics</span></NavLink>
