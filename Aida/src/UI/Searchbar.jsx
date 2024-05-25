@@ -7,7 +7,7 @@ import { useAuthentication } from "../Contexts/AuthenticationContext";
 import { Link, NavLink } from "react-router-dom";
 import { useShoppingCart } from "../Contexts/ShoppingCartProvider";
 
-function Searchbar() {
+function Searchbar({isProfilePage = false}) {
   // const { isAuthenticated } = useAuthentication();
   const isAuthenticated = true
   const { getTotalQuantity } = useShoppingCart(); 
@@ -69,10 +69,12 @@ function Searchbar() {
             )}
           </div>
           </Link>
-            <span>User name</span>{" "}
+            {isProfilePage?"":<>
+            <span>User name</span>
             <Link to="">
               <UserProfile style="w-10 h-10" color="#25b5ba" />
             </Link>
+            </>}
           </>
         ) : (
           <Link to="/login" className=" pl-4">
