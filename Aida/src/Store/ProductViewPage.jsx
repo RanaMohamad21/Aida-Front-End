@@ -15,6 +15,7 @@ import dummyImage2 from "../assets/dummy/Samsung.png";
 import ProductCard from "../UI/ProductCard";
 import { Link } from "react-router-dom";
 import { useShoppingCart } from "../Contexts/ShoppingCartProvider";
+import Searchbar from "../UI/Searchbar";
 // import Carousel from "react-multi-carousel";
 
 const similarItems = [
@@ -253,6 +254,7 @@ function ProductViewPage({ isVendor = false }) {
   };
   return (
     <div className=" mb-12 w-full ">
+      <Searchbar/>
       <div className=" grid grid-rows-[1fr,auto,auto,auto] h-full  bg-IceBlue w-full ">
         {/* Product details */}
         <div className="  grid sm:grid-cols-[1fr,4fr] md:grid-cols-[1fr,3fr] mb-5  ">

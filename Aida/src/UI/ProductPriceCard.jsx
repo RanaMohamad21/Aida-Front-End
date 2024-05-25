@@ -6,6 +6,7 @@ import ProductsCart from "../assets/Store/productsCart.jpeg";
 import { BellFill, CartFill, Check2, XLg } from "react-bootstrap-icons";
 import { useForm } from "react-hook-form";
 import { useShoppingCart } from "../Contexts/ShoppingCartProvider";
+import { useAuthentication } from "../Contexts/AuthenticationContext";
 
 const maxProductsCount = 100;
 
@@ -14,6 +15,7 @@ const maxProductsCount = 100;
 function ProductPriceCard({ product, disable, subscription }) {
   const { subscribe, setSubscribe } = subscription;
   const { addToCart} = useShoppingCart()
+  const { isAuthenticated } = useAuthentication();
   // Sets the Text in the UI button based on the state
   const [addedToCart,setAddedToCart] = useState(false)
   const discountedPrice = product.priceBeforeDiscount * product.discount;
@@ -23,6 +25,8 @@ function ProductPriceCard({ product, disable, subscription }) {
   const { register, handleSubmit,  } = useForm();
   
   const onSubmit = (data) => {
+    
+
     console.log(data);
     addToCart(product.id, data.quantity);
     setAddedToCart(true);
@@ -84,11 +88,13 @@ function ProductPriceCard({ product, disable, subscription }) {
                   ? "bg-gray cursor-auto"
                   : "bg-FlamingoPink cursor-pointer hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
               }`}
-              disabled={disable || addedToCart}
+              disabled={disable || addedToCart || !isAuthenticated}
             >
               <div >
-                {addedToCart?<span className=" flex justify-center items-center gap-2">Added to cart <Check2/></span>:<span className="flex justify-center items-center gap-2">Add to Cart <CartFill /></span>}
+                
+                {addedToCart?<span className="flex justify-center items-center gap-2">Added to cart <Check2/></span>:<span className="flex justify-center items-center gap-2">Add to Cart <CartFill /></span>}
               </div>
+              
             </button>
           )}
         </form>
