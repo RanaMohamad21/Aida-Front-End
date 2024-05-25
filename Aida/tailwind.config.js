@@ -10,7 +10,9 @@ export default {
     colors: {
       white: "#FFFFFF",
       black: "#000",
+      lightTeal: "#60aaad",
       teal: "#25b5ba",
+      shadowTeal:"#428a8d",
       salmon: "#ff897f",
       indianred: "#cc574d",
       lightslategray: "#86959f",
