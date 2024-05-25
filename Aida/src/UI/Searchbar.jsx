@@ -4,11 +4,12 @@ import search from "/src/assets/home/search.png";
 import Cart from "../assets/icons/Cart";
 import UserProfile from "../assets/icons/UserProfile";
 import { useAuthentication } from "../Contexts/AuthenticationContext";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useShoppingCart } from "../Contexts/ShoppingCartProvider";
 
 function Searchbar() {
-  const { isAuthenticated } = useAuthentication();
+  // const { isAuthenticated } = useAuthentication();
+  const isAuthenticated = true
   const { getTotalQuantity } = useShoppingCart(); 
   const cartItemCount = getTotalQuantity();
   return (
@@ -16,13 +17,13 @@ function Searchbar() {
       {/* Search Bar Section */}
 
       {/*Logo start*/}
-      <div className="  ">
+      <NavLink className="  " to="/">
         <img
           src={logoWhiteTxtAida}
           alt="Logo"
           className="h-[40px] mt-[2px]  "
         />
-      </div>
+      </NavLink>
       {/* Logo end */}
       {/* Search start */}
       <div>
@@ -63,7 +64,7 @@ function Searchbar() {
            
             {cartItemCount > 0 && (
               <span className="absolute top-0 right-0 bg-FlamingoPink text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                {cartItemCount}
+                {Number(cartItemCount)}
               </span>
             )}
           </div>
