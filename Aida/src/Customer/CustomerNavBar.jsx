@@ -23,57 +23,90 @@ function CustomerNavBar() {
         </div>
 
         {/* Navlinks */}
-        <div className="  w-full  grid grid-rows-5 text-white font-medium text-lgi px-5 ">
-          <div className="  flex items-center justify-center border-b-[3px] border-shadowTeal ">
-            <NavLink className={({ isActive }) => (isActive ? "   " : " ")}>
-              {" "}
-              <div className=" flex  ">
-                <div className=" inline-block mr-2  ">
-                  <IoMdPerson style={{ fontSize: "24px" }} />
-                </div>
-                <p>My account</p>
+        <div className="  w-full  grid grid-rows-5 text-white font-medium text-lgi  ">
+          {/* Customer account Link */}
+          <NavLink
+            to="account"
+            className={({ isActive }) =>
+              isActive
+                ? "w-full px-3 flex items-center justify-center bg-FlamingoPink py-2 "
+                : "  flex items-center justify-center border-b-[3px] w-full border-shadowTeal px-4   py-2"
+            }
+          >
+            <div className="w-full flex items-center justify-center  ">
+              <div className=" inline-block mr-2  ">
+                <IoMdPerson style={{ fontSize: "24px" }} />
               </div>
-            </NavLink>
-          </div>
-          <div className="  flex items-center justify-center border-b-[3px] border-shadowTeal">
-            <NavLink>
-              {" "}
-              <div className=" flex">
-              <span className=" inline-block mr-2 mt-1 ">
+              <p>My account</p>
+            </div>
+          </NavLink>
+
+          {/* Orders History link */}
+          <NavLink
+            to="ordersHistory"
+            className={({ isActive }) =>
+              isActive
+                ? "w-full px-3 flex items-center justify-center bg-FlamingoPink py-2 "
+                : "  flex items-center justify-center border-b-[3px] w-full border-shadowTeal px-4   py-2"
+            }
+          >
+            <div className="w-full flex items-center justify-center  ">
+              <div className=" inline-block mr-2  ">
                 <GiBackwardTime style={{ fontSize: "22px" }} />
-              </span>
-              <span>Order history</span>
               </div>
-            </NavLink>
-          </div>
-          <div className="  flex items-center justify-center border-b-[3px] border-shadowTeal">
-            <NavLink>
-              <div className=" flex">
-              <span className=" inline-block mr-2 mt-[2px]">
+              <p>Order history</p>
+            </div>
+          </NavLink>
+
+          {/*Pending Orders link  */}
+          <NavLink
+            to="pendingOrders"
+            className={({ isActive }) =>
+              isActive
+                ? "w-full px-3 flex items-center justify-center bg-FlamingoPink py-2 "
+                : "  flex items-center justify-center border-b-[3px] w-full border-shadowTeal px-4   py-2"
+            }
+          >
+            <div className="w-full flex items-center justify-center  ">
+              <div className=" inline-block mr-2  ">
                 <FaTruckFast style={{ fontSize: "22px" }} />
-              </span>
-              <span>Pending orders</span>
               </div>
-            </NavLink>
-          </div>
-          <div className="  flex items-center justify-center border-b-[3px] border-shadowTeal">
-            <NavLink>
-              <div className=" flex">
-              <span className=" inline-block mr-2 mt-1">
-                <TbBellPlusFilled style={{ fontSize: "22px" }}/>
-              </span>
-              <span>Subscription</span>
+              <p>Pending orders</p>
+            </div>
+          </NavLink>
+
+          {/* Subscription Link */}
+          <NavLink
+            to="subscription"
+            className={({ isActive }) =>
+              isActive
+                ? "w-full px-3 flex items-center justify-center bg-FlamingoPink py-2 "
+                : "  flex items-center justify-center border-b-[3px] w-full border-shadowTeal px-4   py-2"
+            }
+          >
+            <div className="w-full flex items-center justify-center  ">
+              <div className=" inline-block mr-2  ">
+                <TbBellPlusFilled style={{ fontSize: "22px" }} />
               </div>
-            </NavLink>
-          </div>
-          <div className="  flex items-center justify-center  ">
-            <NavLink>
-             <div className=" flex">  <span className=" mt-1 inline-block mr-2 ">
+              <p>Subscription</p>
+            </div>
+          </NavLink>
+
+          <NavLink
+            to="settings"
+            className={({ isActive }) =>
+              isActive
+                ? "w-full px-3 flex items-center justify-center bg-FlamingoPink py-2 "
+                : "  flex items-center justify-center border-b-[3px] w-full border-shadowTeal px-4   py-2"
+            }
+          >
+            <div className="w-full flex items-center justify-center  ">
+              <div className=" inline-block mr-2  ">
                 <IoMdSettings style={{ fontSize: "21px" }} />
-              </span>
-              Settings</div>
-            </NavLink>
-          </div>
+              </div>
+              <p>Settings</p>
+            </div>
+          </NavLink>
         </div>
 
         {/* Image */}
