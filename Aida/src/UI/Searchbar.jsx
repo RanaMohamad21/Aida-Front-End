@@ -71,7 +71,7 @@ function Searchbar({isProfilePage = false}) {
           </Link>
             {isProfilePage?"":<>
             <span>User name</span>
-            <Link to="">
+            <Link to="/customerprofile">
               <UserProfile style="w-10 h-10" color="#25b5ba" />
             </Link>
             </>}
@@ -88,35 +88,36 @@ function Searchbar({isProfilePage = false}) {
 
 export default Searchbar;
 
-<div className="w-[300px] mx-9  ">
-  {/*Search Section*/}
-  <div className="flex  w-fit p-[5px]    justify-between h-[40px] gap-1">
-    <div className="h-full w-[30px] bg-teal rounded-tl-2xl rounded-bl-2xl p-[6px] ">
-      {/* Voice search */}
-      <img
-        src={microphone}
-        alt="microphone"
-        className="h-full   object-contain w-[30px] "
-      />
-    </div>
+// {/* <div className="w-[300px] mx-9  ">
+//   {/*Search Section*/}
+//   <div className="flex  w-fit p-[5px]    justify-between h-[40px] gap-1">
+//     <div className="h-full w-[30px] bg-teal rounded-tl-2xl rounded-bl-2xl p-[6px] ">
+//       {/* Voice search */}
+//       <img
+//         src={microphone}
+//         alt="microphone"
+//         className="h-full   object-contain w-[30px] "
+//       />
+//     </div>
 
-    <div className=" flex gap-1  ">
-      <div>
-        <input
-          type="text"
-          placeholder="Search..."
-          className=" h-full mt-[1px] border-none md:w-[400px]   hover:ring-2 hover:ring-teal hover:px-1  transition-all duration-200 rounded focus:outline-none "
-        />
-      </div>
-      <div className="h-full w-[30px] bg-teal rounded-tr-xl rounded-br-xl">
-        <button>
-          <img
-            src={search}
-            alt="search"
-            className="   object-contain    p-[6px]  "
-          />
-        </button>
-      </div>
-    </div>
-  </div>
-</div>;
+//     <div className=" flex gap-1  ">
+//       <div>
+//         <input
+//           type="text"
+//           placeholder="Search..."
+//           className=" h-full mt-[1px] border-none md:w-[400px]   hover:ring-2 hover:ring-teal hover:px-1  transition-all duration-200 rounded focus:outline-none "
+//         />
+//       </div>
+//       <div className="h-full w-[30px] bg-teal rounded-tr-xl rounded-br-xl">
+//         <button>
+//           <img
+//             src={search}
+//             alt="search"
+//             className="   object-contain    p-[6px]  "
+//           />
+//         </button>
+//       </div>
+//     </div>
+//   </div>
+// </div>; */}
+
