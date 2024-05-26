@@ -19,6 +19,7 @@ export default {
       "design-theme-light-grey-500": "#212123",
       // teal: "#03BCBF",
       darkTeal: "#005F80",
+      tealCard:"#33b5b8",
       IceBlue: "#EDF6FB",
       gainsboro: "#e6e6e6",
       darkslategray: "#273b4a",
