@@ -20,7 +20,7 @@ import ShippingAddress from "../Cart/ShippingAddress";
 import VendorAnalytics from "../Vendor/VendorAnalytics";
 import VendorOrders from "../Vendor/VendorOrders";
 import VendorSettings from "../Vendor/VendorSettings";
-import CustomerProfilePage from "../Customer/CustomerProfilePage";
+
 const routes = [
   {
     path: "/",
@@ -115,14 +115,6 @@ const routes = [
     element: (
       <React.Fragment>
         <VendorSettings />
-      </React.Fragment>
-    ),
-  },
-  {
-    path: "/CustomerProfile",
-    element: (
-      <React.Fragment>
-        <CustomerProfilePage />
       </React.Fragment>
     ),
   },
