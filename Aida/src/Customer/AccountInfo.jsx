@@ -162,7 +162,7 @@ function AccountInfo() {
           Card Information
         </h1>
 
-        <div className=" md:flex md:gap-5 lg:justify-between">
+        <div className="px-6 py-5 md:flex md:gap-5 lg:justify-between">
         <div className="  rounded-xl w-max ">
         <div  className="" >
           {/* The card */}
