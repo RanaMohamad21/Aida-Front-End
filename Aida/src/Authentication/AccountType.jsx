@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "../UI/Button";
 import LoginPrompt from "../UI/LoginPrompt";
 import Background from "../assets/Authentication/MixedVendorCustomer.png";
@@ -33,13 +34,11 @@ function AccountType() {
                 Effortlessly reach customers with our <br /> streamlined
                 platform, where trust and modernity <br /> meet
               </p>
-              <Button
-                route="/SignUpVendor1"
-                background="FlamingoPink"
-                width="w-[80%]"
-              >
-                Vendor
-              </Button>
+              <div className=" w-[80%] bg-FlamingoPink  rounded-md h-8 uppercase my-5 cursor-pointer hover:translate-x-[2px] hover:translate-y-[2px] transition-all text-center justify-center pt-1 mx-auto">
+
+              <Link to="/SignUpVendor1" 
+              >Vendor</Link>
+              </div>
             </div>
             <div className="w-[50%]">
               <p>
