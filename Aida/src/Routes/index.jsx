@@ -20,6 +20,7 @@ import ShippingAddress from "../Cart/ShippingAddress";
 import VendorAnalytics from "../Vendor/VendorAnalytics";
 import VendorOrders from "../Vendor/VendorOrders";
 import VendorSettings from "../Vendor/VendorSettings";
+import VendorInformation from "../Vendor/VendorInformation";
 
 const routes = [
   {
@@ -150,6 +151,16 @@ const routes = [
       </React.Fragment>
     ),
   },
+  
+  {
+    path: "/vendorInfo",
+    element: (
+      <React.Fragment>
+        <VendorInformation/>
+      </React.Fragment>
+    ),
+  },
+  
   {
     path: "/searchpage",
     element: (
