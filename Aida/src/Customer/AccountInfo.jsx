@@ -41,6 +41,10 @@ function AccountInfo() {
     setAddCard(false);
     reset();
   }
+  function handleCancelAddCard(){
+    setAddCard(false);
+    reset();
+  }
 
   
 
@@ -124,22 +128,8 @@ function AccountInfo() {
           {/* The card */}
         <CreditCard cards={cards} setCards = {setCards}/>
 
-        
-
-        </div>
-        </div>
-        {/* User points count */}
-        <div  className=" text-teal flex flex-col gap-2 items-center justify-center">
-          <p className=" font-semibold text-center">Current points</p>
-          <h1 className=" text-29xl">{CurrentPoints}</h1>
-          <p className=" text-center font-light">By products during discounts or <br/> immediately after restock to gain more  points</p>
-          
-
-        </div>
-
-        </div>
         {!addCard && <div
-          className="bg-teal py-1 px-2 mx-6 rounded-xl text-white w-max cursor-pointer hover:bg-shadowTeal uppercase"
+          className="bg-teal py-1 px-2  rounded-xl text-white w-max cursor-pointer hover:bg-shadowTeal uppercase"
           onClick={() => setAddCard(!addCard)}
         >
           Add Card
@@ -176,15 +166,39 @@ function AccountInfo() {
                 {...register("expiration")}
                 className="mx-2 px-1 border-2 border-solid border-FlamingoPink  w-[230px]"
               />
-              <button
+              <div className=" flex justify-between w-[238px] pl-2 pt-2">
+             <button
                 type="submit"
-                className="py-1 px-2 bg-teal hover:bg-shadowTeal text-white uppercase"
+                className="py-2 px-2 w-[100px] bg-teal hover:bg-shadowTeal text-white uppercase"
               >
                 Add
               </button>
+             <button
+                onClick={handleCancelAddCard}
+                className="py-2 px-2 w-[100px] bg-salmon hover:bg-indianred text-white uppercase"
+              >
+                cancel
+              </button>
+             </div>
             </div>
           </form>
         )}
+
+        </div>
+        </div>
+        {/* User points count */}
+        <div className=" flex sm:items-start ">
+        <div  className=" text-teal flex flex-col gap-2 items-center justify-center mt-8 ">
+          <p className=" font-semibold text-center">Current points</p>
+          <h1 className=" text-29xl">{CurrentPoints}</h1>
+          <p className=" text-center font-light">By products during discounts or <br/> immediately after restock to gain more  points</p>
+          
+
+        </div>
+        </div>
+
+        </div>
+        
       </div>
     </div>
   );
