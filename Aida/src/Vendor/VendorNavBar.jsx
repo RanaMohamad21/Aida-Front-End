@@ -10,7 +10,7 @@ import myStoreInActive from "../assets/vendor/navBar/myStoreInActive.png";
 import logo from "../assets/logo/LogoWhiteTextAida.svg";
 import { BarChartFill } from "react-bootstrap-icons";
 import { SiSimpleanalytics } from "react-icons/si";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { GiReceiveMoney } from "react-icons/gi";
 import { IoStorefront } from "react-icons/io5";
 import { HiInboxArrowDown } from "react-icons/hi2";
@@ -18,9 +18,9 @@ function VendorNavBar({ storeName }) {
   return (
     <>
       <div className="grid grid-cols-[1fr,auto,auto,3fr,auto] py-2 px-3 border-b-[3px] border-teal gap-3 ">
-        <div className=" rounded-lg">
+        <Link to="/" className=" rounded-lg">
           <img src={logo} alt="Logo" className="w-16" />
-        </div>
+        </Link>
         <NavLink className={({ isActive }) => 
           isActive ?" flex gap-1 mx-2 hover:cursor-pointer text-teal mt-2 ":" flex gap-1 mx-2 hover:cursor-pointer text-FlamingoPink mt-2 "}>
           <span >
