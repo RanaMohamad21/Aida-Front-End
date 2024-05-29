@@ -20,6 +20,7 @@ export default {
       // teal: "#03BCBF",
       darkTeal: "#005F80",
       tealCard:"#33b5b8",
+      seeFoamBlue:"#a2c6c2",
       IceBlue: "#EDF6FB",
       gainsboro: "#e6e6e6",
       darkslategray: "#273b4a",
