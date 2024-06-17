@@ -13,6 +13,26 @@ function ShippingAddress() {
     setChangeDeliveryAddress((prev) => !prev);
   }
 
+  // //? Fetch existing shipping address and payment method data
+  // useEffect(() => {
+  //   const fetchAddressAndPaymentData = async () => {
+  //     try {
+  //       const addressResponse = await fetch('https://api.example.com/user/address');
+  //       const addressData = await addressResponse.json();
+  //       setAddress(addressData);
+  //       reset(addressData); // Populate the form with the fetched data
+
+  //       const paymentResponse = await fetch('https://api.example.com/user/payment-method');
+  //       const paymentData = await paymentResponse.json();
+  //       setPaymentMethod(paymentData);
+  //     } catch (error) {
+  //       console.error('Error fetching address and payment method data:', error);
+  //     }
+  //   };
+
+  //   fetchAddressAndPaymentData();
+  // }, [reset]);
+
   function onSubmit(data) {
     handleChangeAddress();
     console.log(data);

@@ -4,6 +4,22 @@ import { useState } from 'react';
 function OrderInfo() {
    const [orderInfo,setOrderInfo] = useState(null)
 
+
+   //? Function to fetch order details from the API
+  // useEffect(() => {
+  //   const fetchOrderDetails = async () => {
+  //     try {
+  //       const response = await fetch(`https://api.example.com/orders/${orderId}`); // Replace with your actual API endpoint
+  //       const data = await response.json();
+  //       setOrderInfo(data);
+  //     } catch (error) {
+  //       console.error('Error fetching order details:', error);
+  //     }
+  //   };
+  //   fetchOrderDetails();
+  // }, [orderId]);
+
+
    function formatCardNumber(cardNumber) {
     const last4Digits = cardNumber.slice(-4);
     const maskedDigits = cardNumber.slice(0, -4).replace(/./g, '•');

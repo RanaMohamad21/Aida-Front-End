@@ -58,7 +58,7 @@ function CreditCard({cards, setCards}) {
   }, [editCard, activeCard]);
 
     return (
-        <div className="flex mb-4 ">
+        <div className="flex mb-4  ">
           <div className="flex   rounded-xl  ">
             <div
               className="bg-[#81dddf] opacity-80 text-white flex items-center hover:bg-lightseagreen hover:opacity-50 cursor-pointer rounded-tl-xl rounded-bl-xl"

@@ -1,3 +1,4 @@
+// Optimized for mobile viewport 
 import { useEffect, useState } from "react";
 import Pagination from "../Store/Pagination";
 
@@ -30,7 +31,7 @@ function CustomerOrdersHistory() {
 
 
     return (
-        <div className=" w-full ">
+        <div className=" w-full pb-16 ">
              <table className="min-w-full bg-white ">
           <thead>
             <tr>

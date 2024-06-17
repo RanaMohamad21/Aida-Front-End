@@ -1,3 +1,4 @@
+// Optimized for mobile viewport 
 import { useEffect, useState } from "react";
 import Pagination from "../Store/Pagination";
 
@@ -28,7 +29,7 @@ function CustomerSubscriptions() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
-        <div className=" w-full">
+        <div className=" w-full pb-16">
              <table className="min-w-full bg-white ">
           <thead>
             <tr>

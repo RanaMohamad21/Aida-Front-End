@@ -37,7 +37,7 @@ function PendingOrders() {
     }
   
     return (
-        <div className=" w-full px-10">
+        <div className=" w-full px-10 pb-16 ">
              <table className="min-w-full bg-white ">
           <thead>
             <tr>
