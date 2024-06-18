@@ -7,9 +7,10 @@ import { useAuthentication } from "../Contexts/AuthenticationContext";
 import { Link, NavLink } from "react-router-dom";
 import { useShoppingCart } from "../Contexts/ShoppingCartProvider";
 
+// The isProfilePage parameter makes the user name and icon conditionally visible in the UI based on the type of page that the user is in
 function Searchbar({isProfilePage = false}) {
   // const { isAuthenticated } = useAuthentication();
-  const isAuthenticated = true
+  const isAuthenticated = false;
   const { getTotalQuantity } = useShoppingCart(); 
   const cartItemCount = getTotalQuantity();
   return (
