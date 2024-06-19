@@ -6,7 +6,15 @@ import { FaTruckFast } from "react-icons/fa6";
 import { GiBackwardTime } from "react-icons/gi";
 import { TbBellPlusFilled } from "react-icons/tb";
 
+import { useUser } from './UserContext';
+
+
 function CustomerNavBar() {
+
+  const { user, setUser } = useUser();
+  console.log("user", user);
+  
+
   return (
     <div className="h-full bg-lightTeal mt-3 md:w-max ">
       <div className="grid grid-rows-[auto,1fr,auto] h-full">
@@ -16,8 +24,8 @@ function CustomerNavBar() {
           <img src={dummy} className="rounded-full w-24 h-24 mr-1" alt="User Avatar" />
           {/* Customer name and username */}
           <div className="flex flex-col ">
-            <span className="text-xl text-white">Danny the gost</span>
-            <span className="text-darkslategray ">@gostDany_404</span>
+            <span className="text-xl text-white">{user.fname+ " "+user.lname}</span>
+            <span className="text-darkslategray ">{user.email}</span>
           </div>
         </div>
 
