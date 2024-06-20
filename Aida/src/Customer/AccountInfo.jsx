@@ -3,14 +3,14 @@ import { useEffect, useState } from "react";
 import { FaPen } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import CreditCard from "../UI/CreditCard";
+import axios from "axios";
 
 function AccountInfo() {
-  //? On integration initialize the data to zero
+  
   const { register, handleSubmit, reset } = useForm();
   const [allowEdit, setAllowEdit] = useState(false);
-  const [address, setAddress] = useState("Qesm Awal");
-  const [phone, setPhone] = useState("+234532344");
-
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
   const [CurrentPoints, setCurrentPoints] = useState(0);
 
   const [addCard, setAddCard] = useState(false);
@@ -29,25 +29,32 @@ function AccountInfo() {
     },
   ]);
 
+  const token = localStorage.getItem("token");
   // Fetch user data when the component mounts
-  // useEffect(() => {
-  //   axios.get("/api/user")
-  //     .then(response => {
-  //       const userData = response.data;
-  //       setAddress(userData.address);
-  //       setPhone(userData.phone);
-  //       setCurrentPoints(userData.currentPoints);
-  //       setCards(userData.cards);
-  //     })
-  //     .catch(error => {
-  //       console.error("Error fetching user data:", error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    
+    axios.get("http://localhost:8081/api/v1/customer/info", {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(response => {
+      const userData = response.data;
+      setAddress(userData.address);
+      setPhone(userData.phoneNumber);
+      setCurrentPoints(userData.points);
+      //setCards(userData.cards);
+    })
+    .catch(error => {
+      console.error("Error fetching user data:", error);
+    });
+  }, []);
+  
 
   function handleUpdateData() {
     console.log("Updated Address:", address); //*
-    console.log("Updated Phone:", phone); //*
-    setAllowEdit(false); //* Remove on Integration
+    console.log("Updated Phone:", phoneNumber); //*
+   
 
     //? Update user data on the backend
     // axios.put("/api/user", { address, phone })
@@ -97,7 +104,7 @@ function AccountInfo() {
                 type="text"
                 id="address"
                 disabled={!allowEdit}
-                value={address}
+                value={address.street}
                 onChange={(e) => setAddress(e.target.value)}
                 className={`${
                   allowEdit ? "border border-solid border-teal" : ""

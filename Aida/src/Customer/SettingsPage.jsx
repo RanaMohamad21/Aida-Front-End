@@ -1,4 +1,3 @@
-// Optimized for mobile viewport
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuthentication } from "../Contexts/AuthenticationContext";
@@ -9,12 +8,13 @@ function SettingsPage() {
   const [personalizedExperience, setPersonalizedExperience] = useState(false);
   const { logout } = useAuthentication();
   const navigate = useNavigate();
+
   const handleSaveSettings = () => {
-    // Replace with the appropriate request URL and method
-    fetch("/api/save-settings", {
+    fetch("http://localhost:8081/api/v1/customer/update_settings", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({
         subscribedProducts,
@@ -28,8 +28,8 @@ function SettingsPage() {
   };
 
   const handleLogout = () => {
-    logout(); // Call your logout function
-    navigate("/"); // Navigate to the home page
+    logout();
+    navigate("/");
   };
 
   return (
@@ -63,8 +63,7 @@ function SettingsPage() {
                     </div>
                   </div>
                   <div className="relative text-base text-black inline-block ">
-                    You&apos; receive emails when there&apos;s when there&apos;s
-                    a restock or when discounts are available
+                    You&apos;ll receive emails when there&apos;s a restock or when discounts are available
                   </div>
                 </div>
                 <div className="self-stretch flex flex-row items-center justify-between gap-[14px] mq400:flex-wrap">
