@@ -11,11 +11,13 @@ import PendingOrders from "./Customer/PendingOrders";
 import CustomerSubscriptions from "./Customer/CustomerSubscriptions";
 import SettingsPage from "./Customer/SettingsPage";
 import { UserProvider } from './Customer/UserContext';
+import { VendorProvider } from './Vendor/VendorContext';
 
 function App() {
   console.log(routes[0].component);
   return (
     <UserProvider>
+      <VendorProvider>
     <VendorSignUpProvider>
       <ShoppingCartProvider>
         <AuthenticationProvider>
@@ -45,6 +47,7 @@ function App() {
         </AuthenticationProvider>
       </ShoppingCartProvider>
     </VendorSignUpProvider>
+    </VendorProvider>
     </UserProvider>
   );
 }
