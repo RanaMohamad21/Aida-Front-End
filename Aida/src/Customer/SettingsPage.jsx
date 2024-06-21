@@ -1,13 +1,23 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuthentication } from "../Contexts/AuthenticationContext";
+import { useUser } from './UserContext';
 
 function SettingsPage() {
-  const [subscribedProducts, setSubscribedProducts] = useState(false);
-  const [cartReminders, setCartReminders] = useState(false);
-  const [personalizedExperience, setPersonalizedExperience] = useState(false);
+  const { user, setUser } = useUser();
+  //wait for user to be fetched
+  if (!user) {
+    return <div>Loading...</div>;
+  }
+
+  const [subscribedProducts, setSubscribedProducts] = useState(user.customerSettings.allowEmailSubscribed);
+  const [cartReminders, setCartReminders] = useState(user.customerSettings.allowEmailCartRecovery);
+  const [personalizedExperience, setPersonalizedExperience] = useState(user.customerSettings.allowInformationCollection);
   const { logout } = useAuthentication();
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  
+
 
   const handleSaveSettings = () => {
     fetch("http://localhost:8081/api/v1/customer/update_settings", {
@@ -17,9 +27,11 @@ function SettingsPage() {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({
-        subscribedProducts,
-        cartReminders,
-        personalizedExperience,
+      
+      "allowEmailSubscribed": subscribedProducts, 
+      "allowEmailCartRecovery": cartReminders, 
+      "allowInformationCollection": personalizedExperience,
+      "allowDeactivated": true
       }),
     })
       .then((response) => response.json())
