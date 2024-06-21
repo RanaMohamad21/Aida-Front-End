@@ -6,9 +6,13 @@ import UserProfile from "../assets/icons/UserProfile";
 import { useAuthentication } from "../Contexts/AuthenticationContext";
 import { Link, NavLink } from "react-router-dom";
 import { useShoppingCart } from "../Contexts/ShoppingCartProvider";
+import { useUser } from "../Customer/UserContext";
+import { useVendor } from "../Vendor/VendorContext";
 
 function Searchbar({isProfilePage = false}) {
-  // const { isAuthenticated } = useAuthentication();
+  const { vendor, setVendor } = useVendor();
+  const { user, setUser } = useUser();
+
   const isAuthenticated = true
   const { getTotalQuantity } = useShoppingCart(); 
   const cartItemCount = getTotalQuantity();
@@ -69,12 +73,31 @@ function Searchbar({isProfilePage = false}) {
             )}
           </div>
           </Link>
-            {isProfilePage?"":<>
-            <span>User name</span>
-            <Link to="/customerprofile">
-              <UserProfile style="w-10 h-10" color="#25b5ba" />
+          {isProfilePage ? (
+        ""
+      ) : (
+        <div className="flex items-center space-x-4">
+          {vendor ? (
+            <div className="flex items-center space-x-2">
+              <span>{vendor.fname + " " + vendor.lname}</span>
+              <Link to="/vendorprofile">
+                <UserProfile style={{ width: '40px', height: '40px' }} color="#25b5ba" />
+              </Link>
+            </div>
+          ) : user ? (
+            <div className="flex items-center space-x-2">
+              <span>{user.fname + " " + user.lname}</span>
+              <Link to="/customerprofile">
+                <UserProfile style={{ width: '40px', height: '40px' }} color="#25b5ba" />
+              </Link>
+            </div>
+          ) : (
+            <Link to="/login" className="pl-4">
+              Login
             </Link>
-            </>}
+          )}
+        </div>
+      )}
           </>
         ) : (
           <Link to="/login" className=" pl-4">
