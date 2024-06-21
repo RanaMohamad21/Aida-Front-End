@@ -40,7 +40,7 @@ function VendorInformation() {
   const [apartmentNo, setApartmentNo] = useState(vendor.address.apartmentNo || "");
   const [buildingNo, setBuildingNo] = useState(vendor.address.buildingNo || "");
   const [phone, setPhone] = useState(vendor.phoneNumber || "");
-  const [storeName, setStoreName] = useState(vendor.businessInfo.businessName);
+  const [storeName, setStoreName] = useState(vendor.fname+" "+vendor.lname || "" );
 
   async function handleUpdateData() {
    
@@ -96,7 +96,7 @@ function VendorInformation() {
 
   return (
     <div className=" grid grid-rows-[auto,1fr] mb-28">
-      <VendorNavBar />
+      <VendorNavBar/>
       <div className=" w-full px-8 pt-7 ">
       <div >
         <h1 className=" text-FlamingoPink text-[30px] mb-4">My Store</h1>
