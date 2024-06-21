@@ -9,6 +9,7 @@ import { useShoppingCart } from "../Contexts/ShoppingCartProvider";
 import { useUser } from "../Customer/UserContext";
 import { useVendor } from "../Vendor/VendorContext";
 
+
 function Searchbar({isProfilePage = false}) {
   const { vendor, setVendor } = useVendor();
   const { user, setUser } = useUser();
@@ -17,7 +18,7 @@ function Searchbar({isProfilePage = false}) {
   const { getTotalQuantity } = useShoppingCart(); 
   const cartItemCount = getTotalQuantity();
   return (
-    <nav className="w-full  px-9 my-[4px] flex justify-between   ">
+    <nav className="w-full  px-20 my-[4px] flex justify-between   ">
       {/* Search Bar Section */}
 
       {/*Logo start*/}
@@ -59,7 +60,7 @@ function Searchbar({isProfilePage = false}) {
 
       {/* Right part */}
 
-      <div className="flex gap-2 justify-center items-center text-gray">
+      <div className="flex gap-2 justify-center items-center px-24 text-gray">
         {isAuthenticated ? (
           <>
             <Link to="/shoppingcart">
@@ -78,11 +79,19 @@ function Searchbar({isProfilePage = false}) {
       ) : (
         <div className="flex items-center space-x-4">
           {vendor ? (
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-3">
               <span>{vendor.fname + " " + vendor.lname}</span>
               <Link to="/vendorprofile">
                 <UserProfile style={{ width: '40px', height: '40px' }} color="#25b5ba" />
               </Link>
+              {/* logout */}
+              <button
+                onClick={() => {
+                  setVendor(null);
+                  localStorage.removeItem("token");
+                  isAuthenticated = false;
+                  window.location.reload();
+                }}> Logout </button>
             </div>
           ) : user ? (
             <div className="flex items-center space-x-2">
@@ -90,6 +99,14 @@ function Searchbar({isProfilePage = false}) {
               <Link to="/customerprofile">
                 <UserProfile style={{ width: '40px', height: '40px' }} color="#25b5ba" />
               </Link>
+              {/* logout */}
+              <button
+                onClick={() => {
+                  setUser(null);
+                  localStorage.removeItem("token");
+                  isAuthenticated = false;
+                  window.location.reload();
+                }}> Logout </button>
             </div>
           ) : (
             <Link to="/login" className="pl-4">
