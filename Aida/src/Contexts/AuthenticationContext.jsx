@@ -79,6 +79,8 @@ function AuthenticationProvider({ children }) {
 
       // If the request is successful, update the state with the token
       token = response.data.token;
+      localStorage.setItem("token", token);
+
     } catch (error) {
       console.error("Failed to login:", error);
       setError("Failed to log in. Please check your email and password");
