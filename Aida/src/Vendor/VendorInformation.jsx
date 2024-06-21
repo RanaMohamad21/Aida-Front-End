@@ -6,9 +6,16 @@ import { IoCard, IoCheckmarkDone } from "react-icons/io5";
 import CreditCard from "../UI/CreditCard";
 import vendorStore from "../assets/vendor/VendorStore.png";
 import { useForm } from "react-hook-form";
+import {useVendor} from "./VendorContext";
+
 function VendorInformation() {
+  const {vendor, setVendor} = useVendor();
+  if (!vendor) {
+    //wait for the data to be fetched
+    return <div>Loading...</div>;
+  }
+
   const [allowEdit, setAllowEdit] = useState(false);
-  const [storeName, setStoreName] = useState("Danny's Store");
   const [funds,setFunds] = useState("300,000.00");
   const [addCard, setAddCard] = useState(false);
   const { register, handleSubmit, reset } = useForm();
@@ -27,18 +34,54 @@ function VendorInformation() {
       expiration: "09/27",
     },
   ]);
-  const [address, setAddress] = useState("Qesm Awal");
-  const [phone, setPhone] = useState("+234532344");
+  const [address, setAddress] = useState(vendor.address || {});
+  const [street, setStreet] = useState(vendor.address.street || "");
+  const [city, setCity] = useState(vendor.address.city || "");
+  const [apartmentNo, setApartmentNo] = useState(vendor.address.apartmentNo || "");
+  const [buildingNo, setBuildingNo] = useState(vendor.address.buildingNo || "");
+  const [phone, setPhone] = useState(vendor.phoneNumber || "");
+  const [storeName, setStoreName] = useState(vendor.businessInfo.businessName);
 
-  function handleUpdateData() {
-    console.log("Updated Address:", address);
-    console.log("Updated Phone:", phone);
+  async function handleUpdateData() {
+   
+    // Create the payload for the request
+    const payload = {
+      "storeName": storeName, 
+      "address": {
+        "apartmentNo": address.apartmentNo,
+        "buildingNo": address.buildingNo,
+        "city": address.city,
+        "street": address.street
+      },
+      "phone": phone
+    };
+  
+    try {
+      // Send the updated data to the server
+      const response = await fetch('http://localhost:8081/api/v1/vendor/update_info', {
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
 
-    // Send the updated data to the server
-
-    setAllowEdit(false);
+        },
+        body: JSON.stringify(payload)
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      console.log("Server Response:", data);
+  
+      // If successful, disable editing
+      setAllowEdit(false);
+    } catch (error) {
+      console.error('Error updating data:', error);
+    }
   }
-
+  
   
   function handleAddCard(data) {
     setCreditCards((prevCards) => [...prevCards, data]);
@@ -75,19 +118,55 @@ function VendorInformation() {
                 />
               </div>
 
-              {/* Address */}
-              <div>
-                <p className=" block text-white text-lgi mb-1">Address</p>
-                <input
-                  type="text"
-                  disabled={!allowEdit}
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                  className={`${
-                    allowEdit ? "border border-solid border-teal" : ""
-                  } pl-2 rounded-xl`}
-                />
-              </div>
+              {/* Address Form */}
+<div className="address-form">
+  <p className="block text-white text-lg mb-2">Address</p>
+  <div className="mb-4">
+    <label className="block text-white text-lgi mb-1" htmlFor="apartmentNo">Apartment No</label>
+    <input
+      type="text"
+      id="apartmentNo"
+      disabled={!allowEdit}
+      value={address.apartmentNo}
+      onChange={(e) => setAddress({ ...address, apartmentNo: e.target.value })}
+      className={`${allowEdit ? "border border-solid border-teal" : ""} pl-2 rounded-xl w-full`}
+    />
+  </div>
+  <div className="mb-4">
+    <label className="block text-white text-lgi mb-1" htmlFor="buildingNo">Building No</label>
+    <input
+      type="text"
+      id="buildingNo"
+      disabled={!allowEdit}
+      value={address.buildingNo}
+      onChange={(e) => setAddress({ ...address, buildingNo: e.target.value })}
+      className={`${allowEdit ? "border border-solid border-teal" : ""} pl-2 rounded-xl w-full`}
+    />
+  </div>
+  <div className="mb-4">
+    <label className="block text-white text-lgi mb-1" htmlFor="city">City</label>
+    <input
+      type="text"
+      id="city"
+      disabled={!allowEdit}
+      value={address.city}
+      onChange={(e) => setAddress({ ...address, city: e.target.value })}
+      className={`${allowEdit ? "border border-solid border-teal" : ""} pl-2 rounded-xl w-full`}
+    />
+  </div>
+  <div className="mb-4">
+    <label className="block text-white text-lgi mb-1" htmlFor="street">Street</label>
+    <input
+      type="text"
+      id="street"
+      disabled={!allowEdit}
+      value={address.street}
+      onChange={(e) => setAddress({ ...address, street: e.target.value })}
+      className={`${allowEdit ? "border border-solid border-teal" : ""} pl-2 rounded-xl w-full`}
+    />
+  </div>
+</div>
+
 
               {/* Store number */}
               <div>
