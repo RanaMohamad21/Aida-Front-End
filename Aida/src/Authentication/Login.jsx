@@ -26,6 +26,9 @@ function Login() {
     e.preventDefault();
     if (email && password) {
       login(email, password);
+    } else if (email == ""){}
+    else  {
+
     }
     resetInputs();
   }

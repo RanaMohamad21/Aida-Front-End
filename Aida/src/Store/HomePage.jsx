@@ -139,13 +139,13 @@ function HomePage() {
   const [onSale, setONSale] = useState([OnSaleCover, ...dummyImages]);
   // This state will be set using the useEffect hook after integration
   return (
-    <div className="grid grid-rows-[auto,1fr,auto] h-screen">
+    <div className="grid grid-rows-[auto,1fr,auto] h-screen w-screen">
       <div>
         <Searchbar />
         <Navbar />
       </div>
       <div className=" flex flex-col">
-        <div className=" p-4 font-semibold flex flex-col gap-2">
+        {/* <div className=" p-4 font-semibold flex flex-col gap-2">
           <h1 className=" text-2xl text-FlamingoPink font-semibold">
             Most of the links are here for now
           </h1>
@@ -165,13 +165,14 @@ function HomePage() {
           <Link to="/deletedacount">Delete accont</Link>
           <Link to="/SettingsDeleteAccount">Settings Delete accont</Link>
           <Link to="/gtgtgt">Unavailable Page</Link>
-        </div>
+        </div> */}
         {/* Main  home component */}
         <div className=" bg-IceBlue">
           {/* On Sale section */}
           <SeasonalOffers
             title={"On sale"}
-            styles={"bg-FlamingoPink mb-4"}
+            productsOnSale={onSale}
+            styles={"bg-FlamingoPink mb-4 pl-5 mt-4 w-[100%]"}
             icon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -184,25 +185,7 @@ function HomePage() {
                 <path d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v.006c0 .07 0 .27-.038.494H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.038A3 3 0 0 1 3 2.506zm1.068.5H7v-.5a1.5 1.5 0 1 0-3 0c0 .085.002.274.045.43zM9 3h2.932l.023-.07c.043-.156.045-.345.045-.43a1.5 1.5 0 0 0-3 0zm6 4v7.5a1.5 1.5 0 0 1-1.5 1.5H9V7zM2.5 16A1.5 1.5 0 0 1 1 14.5V7h6v9z" />
               </svg>
             }
-          >
-            <CardSlider styles="  sm:w-[4/5] md:w-[2/5] h-[300px]">
-              {onSale.map((image, index) => (
-                <div
-                  key={index}
-                  className=" "
-                  style={{
-                    backgroundImage: `url(${image})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    height: "300px",
-                    width: "50%",
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                  }}
-                ></div>
-              ))}
-            </CardSlider>
-          </SeasonalOffers>
+          />
 
           {/*End of On Sale section */}
           {/* sections */}
@@ -215,7 +198,7 @@ function HomePage() {
               <Star color="#FFFFFF" size="20" full={true} disabled={true} />
             }
           >
-            <div className="  w-screen mx-4 bg-white mt-2   ">
+            <div className="   w-screen mx-4 bg-white mt-2   ">
               <CardSlider
                 styles=" w-[90%] "
                 largeScreanSlidesNumber={largeScreanSimilarProductNumber}

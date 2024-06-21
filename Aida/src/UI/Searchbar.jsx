@@ -14,7 +14,7 @@ function Searchbar({isProfilePage = false}) {
   const { getTotalQuantity } = useShoppingCart(); 
   const cartItemCount = getTotalQuantity();
   return (
-    <nav className="w-full  px-9 my-[4px] flex justify-between   ">
+    <nav className="w-full px-14 my-[4px] flex justify-between   ">
       {/* Search Bar Section */}
 
       {/*Logo start*/}
@@ -78,9 +78,11 @@ function Searchbar({isProfilePage = false}) {
             </>}
           </>
         ) : (
-          <Link to="/login" className=" pl-4">
+         <div className=" pr-8">
+           <Link to="/login" >
             Login
           </Link>
+          </div>
         )}
       </div>
     </nav>
