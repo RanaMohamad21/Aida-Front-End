@@ -10,6 +10,7 @@ import { useUser } from "../Customer/UserContext";
 import { useVendor } from "../Vendor/VendorContext";
 
 
+// The isProfilePage parameter makes the user name and icon conditionally visible in the UI based on the type of page that the user is in
 function Searchbar({isProfilePage = false}) {
   const { vendor, setVendor } = useVendor();
   const { user, setUser } = useUser();
@@ -117,9 +118,11 @@ function Searchbar({isProfilePage = false}) {
       )}
           </>
         ) : (
-          <Link to="/login" className=" pl-4">
+         <div className=" pr-8">
+           <Link to="/login" >
             Login
           </Link>
+          </div>
         )}
       </div>
     </nav>

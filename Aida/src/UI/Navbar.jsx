@@ -15,7 +15,7 @@ const NavbarLinks = [
 
 function Navbar() {
   return (
-    <nav className="w-full bg-teal mt-1  h-10 text-md  ">
+    <nav className="w-full bg-teal mt-4   h-10 text-md  ">
       <div className="   text-white font-sans  w-full h-full  ">
         {/*Menu items*/}
         <ul className=" grid grid-cols-[repeat(10,auto)] gap-2 text-nowrap   h-full ">

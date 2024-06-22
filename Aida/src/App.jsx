@@ -13,6 +13,7 @@ import SettingsPage from "./Customer/SettingsPage";
 import { UserProvider } from './Customer/UserContext';
 import { VendorProvider } from './Vendor/VendorContext';
 
+
 function App() {
   console.log(routes[0].component);
   return (

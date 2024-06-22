@@ -4,31 +4,31 @@ import trash from "../assets/vendor/products/trash.png";
 import PropTypes from "prop-types";
 
 ItemCard.propTypes = {
-  dummyItem: PropTypes.object,
+  product: PropTypes.object,
   deleteItem: PropTypes.func,
   shelfID: PropTypes.string
 }
-function ItemCard({ dummyItem, deleteItem, shelfID}) {
+function ItemCard({ product, deleteItem}) {
   return (
-    <ProductCard dummyItem={dummyItem}
+    <ProductCard product={product}
       deleteItem={deleteItem}
-      shelfID={shelfID}
+
       style="p-2"
     >
       <div className=" flex justify-between text-teal">
         <span>available left</span>
-        <span>{dummyItem.availableLeft}</span>
+        <span>{product.availableLeft}</span>
       </div>
       <div className=" flex justify-between text-teal">
         <span>Revenues</span>
-        <span>{dummyItem.revenues}</span>
+        <span>{product.revenues}</span>
       </div>
       <div className=" flex justify-between text-teal">
         <span>subscribed</span>
-        <span>{dummyItem.subscribed}</span>
+        <span>{product.subscribed}</span>
       </div>
       <div className="flex  justify-end">
-        <button onClick={() => deleteItem(shelfID, dummyItem.itemID)}>
+        <button onClick={() => deleteItem( product.itemID)}>
           <img src={trash} alt="delete" className="h-6 mt-1" />
         </button>
       </div>

@@ -8,11 +8,12 @@ function Login() {
   // Use the useNavigate hook to navigate to a different page
   const navigate = useNavigate();
 
- // Set up state for email and password
+  // Set up state for email and password
   const [email, setEmail] = useState("example@example.com");
   const [password, setPassword] = useState("");
+  const [logInCicked, setLogInClicked]= useState(false);
 
-   // Get the login function, isAuthenticated, and error properties from the useAuthentication hook
+  // Get the login function, isAuthenticated, and error properties from the useAuthentication hook
   const { login, isAuthenticated, error } = useAuthentication();
 
   // Reset the input fields
@@ -71,12 +72,11 @@ function Login() {
               required
             />
           </div>
-           {/* Display the password input field */}
+          {/* Display the password input field */}
           <div className="py-4">
             <label className="text-xl">Password</label>
             <input
               type="password"
-              
               className="w-full text-black bg-none px-2 py-1 mt-1 font-thin"
               onChange={(e) => setPassword(e.target.value)}
               required
