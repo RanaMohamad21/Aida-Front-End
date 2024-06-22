@@ -82,7 +82,7 @@ function Searchbar({isProfilePage = false}) {
           {vendor ? (
             <div className="flex items-center space-x-3">
               <span>{vendor.fname + " " + vendor.lname}</span>
-              <Link to="/vendorprofile">
+              <Link to="/vendorInfostt">
                 <UserProfile style={{ width: '40px', height: '40px' }} color="#25b5ba" />
               </Link>
               {/* logout */}

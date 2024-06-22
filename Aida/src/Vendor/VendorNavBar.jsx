@@ -68,7 +68,7 @@ function VendorNavBar() {
           </div>
         </div>
         <div className="  flex gap-2 text-teal mt-3 ">
-          <p>storeName</p>
+          <p>{vendor.businessInfo.businessName}</p>
           <Link title="My account" to="/vendorInfo">
             <HiInboxArrowDown style={{ fontSize: "23px" }} />
           </Link>

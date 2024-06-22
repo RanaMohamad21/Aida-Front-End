@@ -27,6 +27,7 @@ function Login() {
     e.preventDefault();
     if (email && password) {
       login(email, password);
+      window.location.href = "/";
     }
     resetInputs();
   }
