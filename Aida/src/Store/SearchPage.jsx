@@ -11,7 +11,7 @@ import axios from 'axios';
 function SearchPage() {
   const [starRating, setStarRating] = useState(0);
   const [errors, setErrors] = useState(""); // State for form errors
-  onst [products, setProducts] = useState([]); 
+  const [products, setProducts] = useState([]); 
   const { register, handleSubmit, control } = useForm();  // React Hook Form setup
 
 
