@@ -1,3 +1,4 @@
+import React from 'react';
 // import orderActive from "../assets/vendor/navBar/orderActive.png"
 import orderInActive from "../assets/vendor/navBar/orderInActive.png";
 // import analyticsActive from "../assets/vendor/navBar/analyticsActive.png"
@@ -7,14 +8,19 @@ import newOrderInActive from "../assets/vendor/navBar/newOrderInActive.png";
 import myStoreInActive from "../assets/vendor/navBar/myStoreInActive.png";
 // import myStoreActive from "../assets/vendor/navBar/myStoreActive.png"
 // import { NavLink } from "react-router-dom"
-import logo from "../assets/logo/LogoWhiteTextAida.svg";
 import { BarChartFill, GearFill } from "react-bootstrap-icons";
 import { SiSimpleanalytics } from "react-icons/si";
 import { Link, NavLink } from "react-router-dom";
-import { GiReceiveMoney } from "react-icons/gi";
 import { IoStorefront } from "react-icons/io5";
+import { GiReceiveMoney } from "react-icons/gi";
+import { SiSimpleanalytics } from "react-icons/si";
 import { HiInboxArrowDown } from "react-icons/hi2";
-function VendorNavBar({ storeName }) {
+import logo from "../assets/logo/LogoWhiteTextAida.svg";
+import {useVendor} from "./VendorContext";
+
+
+function VendorNavBar() {
+  const {vendor, setVendor} = useVendor();
   return (
     <>
       <div className="grid grid-cols-[1fr,auto,auto,3fr,auto] py-2 px-3 border-b-[3px] border-teal gap-3 ">
@@ -71,8 +77,7 @@ function VendorNavBar({ storeName }) {
             <HiInboxArrowDown style={{ fontSize: "23px" }} />
           </Link>
         </div>
-      </div>
-    </>
+    </div>
   );
 }
 

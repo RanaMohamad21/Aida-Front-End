@@ -20,6 +20,7 @@ function reducer(state, action) {
       return { ...state, user: action.payload, isAuthenticated: true };
     case "logout":
       // Reset the state to the initial state
+
       return { ...state, user: null, isAuthenticated: false };
     default:
       throw new Error("Unknown action");
@@ -91,6 +92,7 @@ function AuthenticationProvider({ children }) {
   function logout() {
     dispatch({ type: "logout" });
     //We need to remove token when logged out.
+    localStorage.removeItem("token");
   }
 
   return (

@@ -1,23 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import VendorNavBar from './VendorNavBar'; 
-import Pagination from '../Store/Pagination';
 import Footer from '../UI/Footer';
+import { useVendor } from './VendorContext';
+import axios from 'axios';
 
 const VendorSettings = () => {
-  const [newOrders, setNewOrders] = useState(true);
-  const [lateOrders, setLateOrders] = useState(false);
+  const { vendor, setVendor } = useVendor();
+  if (!vendor) {
+    // Wait for the data to be fetched
+    return <div>Loading...</div>;
+  }
+
+  // Initialize state with vendor settings
+  const [newOrders, setNewOrders] = useState(vendor.settings.allowNewEmails);
+  const [lateOrders, setLateOrders] = useState(vendor.settings.allowLateEmails);
+  const token = localStorage.getItem('token');
 
   const handleSaveSettings = () => {
-    // Replace with the appropriate request URL and method
-    fetch('/api/save-settings', {
-      method: 'POST',
+    axios.post('http://localhost:8081/api/v1/vendor/update_settings', {
+      allowNewEmails: newOrders,
+      allowLateEmails: lateOrders
+    }, {
       headers: {
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ newOrders, lateOrders }),
-    }).then(response => response.json())
-      .then(data => console.log(data))
-      .catch(error => console.error('Error:', error));
+      }
+    }).then(response => {
+      console.log(response.data);
+      alert('Settings saved successfully');
+      setVendor(prevVendor => ({
+        ...prevVendor,
+        settings: {
+          allowNewEmails: newOrders,
+          allowLateEmails: lateOrders
+        }
+      }));
+    }).catch(error => {
+      console.error('Error:', error);
+      alert('Failed to save settings');
+    });
   };
 
   return (
@@ -37,10 +58,10 @@ const VendorSettings = () => {
                       New Orders
                     </h3>
                     <div 
-                      className={`relative w-12 h-7 rounded-full cursor-pointer ${newOrders ? 'bg-darkturquoise' : 'bg-gray-300'}`} 
+                      className={`relative w-12 h-7 rounded-full cursor-pointer ${newOrders ? 'bg-darkturquoise border border-teal ' : 'bg-gray border border-darkGray border-opacity-35'}`} 
                       onClick={() => setNewOrders(!newOrders)}
                     >
-                      <div className={`absolute top-[2px] ${newOrders ? 'left-[24px]' : 'left-[2px]'} shadow-[0px_2px_4px_rgba(39,_39,_39,_0.1)] rounded-full bg-white w-6 h-6 transition-all`} />
+                      <div className={`absolute top-[2px] ${newOrders ? 'left-[24px]' : 'left-[2px]'} shadow-[0px_2px_4px_rgba(39,_39,_39,_0.1)] rounded-full ${newOrders ? 'bg-white' : 'bg-white'} w-6 h-6 transition-all`} />
                     </div>
                   </div>
                   <div className="relative text-base text-black inline-block ">
@@ -52,10 +73,10 @@ const VendorSettings = () => {
                     Late Orders
                   </h3>
                   <div 
-                    className={`relative w-12 h-7 rounded-full cursor-pointer ${lateOrders ? 'bg-darkturquoise' : 'bg-gray-300'}`} 
-                    onClick={() => setLateOrders(!lateOrders)}
-                  >
-                    <div className={`absolute top-[2px] ${lateOrders ? 'left-[24px]' : 'left-[2px]'} shadow-[0px_2px_4px_rgba(39,_39,_39,_0.1)] rounded-full bg-white w-6 h-6 transition-all`} />
+                    className={`relative w-12 h-7 rounded-full cursor-pointer ${lateOrders ? 'bg-darkturquoise border border-teal ' : 'bg-gray border border-darkGray border-opacity-35'}`} 
+                      onClick={() => setLateOrders(!lateOrders)}
+                    >
+                    <div className={`absolute top-[2px] ${lateOrders ? 'left-[24px]' : 'left-[2px]'} shadow-[0px_2px_4px_rgba(39,_39,_39,_0.1)] rounded-full ${lateOrders ? 'bg-white' : 'bg-white'} w-6 h-6 transition-all`} />
                   </div>
                 </div>
                 <div className="self-stretch relative text-xl font-light font-roboto whitespace-pre-wrap mq400:text-base">

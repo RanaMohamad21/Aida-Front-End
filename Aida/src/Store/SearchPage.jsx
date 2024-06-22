@@ -6,29 +6,30 @@ import { DevTool } from "@hookform/devtools";
 import { useForm } from "react-hook-form";
 import UpperFooter from "../UI/UpperFooter";
 import PaginatedProducts from "./PaginatedProducts";
+import axios from 'axios';
 
 function SearchPage() {
   const [starRating, setStarRating] = useState(0);
   const [errors, setErrors] = useState(""); // State for form errors
- 
-  // React Hook Form setup
-  const {
-    register,
-    handleSubmit,
-    control,
-  } = useForm();
+  const [products, setProducts] = useState([]); 
+  const { register, handleSubmit, control } = useForm();  // React Hook Form setup
 
-  function onSubmit(data) {
-    console.log(data);
-    console.log(starRating);
-    
-      // Check if minimum price is greater than or equal to maximum price
-    if(data.minPrice >= data.maxPrice){
-      setErrors("The minimum price must be smaller than the maximum price.")
-      return;
-    }
-    // Filtering logic
-  }
+
+
+ 
+  // Prepare the search request payload
+  const searchRequest = {
+    search: data.search || "", // Add search keyword if applicable
+    minRating: starRating,
+    minPrice: data.minPrice,
+    maxPrice: data.maxPrice,
+    available: data.available || false,
+    is_used: data.unused || false,
+    discount: data.discounts || false,
+    bestSeller: data.bestSeller || false,
+    page: 1 // You can manage pagination accordingly
+  };
+  
 
   
   return (
