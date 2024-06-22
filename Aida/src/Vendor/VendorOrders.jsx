@@ -4,9 +4,15 @@ import Pagination from '../Store/Pagination';
 import Footer from '../UI/Footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faClock, faShippingFast, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import {useVendor} from "./VendorContext";
 
 
 function VendorOrders() {
+  const {vendor, setVendor} = useVendor();
+  if (!vendor) {
+    //wait for the data to be fetched
+    return <div>Loading...</div>;
+  }
   const [orders, setOrders] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
