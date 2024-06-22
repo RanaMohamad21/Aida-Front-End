@@ -8,7 +8,7 @@ import myStoreInActive from "../assets/vendor/navBar/myStoreInActive.png";
 // import myStoreActive from "../assets/vendor/navBar/myStoreActive.png"
 // import { NavLink } from "react-router-dom"
 import logo from "../assets/logo/LogoWhiteTextAida.svg";
-import { BarChartFill } from "react-bootstrap-icons";
+import { BarChartFill, GearFill } from "react-bootstrap-icons";
 import { SiSimpleanalytics } from "react-icons/si";
 import { Link, NavLink } from "react-router-dom";
 import { GiReceiveMoney } from "react-icons/gi";
@@ -21,31 +21,55 @@ function VendorNavBar({ storeName }) {
         <Link to="/" className=" rounded-lg">
           <img src={logo} alt="Logo" className="w-16" />
         </Link>
-        <NavLink className={({ isActive }) => 
-          isActive ?" flex gap-1 mx-2 hover:cursor-pointer text-teal mt-2 ":" flex gap-1 mx-2 hover:cursor-pointer text-FlamingoPink mt-2 "}>
-          <span >
-            <IoStorefront style={{ fontSize: '23px'}}/>
+        <Link
+          to="/VendorShelves"
+          className={
+            " flex gap-1 mx-2 hover:cursor-pointer text-FlamingoPink mt-2 "
+          }
+        >
+          <span>
+            <IoStorefront style={{ fontSize: "23px" }} />
           </span>
           <p className="">My Store</p>
-
-        </NavLink>
-        <NavLink className={({ isActive }) => 
-          isActive ?"flex gap-1 mx-3 text-teal ":"flex gap-1 mx-3 text-FlamingoPink "}>
-          <span className=" mt-2"><GiReceiveMoney style={{ fontSize: '23px' }}/></span>
-          
-          <p className="text-teal mt-2 text-xs">Orders</p>
-        </NavLink>
-        <div>
+        </Link>
+        <Link
+          to="/VendorOrders"
+          className={"flex gap-1 mx-3 text-FlamingoPink "}
+        >
+          <span className=" mt-2">
+            <GiReceiveMoney style={{ fontSize: "23px", color: "" }} />
+          </span>
+          <p className=" mt-2 text-xs">Orders</p>
+        </Link>
+        <div className=" flex gap-2">
           <div className="flex ">
-            <NavLink className={({ isActive }) => 
-          isActive ? 'text-teal mt-2 flex gap-2' : ' text-FlamingoPink mt-2 flex gap-2'}>
-            <span className=" mt-1"><SiSimpleanalytics  /></span> <span>Analytics</span></NavLink>
-            
+            <Link
+              to="/VendorAnalytics"
+              className={" text-FlamingoPink mt-2 flex gap-2"}
+            >
+              <span className=" mt-1">
+                <SiSimpleanalytics />
+              </span>{" "}
+              <span>Analytics</span>
+            </Link>
+          </div>
+          <div className="flex ">
+            <Link
+              to="/VendorSettings"
+              className={" text-FlamingoPink mt-2 flex gap-2"}
+            >
+              <span className=" mt-1">
+                <GearFill />
+              </span>{" "}
+              <span>Settings</span>
+            </Link>
           </div>
         </div>
         <div className="  flex gap-2 text-teal mt-3 ">
           <p>storeName</p>
-          <NavLink title="New orders"><HiInboxArrowDown style={{ fontSize: '23px'}}/></NavLink>
+          <Link title="My account" to="/vendorInfo">
+            <HiInboxArrowDown style={{ fontSize: "23px" }} />
+          </Link>
         </div>
       </div>
     </>
