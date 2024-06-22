@@ -11,6 +11,7 @@ function Login() {
   // Set up state for email and password
   const [email, setEmail] = useState("example@example.com");
   const [password, setPassword] = useState("");
+  const [logInCicked, setLogInClicked]= useState(false);
 
   // Get the login function, isAuthenticated, and error properties from the useAuthentication hook
   const { login, isAuthenticated, error } = useAuthentication();
