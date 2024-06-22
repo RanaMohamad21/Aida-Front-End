@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 import ProductPriceCard from "../UI/ProductPriceCard";
 import ProductDetails from "../UI/ProductDetails";
@@ -119,7 +119,6 @@ const similarItems = [
 ];
 // TODO: We must check that the amount available for the user to buy is <= the stock count
 
-
 // Dummy
 const dummyReviews = [
   { name: "Rana Mohamad", rating: 4, review: "Such high quality!" },
@@ -205,15 +204,15 @@ const dummyProduct = {
 };
 
 // This is a reusable page that is viewed by both the vendor and the customer but with different details each,
-function ProductViewPage({ isVendor = false }) {
-  const [product] = useState(dummyProduct);
+function ProductViewPage({ isVendor = false, vendorProduct = {} }) {
+  const [product, setProduct] = useState(isVendor ? vendorProduct : {});
   const [newReview, setNewReview] = useState("");
   const [newRating, setNewRating] = useState();
   const [commentAdded, setCommentAdded] = useState(false);
   const [reviews, setReviews] = useState(dummyReviews);
   const [selectedProducts, setSelectedProducts] = useState([]);
-  const [addedOtherProducts,setAddedOtherProducts] = useState(false)
-  const {addToCart} = useShoppingCart()
+  const [addedOtherProducts, setAddedOtherProducts] = useState(false);
+  const { addToCart } = useShoppingCart();
   const [subscribe, setSubscribe] = useState(false);
   function handleReview(e) {
     setNewReview(e.target.value);
@@ -230,9 +229,8 @@ function ProductViewPage({ isVendor = false }) {
     setCommentAdded(true);
   }
 
- 
   const handleCheckboxChange = (productId) => {
-    console.log("id: "+ productId )
+    console.log("id: " + productId);
     setSelectedProducts((prevSelectedProducts) =>
       prevSelectedProducts.includes(productId)
         ? prevSelectedProducts.filter((id) => id !== productId)
@@ -242,31 +240,33 @@ function ProductViewPage({ isVendor = false }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(selectedProducts.length<1)
-      return
-    
+    if (selectedProducts.length < 1) return;
+
     // Add each selected product to the cart
     selectedProducts.forEach((productId) => {
       addToCart(productId, 1); // Add each selected product with quantity 1
     });
     setAddedOtherProducts(true);
-
   };
   return (
     <div className=" mb-12 w-full ">
-      <Searchbar/>
+      <Searchbar />
       <div className=" grid grid-rows-[1fr,auto,auto,auto] h-full  bg-IceBlue w-full ">
         {/* Product details */}
         <div className="  grid sm:grid-cols-[1fr,4fr] md:grid-cols-[1fr,3fr] mb-5  ">
           {/* Subscribe and add to cart */}
-          <ProductPriceCard product={product} disable={isVendor} subscription={{subscribe,setSubscribe}} />
+          <ProductPriceCard
+            product={product}
+            disable={isVendor}
+            subscription={{ subscribe, setSubscribe }}
+          />
           {/* Product Features */}
           <ProductDetails product={product} />
         </div>
 
         {/* Reviews start */}
 
-        <Shelf shelfName={"Reviews"} styles={' mb-6'}>
+        <Shelf shelfName={"Reviews"} styles={" mb-6"}>
           <div className="  w-screen flex gap-4  mx-2">
             <CardSlider
               styles="w-2/3"
@@ -330,62 +330,64 @@ function ProductViewPage({ isVendor = false }) {
 
         {/* From the same store */}
         <Shelf shelfName={"From the same store"}>
-  <form onSubmit={handleSubmit}>
-    <div className="w-screen flex justify-between gap-2 mx-2">
-      <CardSlider
-        styles="w-2/3"
-        largeScreanSlidesNumber={largeScreanSameStoreProductNumber}
-        mediumScreanSlidesNumber={mediumScreanSameStoreProductNumber}
-      >
-        {similarItems.map((item, index) => (
-          <div key={index} className="my-2">
-            <label className="">
-              <input
-                type="checkbox"
-                style={{ color: "teal" }}
-                onChange={() => handleCheckboxChange(item.itemID)} // assuming each item has a unique 'id' field
-              />
-              <ProductCard
-                dummyItem={item}
-                style={"mx-4 p-4 bg-white rounded-xl h-[400px]"}
-              />
-            </label>
-          </div>
-        ))}
-      </CardSlider>
-      <div className="flex justify-center w-full">
-        <div
-          className="relative flex flex-col items-center justify-center text-FlamingoPink rounded-xl mt-2"
-          style={{
-            backgroundImage: `url(${background})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            width: "300px",
-          }}
-        >
-          {/* Overlay */}
-          <div
-            className="absolute inset-0 bg-black opacity-20 rounded-xl"
-          ></div>
-          <div className="relative flex bg-FlamingoPink items-center w-full py-1 h-20 justify-center text-white mb-2">
-            Total Price
-          </div>
-          <button
-            type="submit"
-            className={`relative capitalize rounded-2xl px-4 py-2 ${
-              isVendor || addedOtherProducts
-                ? "bg-gray text-white cursor-auto"
-                : "bg-white text-black cursor-pointer"
-            }`}
-            disabled={isVendor || addedOtherProducts}
-          >
-            {addedOtherProducts ? <span>added!</span> : <span>Add to cart</span>}
-          </button>
-        </div>
-      </div>
-    </div>
-  </form>
-</Shelf>
+          <form onSubmit={handleSubmit}>
+            <div className="w-screen flex justify-between gap-2 mx-2">
+              <CardSlider
+                styles="w-2/3"
+                largeScreanSlidesNumber={largeScreanSameStoreProductNumber}
+                mediumScreanSlidesNumber={mediumScreanSameStoreProductNumber}
+              >
+                {similarItems.map((item, index) => (
+                  <div key={index} className="my-2">
+                    <label className="">
+                      <input
+                        type="checkbox"
+                        style={{ color: "teal" }}
+                        onChange={() => handleCheckboxChange(item.itemID)} // assuming each item has a unique 'id' field
+                      />
+                      <ProductCard
+                        dummyItem={item}
+                        style={"mx-4 p-4 bg-white rounded-xl h-[400px]"}
+                      />
+                    </label>
+                  </div>
+                ))}
+              </CardSlider>
+              <div className="flex justify-center w-full">
+                <div
+                  className="relative flex flex-col items-center justify-center text-FlamingoPink rounded-xl mt-2"
+                  style={{
+                    backgroundImage: `url(${background})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    width: "300px",
+                  }}
+                >
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-black opacity-20 rounded-xl"></div>
+                  <div className="relative flex bg-FlamingoPink items-center w-full py-1 h-20 justify-center text-white mb-2">
+                    Total Price
+                  </div>
+                  <button
+                    type="submit"
+                    className={`relative capitalize rounded-2xl px-4 py-2 ${
+                      isVendor || addedOtherProducts
+                        ? "bg-gray text-white cursor-auto"
+                        : "bg-white text-black cursor-pointer"
+                    }`}
+                    disabled={isVendor || addedOtherProducts}
+                  >
+                    {addedOtherProducts ? (
+                      <span>added!</span>
+                    ) : (
+                      <span>Add to cart</span>
+                    )}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </Shelf>
         {/* Similar products */}
         <Shelf shelfName={"Similar Products"}>
           <div className="  w-screen mx-4   ">
@@ -420,16 +422,8 @@ function ProductViewPage({ isVendor = false }) {
   );
 }
 
-
-
 ProductViewPage.propTypes = {
-    isVendor: PropTypes.bool
+  isVendor: PropTypes.bool,
 };
 
-
-
 export default ProductViewPage;
-
-
-
-

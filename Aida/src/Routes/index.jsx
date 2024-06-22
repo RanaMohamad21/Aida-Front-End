@@ -88,7 +88,7 @@ const routes = [
     ),
   },
   {
-    path: "/VendorProductViewPage",
+    path: "/VendorProductViewPage/:orderID",
     element: (
       <React.Fragment>
         <VendorProductViewPage />
