@@ -134,10 +134,45 @@ function ProductForm({
     try {
       const response = await createProduct(productData, authToken);
       console.log("Product created successfully:", response);
+      uploadImage(response._id, images[0]);
       // Handle success (e.g., redirect to product list, show success message, etc.)
     } catch (error) {
       console.error("Error creating product:", error);
       // Handle error (e.g., show error message)
+    }
+  };
+  const uploadImage = async (productId, file) => {
+    const authToken = localStorage.getItem("token");
+    console.log("upload image", productId, file);
+    // Create FormData object and append the file
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      // Upload the image to the server
+      const response = await fetch(
+        `http://localhost:8081/api/v1/product/fileSystem/${productId}`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+            // Do not set Content-Type header to multipart/form-data; fetch will handle it automatically
+          },
+          body: formData,
+        }
+      );
+
+      if (response.ok) {
+        const status = await response.text(); // Assuming the response is a plain text status
+        console.log("Image uploaded successfully:", status);
+        return status;
+      } else {
+        console.error("Image upload failed:", response.statusText);
+        return null;
+      }
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      return null;
     }
   };
 

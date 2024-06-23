@@ -100,6 +100,8 @@ function AuthenticationProvider({ children }) {
     dispatch({ type: "logout" });
     // We need to remove token when logged out.
     localStorage.removeItem("token");
+    // Navigate to the home page and replace the current entry in the history stack
+    navigate("/", { replace: true });
   }
 
   return (
