@@ -62,9 +62,9 @@ function CustomerOrdersHistory() {
             <tbody>
                {currentOrders.map((order, index) => (
                   <tr key={order.id}>
-                     <td className="py-2 px-4 border-b"><Link to={`/order/${order.id}`}>{index + 1}</Link></td>
+                    <Link to={`/CustomerProfile/orderDetails/${order.id}`}> <td className="py-2 px-4 border-b"><Link to={`/order/${order.id}`}>{index + 1}</Link></td>
                      <td className="py-2 px-4 border-b">{order.date}</td>
-                     <td className="py-2 px-4 border-b">${order.price.toFixed(2)}</td>
+                     <td className="py-2 px-4 border-b">${order.price.toFixed(2)}</td></Link>
                   </tr>
                ))}
             </tbody>

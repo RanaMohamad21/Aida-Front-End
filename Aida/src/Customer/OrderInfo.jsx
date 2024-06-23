@@ -1,26 +1,15 @@
 
 import { useState } from 'react';
-
+import { useParams } from 'react-router-dom';
 function OrderInfo() {
    const [orderInfo,setOrderInfo] = useState(null)
+   const { orderId } = useParams();
 
-
-   //? Function to fetch order details from the API
-  // useEffect(() => {
-  //   const fetchOrderDetails = async () => {
-  //     try {
-  //       const response = await fetch(`https://api.example.com/orders/${orderId}`); // Replace with your actual API endpoint
-  //       const data = await response.json();
-  //       setOrderInfo(data);
-  //     } catch (error) {
-  //       console.error('Error fetching order details:', error);
-  //     }
-  //   };
-  //   fetchOrderDetails();
-  // }, [orderId]);
+  // Set order info: 
 
 
    function formatCardNumber(cardNumber) {
+    
     const last4Digits = cardNumber.slice(-4);
     const maskedDigits = cardNumber.slice(0, -4).replace(/./g, '•');
     return `${maskedDigits}${last4Digits}`;
