@@ -15,7 +15,6 @@ import { VendorProvider } from './Vendor/VendorContext';
 
 
 function App() {
-  console.log(routes[0].component);
   return (
     <UserProvider>
       <VendorProvider>
