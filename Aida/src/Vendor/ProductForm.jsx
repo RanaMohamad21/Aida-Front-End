@@ -23,19 +23,22 @@ function ProductForm({
   pSpecifications,
   pImages,
   pHasDiscount = false,
-  initialProduct
+  initialProduct,
 }) {
   const [showAlert, setShowAlert] = useState(false);
-  const { register, handleSubmit, control, getValues, setValue, watch } = useForm({
-    defaultValues: initialProduct || {},
-  });
+  const { register, handleSubmit, control, getValues, setValue, watch } =
+    useForm({
+      defaultValues: initialProduct || {},
+    });
 
   const [images, setImages] = useState(pImages || []);
   const [previewImages, setPreviewImages] = useState(pImages || []);
   const [tags, setTags] = useState(pTags || ["Add tags here"]);
   const [newTag, setNewTag] = useState("");
   const [description, setDescription] = useState(pDescription || "");
-  const [specifications, setSpecifications] = useState(pSpecifications || [{ name: "", specification: "" }]);
+  const [specifications, setSpecifications] = useState(
+    pSpecifications || [{ name: "", specification: "" }]
+  );
 
   function handleDeleteImage(index) {
     setPreviewImages((prevImages) => {
@@ -52,11 +55,15 @@ function ProductForm({
 
   const createProduct = async (productData, authToken) => {
     try {
-      const response = await axios.post('http://localhost:8081/api/v1/product', productData, {
-        headers: {
-          Authorization: `Bearer ${authToken}`
+      const response = await axios.post(
+        "http://localhost:8081/api/v1/product",
+        productData,
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
         }
-      });
+      );
       return response.data;
     } catch (error) {
       console.error("Error creating product:", error);
@@ -109,14 +116,18 @@ function ProductForm({
   }, [images, setPreviewImages]);
 
   const onSubmit = async (data) => {
+    console.log(data);
     const authToken = localStorage.getItem("token");
     const productData = {
       ...data,
       description,
-      tags: tags.map((tag, index) => ({
-        tagName: tag
+      tags: tags.map((tag) => ({
+        tagName: tag,
       })),
-      specifications,
+      specifications: specifications.map((spec) => ({
+        attributeName: spec.name,
+        attributeValue: spec.specification,
+      })),
       images, // Assuming you handle images upload separately or include image URLs here
     };
 
@@ -133,7 +144,11 @@ function ProductForm({
   return (
     <>
       <VendorNavBar />
-      <form className="mb-10" onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
+      <form
+        className="mb-10"
+        onSubmit={handleSubmit(onSubmit)}
+        encType="multipart/form-data"
+      >
         <div className="grid-rows-[auto,1fr] mb-14">
           {showAlert && (
             <CustomAlert
@@ -141,14 +156,26 @@ function ProductForm({
               onClose={() => setShowAlert(false)}
             />
           )}
-          <div className={`h-[500px] relative border-t-[8px] border-t-white`} style={{ backgroundImage: `url(${Background})`, backgroundSize: "cover" }}>
+          <div
+            className={`h-[500px] relative border-t-[8px] border-t-white`}
+            style={{
+              backgroundImage: `url(${Background})`,
+              backgroundSize: "cover",
+            }}
+          >
             <div className="absolute inset-0 bg-black opacity-50" />
             <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
               {previewImages && (
                 <div className="grid-cols-5 grid gap-3 px-1">
                   {previewImages.map((pic, index) => (
-                    <div key={index} className="p-4 border-gray border-solid border text-center">
-                      <p onClick={() => handleDeleteImage(index)} className="cursor-pointer mb-1">
+                    <div
+                      key={index}
+                      className="p-4 border-gray border-solid border text-center"
+                    >
+                      <p
+                        onClick={() => handleDeleteImage(index)}
+                        className="cursor-pointer mb-1"
+                      >
                         X
                       </p>
                       <img src={pic} className="" />
@@ -171,15 +198,26 @@ function ProductForm({
                     Upload Image
                   </div>
                   <p className="text-xs text-center">
-                    Thumbnail image size 240*320<br /> Hero image size 550*600 px <br /> You can add up to 5 images
+                    Thumbnail image size 240*320
+                    <br /> Hero image size 550*600 px <br /> You can add up to 5
+                    images
                   </p>
                 </label>
               </div>
             </div>
           </div>
 
-          <InfoAndPricing register={register} watch={watch} setValue={setValue} getValues={getValues} pHasDiscount={pHasDiscount} />
-          <SpecificationsCollection specifications={specifications} setSpecifications={setSpecifications} />
+          <InfoAndPricing
+            register={register}
+            watch={watch}
+            setValue={setValue}
+            getValues={getValues}
+            pHasDiscount={pHasDiscount}
+          />
+          <SpecificationsCollection
+            specifications={specifications}
+            setSpecifications={setSpecifications}
+          />
 
           <TitleAndLogo imgURL={tag}>Tags</TitleAndLogo>
           <div className="pl-4">
@@ -201,14 +239,19 @@ function ProductForm({
                   className="border border-solid border-black text-black px-1 h-7"
                 />
                 <span>
-                  <img src={add} className="h-7 cursor-pointer" onClick={handleAddTag} />
+                  <img
+                    src={add}
+                    className="h-7 cursor-pointer"
+                    onClick={handleAddTag}
+                  />
                 </span>
               </div>
             </div>
           </div>
 
           <p className="text-teal mt-2 pl-4">
-            Tags help customers find your product when searching, you can add up to five tags so make sure they best describe your product.
+            Tags help customers find your product when searching, you can add up
+            to five tags so make sure they best describe your product.
           </p>
 
           <TitleAndLogo imgURL={descriptionTag} style="mt-10">
@@ -236,12 +279,16 @@ ProductForm.propTypes = {
   pDescription: PropTypes.string,
   pHasDiscount: PropTypes.bool,
   pTags: PropTypes.arrayOf(PropTypes.string),
-  pSpecifications: PropTypes.arrayOf(PropTypes.shape({
-    attributeName: PropTypes.string.isRequired,
-    attributeValue: PropTypes.string.isRequired
-  })),
-  pImages: PropTypes.arrayOf(PropTypes.shape({
-    url: PropTypes.string.isRequired,
-  })),
+  pSpecifications: PropTypes.arrayOf(
+    PropTypes.shape({
+      attributeName: PropTypes.string.isRequired,
+      attributeValue: PropTypes.string.isRequired,
+    })
+  ),
+  pImages: PropTypes.arrayOf(
+    PropTypes.shape({
+      url: PropTypes.string.isRequired,
+    })
+  ),
   initialProduct: PropTypes.object.isRequired,
 };
