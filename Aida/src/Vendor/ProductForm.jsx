@@ -113,7 +113,7 @@ function ProductForm({
     const productData = {
       productName: data.productName,
       quantity: data.quantity,
-      description : data.description,
+      description : ,
       timeSinceRestocking: data.timeSinceRestocking,
       price: data.price,
       taxes: data.taxes,
@@ -123,7 +123,7 @@ function ProductForm({
       isShown: data.isShown,
       allowSubscription: data.allowSubscription,
       tags: tags.map((tag) => ({
-        tagId: tag.id,
+        tagId: null, // Assign tagId if necessary
         tagName: tag
       })),
       discount: data.discount,
