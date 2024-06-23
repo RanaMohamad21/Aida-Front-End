@@ -15,7 +15,7 @@ function Searchbar({isProfilePage = false}) {
   const { vendor, setVendor } = useVendor();
   const { user, setUser } = useUser();
 
-  const isAuthenticated = true
+  let isAuthenticated = true
   const { getTotalQuantity } = useShoppingCart(); 
   const cartItemCount = getTotalQuantity();
   return (

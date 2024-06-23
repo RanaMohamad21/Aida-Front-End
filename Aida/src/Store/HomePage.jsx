@@ -2,6 +2,7 @@ import Searchbar from "../UI/Searchbar";
 import Navbar from "../UI/Navbar";
 import UpperFooter from "../UI/UpperFooter";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
 
 import OnSaleCover from "../assets/home/OnSaleHomePage.jpg";
 import { useState } from "react";
@@ -11,19 +12,15 @@ import dummy3 from "../assets/dummy/dummy4.jpeg";
 import dummy4 from "../assets/dummy/dummy5.jpeg";
 import CardSlider from "../UI/CardSlider";
 import SeasonalOffers from "../UI/SeasonalOffers";
-// import { useAuthentication } from "../Authentication/AuthenticationContext";
+import { ProductContext } from "../Contexts/ProductContext";
 
-// Sliding windows settings:
-// const onSaleSlidesNumber = 1;
-const largeScreanSimilarProductNumber = 5;
-const mediumScreanSimilarProductNumber = 3;
-
-//** */ Dummy:
+// Dummy images for ProductCard
 import dummyImage1 from "../assets/dummy/Product images.png";
 import dummyImage2 from "../assets/dummy/Samsung.png";
 import ProductCard from "../UI/ProductCard";
 import Shelf from "../UI/Shelf";
 import Star from "../UI/Star";
+
 import {
   Activity,
   BookFill,
@@ -32,146 +29,41 @@ import {
   HouseFill,
   Mouse2Fill,
   Truck,
-} from "react-bootstrap-icons";
-const dummyImages = [dummy1, dummy2, dummy3, dummy4];
-const similarItems = [
-  {
-    itemID: 0,
-    rating: 3.0,
-    isBestSeller: true,
-    itemName: "Men's suit",
-    discountValue: 0.05,
-    pricebeforeDiscount: 70000,
-    availableLeft: 10,
-    revenues: 12023,
-    subscribed: 20,
-    dummyImage: dummyImage1,
-  },
-  {
-    itemID: 1,
-    rating: 3.0,
-    isBestSeller: false,
-    itemName: "Armini Gold",
-    discountValue: 0,
-    pricebeforeDiscount: 70000,
-    availableLeft: 10,
-    revenues: 12023,
-    subscribed: 20,
-    dummyImage: dummyImage1,
-  },
-  {
-    itemID: 2,
-    rating: 3.0,
-    isBestSeller: true,
-    itemName: "Armini",
-    discountValue: 0,
-    pricebeforeDiscount: 70000,
-    availableLeft: 10,
-    revenues: 12023,
-    subscribed: 20,
-    dummyImage: dummyImage1,
-  },
-  {
-    itemID: 3,
-    rating: 3.0,
-    isBestSeller: true,
-    itemName: "Men's suit",
-    discountValue: 0.07,
-    pricebeforeDiscount: 70000,
-    availableLeft: 10,
-    revenues: 12023,
-    subscribed: 20,
-    dummyImage: dummyImage1,
-  },
+} from 'react-bootstrap-icons';
 
-  {
-    itemID: 0,
-    rating: 3.0,
-    isBestSeller: true,
-    itemName: "Men's like",
-    discountValue: 0.05,
-    pricebeforeDiscount: 70000,
-    availableLeft: 10,
-    revenues: 12023,
-    subscribed: 20,
-    dummyImage: dummyImage2,
-  },
-  {
-    itemID: 1,
-    rating: 3.0,
-    isBestSeller: false,
-    itemName: "Samsung",
-    discountValue: 0,
-    pricebeforeDiscount: 70000,
-    availableLeft: 10,
-    revenues: 12023,
-    subscribed: 20,
-    dummyImage: dummyImage2,
-  },
-  {
-    itemID: 2,
-    rating: 3.0,
-    isBestSeller: true,
-    itemName: "Samsung the dup",
-    discountValue: 0,
-    pricebeforeDiscount: 70000,
-    availableLeft: 10,
-    revenues: 12023,
-    subscribed: 20,
-    dummyImage: dummyImage2,
-  },
-  {
-    itemID: 3,
-    rating: 3.0,
-    isBestSeller: true,
-    itemName: "Men's suit",
-    discountValue: 0.07,
-    pricebeforeDiscount: 70000,
-    availableLeft: 10,
-    revenues: 12023,
-    subscribed: 20,
-    dummyImage: dummyImage2,
-  },
-];
+const largeScreanSimilarProductNumber = 5;
+const mediumScreanSimilarProductNumber = 3;
 
 function HomePage() {
-  // const {user} = useAuthentication();
-  const [onSale, setONSale] = useState([OnSaleCover, ...dummyImages]);
-  // This state will be set using the useEffect hook after integration
+  const { allProducts, recommendedProducts, newShippmentProducts, onSaleProducts, underPriceProducts } = useContext(ProductContext);
+
+  // Function to render a limited number of products
+  const renderLimitedProducts = (products) => {
+    // Limit the products to the first 5 items
+    const limitedProducts = products.slice(0, 5);
+
+    return limitedProducts.map((item, index) => (
+      <div key={index} className="">
+        <ProductCard
+          dummyItem={item}
+          style={"mr-4 bg-white rounded-xl h-[400px] my-2 p-3"}
+          
+        />
+      </div>
+    ));
+  };
+
   return (
     <div className="grid grid-rows-[auto,1fr,auto] h-screen w-screen">
       <div>
         <Searchbar />
         <Navbar />
       </div>
-      <div className=" flex flex-col">
-        {/* <div className=" p-4 font-semibold flex flex-col gap-2">
-          <h1 className=" text-2xl text-FlamingoPink font-semibold">
-            Most of the links are here for now
-          </h1>
-          
-          <Link to="/productviewpage">Product View Page</Link>
-          <Link to="/vendorInfo">Vendor Info</Link>
-          <Link to="/customerprofile">Customer Profile</Link>
-          <Link to="/VendorProductViewPage">Vendor Product View Page</Link>
-          <Link to="/shoppingCart">Shopping Cart Page</Link>
-          <Link to="/shippingAddress">Shipping Address Page</Link>
-          <Link to="/dummyPage">DummyPage</Link>
-          <Link to="/searchpage">Search Page</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">user Sign up</Link>
-          <Link to="/SignUpVendor1">vendor Sign up</Link>
-          <Link to="/VendorShelves">vendor shelves</Link>
-          <Link to="/deletedacount">Delete accont</Link>
-          <Link to="/SettingsDeleteAccount">Settings Delete accont</Link>
-          <Link to="/gtgtgt">Unavailable Page</Link>
-        </div> */}
-        {/* Main  home component */}
-        <div className=" bg-IceBlue">
-          {/* On Sale section */}
+      <div className="flex flex-col">
+        <div className="bg-IceBlue">
           <SeasonalOffers
             title={"On sale"}
-            productsOnSale={onSale}
+            productsOnSale={onSaleProducts}
             styles={"bg-FlamingoPink mb-4 pl-5 mt-4 w-[100%]"}
             icon={
               <svg
@@ -187,232 +79,66 @@ function HomePage() {
             }
           />
 
-          {/*End of On Sale section */}
-          {/* sections */}
-          {/* Recomended for you  */}
-
-          {/* //TODO Add authentication for recomended for you section  */}
-          <Shelf
-            shelfName={"Recommended for you"}
-            icon={
-              <Star color="#FFFFFF" size="20" full={true} disabled={true} />
-            }
-          >
-            <div className="   w-screen mx-4 bg-white mt-2   ">
-              <CardSlider
-                styles=" w-[90%] "
-                largeScreanSlidesNumber={largeScreanSimilarProductNumber}
-                mediumScreanSlidesNumber={mediumScreanSimilarProductNumber}
-              >
-                {similarItems.map((item, index) => (
-                  <div key={index} className="">
-                    <ProductCard
-                      dummyItem={item}
-                      style={"mr-4 bg-white rounded-xl h-[400px] my-2 p-3"}
-                    />
-                  </div>
-                ))}
-              </CardSlider>
-
-              <div className=" px-6 text-teal hover:text-FlamingoPink  hover:italic mb-4">
-                <Link to="/searchpage">Checkout more...</Link>
+          {recommendedProducts.length > 0 && (
+            <Shelf
+              shelfName={"Recommended for you"}
+              icon={
+                <Star color="#FFFFFF" size="20" full={true} disabled={true} />
+              }
+            >
+              <div className="w-screen mx-4 bg-white mt-2">
+                <CardSlider
+                  styles="w-[90%]"
+                  largeScreanSlidesNumber={largeScreanSimilarProductNumber}
+                  mediumScreanSlidesNumber={mediumScreanSimilarProductNumber}
+                >
+                  {renderLimitedProducts(recommendedProducts)}
+                </CardSlider>
+                <div className="px-6 text-teal hover:text-FlamingoPink hover:italic mb-4">
+                  <Link to="/searchpage">Checkout more...</Link>
+                </div>
               </div>
-            </div>
-          </Shelf>
-          {/* New Shipment */}
+            </Shelf>
+          )}
+
           <Shelf shelfName={"New Shipments"} icon={<Truck />}>
-            <div className="  w-screen mx-4 bg-white mt-2   ">
+            <div className="w-screen mx-4 bg-white mt-2">
               <CardSlider
-                styles=" w-[90%] "
+                styles="w-[90%]"
                 largeScreanSlidesNumber={largeScreanSimilarProductNumber}
                 mediumScreanSlidesNumber={mediumScreanSimilarProductNumber}
               >
-                {similarItems.map((item, index) => (
-                  <div key={index} className="">
-                    <ProductCard
-                      dummyItem={item}
-                      style={"mr-4 bg-white rounded-xl h-[400px] my-2 p-3"}
-                    />
-                  </div>
-                ))}
+                {renderLimitedProducts(newShippmentProducts)}
               </CardSlider>
-
-              <div className=" px-6 text-teal hover:text-FlamingoPink  hover:italic mb-4">
+              <div className="px-6 text-teal hover:text-FlamingoPink hover:italic mb-4">
                 <Link to="/searchpage">Checkout more...</Link>
               </div>
             </div>
           </Shelf>
 
-          {/* Fashion */}
-          <Shelf shelfName={"Fashion"} icon={<HandbagFill />}>
-            <div className="  w-screen mx-4 bg-white mt-2   ">
+          {/* Render other shelves similarly */}
+          {/* Example: Fashion shelf */}
+          {/* <Shelf shelfName={"Fashion"} icon={<HandbagFill />}>
+            <div className="w-screen mx-4 bg-white mt-2">
               <CardSlider
-                styles=" w-[90%] "
+                styles="w-[90%]"
                 largeScreanSlidesNumber={largeScreanSimilarProductNumber}
                 mediumScreanSlidesNumber={mediumScreanSimilarProductNumber}
               >
-                {similarItems.map((item, index) => (
-                  <div key={index} className="">
-                    <ProductCard
-                      dummyItem={item}
-                      style={"mr-4 bg-white rounded-xl h-[400px] my-2 p-3"}
-                    />
-                  </div>
-                ))}
+                {renderLimitedProducts(allProducts)}
               </CardSlider>
-
-              <div className=" px-6 text-teal hover:text-FlamingoPink  hover:italic mb-4">
+              <div className="px-6 text-teal hover:text-FlamingoPink hover:italic mb-4">
                 <Link to="/searchpage">Checkout more...</Link>
               </div>
             </div>
-          </Shelf>
+          </Shelf> */}
 
-          {/* Electronics */}
-          <Shelf shelfName={"Electronic devices"} icon={<Mouse2Fill />}>
-            <div className="  w-screen mx-4 bg-white mt-2   ">
-              <CardSlider
-                styles=" w-[90%] "
-                largeScreanSlidesNumber={largeScreanSimilarProductNumber}
-                mediumScreanSlidesNumber={mediumScreanSimilarProductNumber}
-              >
-                {similarItems.map((item, index) => (
-                  <div key={index} className="">
-                    <ProductCard
-                      dummyItem={item}
-                      style={"mr-4 bg-white rounded-xl h-[400px] my-2 p-3"}
-                    />
-                  </div>
-                ))}
-              </CardSlider>
+          {/* Repeat similar pattern for other shelves */}
+          {/* Adjust the shelfName, icon, and products accordingly */}
 
-              <div className=" px-6 text-teal hover:text-FlamingoPink  hover:italic mb-4">
-                <Link to="/searchpage">Checkout more...</Link>
-              </div>
-            </div>
-          </Shelf>
-
-          {/* Health */}
-          <Shelf shelfName={"Health and wellness"} icon={<Activity />}>
-            <div className="  w-screen mx-4 bg-white mt-2   ">
-              <CardSlider
-                styles=" w-[90%] "
-                largeScreanSlidesNumber={largeScreanSimilarProductNumber}
-                mediumScreanSlidesNumber={mediumScreanSimilarProductNumber}
-              >
-                {similarItems.map((item, index) => (
-                  <div key={index} className="">
-                    <ProductCard
-                      dummyItem={item}
-                      style={"mr-4 bg-white rounded-xl h-[400px] my-2 p-3"}
-                    />
-                  </div>
-                ))}
-              </CardSlider>
-
-              <div className=" px-6 text-teal hover:text-FlamingoPink  hover:italic mb-4">
-                <Link to="/searchpage">Checkout more...</Link>
-              </div>
-            </div>
-          </Shelf>
-
-          {/* Pet supplies */}
-          <Shelf shelfName={"Pet supplies"}>
-            <div className="  w-screen mx-4 bg-white mt-2   ">
-              <CardSlider
-                styles=" w-[90%] "
-                largeScreanSlidesNumber={largeScreanSimilarProductNumber}
-                mediumScreanSlidesNumber={mediumScreanSimilarProductNumber}
-              >
-                {similarItems.map((item, index) => (
-                  <div key={index} className="">
-                    <ProductCard
-                      dummyItem={item}
-                      style={"mr-4 bg-white rounded-xl h-[400px] my-2 p-3"}
-                    />
-                  </div>
-                ))}
-              </CardSlider>
-
-              <div className=" px-6 text-teal hover:text-FlamingoPink  hover:italic mb-4">
-                <Link to="/searchpage">Checkout more...</Link>
-              </div>
-            </div>
-          </Shelf>
-
-          {/* Books  */}
-          <Shelf shelfName={"Books"} icon={<BookFill />}>
-            <div className="  w-screen mx-4 bg-white mt-2   ">
-              <CardSlider
-                styles=" w-[90%] "
-                largeScreanSlidesNumber={largeScreanSimilarProductNumber}
-                mediumScreanSlidesNumber={mediumScreanSimilarProductNumber}
-              >
-                {similarItems.map((item, index) => (
-                  <div key={index} className="">
-                    <ProductCard
-                      dummyItem={item}
-                      style={"mr-4 bg-white rounded-xl h-[400px] my-2 p-3"}
-                    />
-                  </div>
-                ))}
-              </CardSlider>
-
-              <div className=" px-6 text-teal hover:text-FlamingoPink  hover:italic mb-4">
-                <Link to="/searchpage">Checkout more...</Link>
-              </div>
-            </div>
-          </Shelf>
-
-          {/* Home essentials  */}
-          <Shelf shelfName={"Home essentials"} icon={<HouseFill />}>
-            <div className="  w-screen mx-4 bg-white mt-2   ">
-              <CardSlider
-                styles=" w-[90%] "
-                largeScreanSlidesNumber={largeScreanSimilarProductNumber}
-                mediumScreanSlidesNumber={mediumScreanSimilarProductNumber}
-              >
-                {similarItems.map((item, index) => (
-                  <div key={index} className="">
-                    <ProductCard
-                      dummyItem={item}
-                      style={"mr-4 bg-white rounded-xl h-[400px] my-2 p-3"}
-                    />
-                  </div>
-                ))}
-              </CardSlider>
-
-              <div className=" px-6 text-teal hover:text-FlamingoPink  hover:italic mb-4">
-                <Link to="/searchpage">Checkout more...</Link>
-              </div>
-            </div>
-          </Shelf>
-
-          {/* Office supplies  */}
-          <Shelf shelfName={"office supplies"} icon={<BuildingsFill />}>
-            <div className="  w-screen mx-4 bg-white mt-2   ">
-              <CardSlider
-                styles=" w-[90%] "
-                largeScreanSlidesNumber={largeScreanSimilarProductNumber}
-                mediumScreanSlidesNumber={mediumScreanSimilarProductNumber}
-              >
-                {similarItems.map((item, index) => (
-                  <div key={index} className="">
-                    <ProductCard
-                      dummyItem={item}
-                      style={"mr-4 bg-white rounded-xl h-[400px] my-2 p-3"}
-                    />
-                  </div>
-                ))}
-              </CardSlider>
-
-              <div className=" px-6 text-teal hover:text-FlamingoPink  hover:italic mb-4">
-                <Link to="/searchpage">Checkout more...</Link>
-              </div>
-            </div>
-          </Shelf>
+          <UpperFooter />
         </div>
       </div>
-      <UpperFooter />
     </div>
   );
 }
