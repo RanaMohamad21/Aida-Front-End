@@ -4,16 +4,23 @@ import pricing from "../assets/vendor/products/price-tag.png";
 import ToggleSwitch from "../UI/ToggleSwitch";
 import TitleAndLogo from "../UI/TitleAndLogo";
 
-function InfoAndPricing({ register, watch, setValue, getValues, pHasDiscount }) {
+function InfoAndPricing({
+  register,
+  watch,
+  setValue,
+  getValues,
+  pHasDiscount,
+}) {
   const [hasDiscount, setHasDiscount] = useState(pHasDiscount);
-  
+
   const initialStockCount = getValues("availableStockCount") || 0;
-  const [availableStockCount, setAvailableStockCount] = useState(initialStockCount);
+  const [availableStockCount, setAvailableStockCount] =
+    useState(initialStockCount);
 
   const discountDurationType = watch("discountDurationType");
 
   const handleIncrement = () => {
-    setAvailableStockCount(prevCount => {
+    setAvailableStockCount((prevCount) => {
       const newCount = prevCount + 1;
       setValue("availableStockCount", newCount);
       return newCount;
@@ -21,7 +28,7 @@ function InfoAndPricing({ register, watch, setValue, getValues, pHasDiscount }) 
   };
 
   const handleDecrement = () => {
-    setAvailableStockCount(prevCount => {
+    setAvailableStockCount((prevCount) => {
       const newCount = Math.max(prevCount - 1, 0);
       setValue("availableStockCount", newCount);
       return newCount;
@@ -50,7 +57,7 @@ function InfoAndPricing({ register, watch, setValue, getValues, pHasDiscount }) 
             <h1>Title</h1>
             <input
               type="text"
-              {...register("title")}
+              {...register("productName")}
               placeholder="Type..."
               className="border border-solid px-2 w-full md:w-[60%] border-black"
             />
@@ -61,7 +68,7 @@ function InfoAndPricing({ register, watch, setValue, getValues, pHasDiscount }) 
             <select
               name="category"
               className="w-full bg-teal bg-opacity-10 p-2 md:w-[60%] rounded-md text-black font-thin text-sm"
-              {...register("category")}
+              {...register("categoryName")}
             >
               <option value="fashion">Fashion</option>
               <option value="electronics">Electronics</option>
@@ -109,7 +116,11 @@ function InfoAndPricing({ register, watch, setValue, getValues, pHasDiscount }) 
         </div>
 
         <div className="grid grid-rows-[auto,1fr,1fr] pl-10 gap-4">
-          <TitleAndLogo imgURL={pricing} imgStyle="h-8" style="flex justify-center">
+          <TitleAndLogo
+            imgURL={pricing}
+            imgStyle="h-8"
+            style="flex justify-center"
+          >
             Pricing
           </TitleAndLogo>
 
@@ -142,7 +153,7 @@ function InfoAndPricing({ register, watch, setValue, getValues, pHasDiscount }) 
               Want to create discounts?
               <span
                 className="bg-white rounded-full h-3 px-1 mt-1 text-teal text-[10px] font-thin cursor-pointer"
-                onClick={() => setHasDiscount(prevState => !prevState)}
+                onClick={() => setHasDiscount((prevState) => !prevState)}
               >
                 {hasDiscount ? "∧" : "V"}
               </span>
@@ -172,7 +183,9 @@ function InfoAndPricing({ register, watch, setValue, getValues, pHasDiscount }) 
                   <label
                     htmlFor="time"
                     className={`cursor-pointer p-1 ${
-                      discountDurationType === "time" ? "bg-IceBlue rounded-md" : ""
+                      discountDurationType === "time"
+                        ? "bg-IceBlue rounded-md"
+                        : ""
                     }`}
                   >
                     Time limited
@@ -188,7 +201,9 @@ function InfoAndPricing({ register, watch, setValue, getValues, pHasDiscount }) 
                   <label
                     htmlFor="number"
                     className={`cursor-pointer p-1 ${
-                      discountDurationType === "number" ? "bg-IceBlue rounded-md" : ""
+                      discountDurationType === "number"
+                        ? "bg-IceBlue rounded-md"
+                        : ""
                     }`}
                   >
                     Number limited
