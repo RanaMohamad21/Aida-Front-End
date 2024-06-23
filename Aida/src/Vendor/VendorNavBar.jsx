@@ -1,22 +1,24 @@
+import React from 'react';
 // import orderActive from "../assets/vendor/navBar/orderActive.png"
 import orderInActive from "../assets/vendor/navBar/orderInActive.png";
 // import analyticsActive from "../assets/vendor/navBar/analyticsActive.png"
 import analyticsInActive from "../assets/vendor/navBar/analyticsInActive.png";
 // import newOrderActive from "../assets/vendor/navBar/newOrderActive.png"
-import newOrderInActive from "../assets/vendor/navBar/newOrderInActive.png";
-import myStoreInActive from "../assets/vendor/navBar/myStoreInActive.png";
 // import myStoreActive from "../assets/vendor/navBar/myStoreActive.png"
 // import { NavLink } from "react-router-dom"
-import logo from "../assets/logo/LogoWhiteTextAida.svg";
 import { BarChartFill, GearFill } from "react-bootstrap-icons";
 import { SiSimpleanalytics } from "react-icons/si";
 import { Link, NavLink } from "react-router-dom";
-import { GiReceiveMoney } from "react-icons/gi";
 import { IoStorefront } from "react-icons/io5";
+import { GiReceiveMoney } from "react-icons/gi";
 import { HiInboxArrowDown } from "react-icons/hi2";
-function VendorNavBar({ storeName }) {
+import logo from "../assets/logo/LogoWhiteTextAida.svg";
+import {useVendor} from "./VendorContext";
+
+
+function VendorNavBar() {
+  const {vendor, setVendor} = useVendor();
   return (
-    <>
       <div className="grid grid-cols-[1fr,auto,auto,3fr,auto] py-2 px-3 border-b-[3px] border-teal gap-3 ">
         <Link to="/" className=" rounded-lg">
           <img src={logo} alt="Logo" className="w-16" />
@@ -66,13 +68,12 @@ function VendorNavBar({ storeName }) {
           </div>
         </div>
         <div className="  flex gap-2 text-teal mt-3 ">
-          <p>storeName</p>
+          <p>{vendor.businessInfo.businessName}</p>
           <Link title="My account" to="/vendorInfo">
             <HiInboxArrowDown style={{ fontSize: "23px" }} />
           </Link>
         </div>
-      </div>
-    </>
+    </div>
   );
 }
 

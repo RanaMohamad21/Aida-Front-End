@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Pagination from './Pagination';
-// Reusable component for data pagination
+
 function PaginatedProducts() {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
-
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('https://api.example.com/products');
-        const data = await response.json();
-        setProducts(data);
+        const response = await axios.get('http://localhost:8081/api/v1/product', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        setProducts(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
       }
@@ -36,7 +40,7 @@ function PaginatedProducts() {
     <div className="p-6">
       <ul>
         {currentProducts.map((product) => (
-          <li key={product.id}>{product.name}</li>
+          <li key={product._id}>{product.productName}</li>
         ))}
       </ul>
       <Pagination
@@ -46,7 +50,6 @@ function PaginatedProducts() {
       />
     </div>
   );
-
 }
 
 export default PaginatedProducts;
