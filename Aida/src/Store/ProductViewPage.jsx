@@ -16,6 +16,7 @@ import ProductCard from "../UI/ProductCard";
 import { Link } from "react-router-dom";
 import { useShoppingCart } from "../Contexts/ShoppingCartProvider";
 import Searchbar from "../UI/Searchbar";
+import RevenuesDisplay from "../Vendor/RevenuesDisplay";
 // import Carousel from "react-multi-carousel";
 
 const similarItems = [
@@ -255,11 +256,14 @@ function ProductViewPage({ isVendor = false, vendorProduct = {} }) {
         {/* Product details */}
         <div className="  grid sm:grid-cols-[1fr,4fr] md:grid-cols-[1fr,3fr] mb-5  ">
           {/* Subscribe and add to cart */}
-          <ProductPriceCard
+         <div className=" flex-col">
+         <ProductPriceCard
             product={product}
             disable={isVendor}
-            subscription={{ subscribe, setSubscribe }}
-          />
+            subscription={{ subscribe, setSubscribe }}/>
+            <RevenuesDisplay/>
+
+         </div>
           {/* Product Features */}
           <ProductDetails product={product} />
         </div>

@@ -12,6 +12,7 @@ import CustomerSubscriptions from "./Customer/CustomerSubscriptions";
 import SettingsPage from "./Customer/SettingsPage";
 import { UserProvider } from "./Customer/UserContext";
 import { VendorProvider } from "./Vendor/VendorContext";
+import OrderInfo from "./Customer/OrderInfo";
 
 function App() {
   return (
@@ -47,6 +48,10 @@ function App() {
                         element={<CustomerSubscriptions />}
                       />
                       <Route path="settings" element={<SettingsPage />} />
+                      <Route
+                      path="orderDetails/:orderId"
+                      element={<OrderInfo />}
+                    />
                     </Route>
                   </Routes>
                   <Footer />
