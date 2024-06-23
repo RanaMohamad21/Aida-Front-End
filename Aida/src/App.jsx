@@ -10,44 +10,52 @@ import CustomerOrdersHistory from "./Customer/CustomerOrdersHistory";
 import PendingOrders from "./Customer/PendingOrders";
 import CustomerSubscriptions from "./Customer/CustomerSubscriptions";
 import SettingsPage from "./Customer/SettingsPage";
-import { UserProvider } from './Customer/UserContext';
-import { VendorProvider } from './Vendor/VendorContext';
-
+import { UserProvider } from "./Customer/UserContext";
+import { VendorProvider } from "./Vendor/VendorContext";
 
 function App() {
   return (
     <UserProvider>
       <VendorProvider>
-    <VendorSignUpProvider>
-      <ShoppingCartProvider>
-        <AuthenticationProvider>
-          <div className="grid grid-rows-[1fr,auto]">
+        <VendorSignUpProvider>
+          <ShoppingCartProvider>
             <BrowserRouter>
-              <Routes>
-                {routes.map((route, index) => (
-                  <Route
-                    key={index}
-                    path={route.path}
-                    element={route.element}
-                  />
-                ))}
+              <AuthenticationProvider>
+                <div className="grid grid-rows-[1fr,auto]">
+                  <Routes>
+                    {routes.map((route, index) => (
+                      <Route
+                        key={index}
+                        path={route.path}
+                        element={route.element}
+                      />
+                    ))}
 
-                <Route path="CustomerProfile" element={ <CustomerProfilePage />}>
-                <Route index element={<AccountInfo />} />
-                <Route path="account" element={<AccountInfo />} />
-                  <Route path="ordersHistory" element={<CustomerOrdersHistory/>}/>
-                  <Route path="pendingOrders" element={<PendingOrders/>}/>
-                  <Route path="subscription" element={<CustomerSubscriptions/>}/>
-                  <Route path="settings" element={<SettingsPage/>}/>
-                </Route>
-              </Routes>
+                    <Route
+                      path="CustomerProfile"
+                      element={<CustomerProfilePage />}
+                    >
+                      <Route index element={<AccountInfo />} />
+                      <Route path="account" element={<AccountInfo />} />
+                      <Route
+                        path="ordersHistory"
+                        element={<CustomerOrdersHistory />}
+                      />
+                      <Route path="pendingOrders" element={<PendingOrders />} />
+                      <Route
+                        path="subscription"
+                        element={<CustomerSubscriptions />}
+                      />
+                      <Route path="settings" element={<SettingsPage />} />
+                    </Route>
+                  </Routes>
+                  <Footer />
+                </div>
+              </AuthenticationProvider>
             </BrowserRouter>
-            <Footer />
-          </div>
-        </AuthenticationProvider>
-      </ShoppingCartProvider>
-    </VendorSignUpProvider>
-    </VendorProvider>
+          </ShoppingCartProvider>
+        </VendorSignUpProvider>
+      </VendorProvider>
     </UserProvider>
   );
 }
