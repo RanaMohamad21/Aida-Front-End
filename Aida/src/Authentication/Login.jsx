@@ -27,7 +27,7 @@ function Login() {
     e.preventDefault();
     if (email && password) {
       login(email, password);
-      window.location.href = "/";
+      
     }
     resetInputs();
   }
@@ -36,7 +36,7 @@ function Login() {
   useEffect(
     function () {
       // User can't navigate back to the login page after login is completed
-      if (isAuthenticated) navigate("/", { replace: true });
+      if (isAuthenticated) window.location.href = "/";
       else {
         console.log(error);
       }

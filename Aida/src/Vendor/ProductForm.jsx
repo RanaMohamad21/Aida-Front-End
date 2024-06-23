@@ -35,7 +35,7 @@ function ProductForm({
   const [tags, setTags] = useState(pTags || ["Add tags here"]);
   const [newTag, setNewTag] = useState("");
   const [description, setDescription] = useState(pDescription || "");
-  const [specifications, setSpecifications] = useState(pSpecifications || [{ attributeName: "", attributeValue: "" }]);
+  const [specifications, setSpecifications] = useState(pSpecifications || [{ name: "", specification: "" }]);
 
   function handleDeleteImage(index) {
     setPreviewImages((prevImages) => {
@@ -111,26 +111,12 @@ function ProductForm({
   const onSubmit = async (data) => {
     const authToken = localStorage.getItem("token");
     const productData = {
-      productName: data.productName,
-      quantity: data.quantity,
-      description : ,
-      timeSinceRestocking: data.timeSinceRestocking,
-      price: data.price,
-      taxes: data.taxes,
-      categoryName: data.categoryName,
-      isUsed: data.isUsed,
-      isInEvent: data.isInEvent,
-      isShown: data.isShown,
-      allowSubscription: data.allowSubscription,
-      tags: tags.map((tag) => ({
-        tagId: null, // Assign tagId if necessary
+      ...data,
+      description,
+      tags: tags.map((tag, index) => ({
         tagName: tag
       })),
-      discount: data.discount,
-      specifications: specifications.map(spec => ({
-        attributeName: spec.attributeName,
-        attributeValue: spec.attributeValue
-      })),
+      specifications,
       images, // Assuming you handle images upload separately or include image URLs here
     };
 
@@ -235,12 +221,7 @@ function ProductForm({
           <input
             type="submit"
             value="Create"
-            className="bg-FlamingoPink text-white w-1/3 rounded-md h-8 uppercase my-5 cursor-pointer hover:translate-x-[2px] hover:translate-y-[2px] transition duration-200"
-          />
-          <input
-            type="button"
-            value="Cancel"
-            className="bg-FlamingoPink text-white w-1/3 rounded-md h-8 uppercase my-5 cursor-pointer hover:translate-x-[2px] hover:translate-y-[2px] transition duration-200"
+            className="bg-FlamingoPink text-white w-1/3 rounded-md h-8 uppercase my-5 cursor-pointer hover:translate-x-[2px] hover:translate-y-[2px] transition-all text-center justify-center pt-1 mx-auto"
           />
         </div>
       </form>
@@ -249,13 +230,18 @@ function ProductForm({
   );
 }
 
+export default ProductForm;
+
 ProductForm.propTypes = {
   pDescription: PropTypes.string,
-  pTags: PropTypes.array,
-  pSpecifications: PropTypes.array,
-  pImages: PropTypes.array,
   pHasDiscount: PropTypes.bool,
-  initialProduct: PropTypes.object,
+  pTags: PropTypes.arrayOf(PropTypes.string),
+  pSpecifications: PropTypes.arrayOf(PropTypes.shape({
+    attributeName: PropTypes.string.isRequired,
+    attributeValue: PropTypes.string.isRequired
+  })),
+  pImages: PropTypes.arrayOf(PropTypes.shape({
+    url: PropTypes.string.isRequired,
+  })),
+  initialProduct: PropTypes.object.isRequired,
 };
-
-export default ProductForm;
