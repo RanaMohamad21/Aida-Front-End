@@ -17,16 +17,16 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case "login":
-      // Update the state with the user type  and set isAuthenticated to true
+      // Update the state with the user type and set isAuthenticated to true
       return { ...state, user: action.payload, isAuthenticated: true };
     case "logout":
       // Reset the state to the initial state
-
       return { ...state, user: null, isAuthenticated: false };
     default:
       throw new Error("Unknown action");
   }
 }
+
 // AuthenticationProvider component
 // eslint-disable-next-line react/prop-types
 function AuthenticationProvider({ children }) {
@@ -83,6 +83,11 @@ function AuthenticationProvider({ children }) {
       // If the request is successful, update the state with the token
       token = response.data.token;
       localStorage.setItem("token", token);
+
+      // Update the state with the user information
+      dispatch({ type: "login", payload: response.data.user });
+
+      // Navigate to the home page
       navigate("/");
     } catch (error) {
       console.error("Failed to login:", error);
@@ -93,14 +98,13 @@ function AuthenticationProvider({ children }) {
   // Logout function to log out the user
   function logout() {
     dispatch({ type: "logout" });
-    //We need to remove token when logged out.
+    // We need to remove token when logged out.
     localStorage.removeItem("token");
   }
 
   return (
     /* Provide the user, isAuthenticated, login & logout functions 
     and error properties to the context */
-
     <AuthenticationContext.Provider
       value={{ user, isAuthenticated, login, logout, error, token }}
     >
