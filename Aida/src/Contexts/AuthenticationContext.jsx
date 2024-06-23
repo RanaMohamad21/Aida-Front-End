@@ -1,6 +1,7 @@
 import { useContext, useReducer, useState } from "react";
 import { createContext } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 // Create a new context for authentication state
 const AuthenticationContext = createContext();
@@ -29,6 +30,7 @@ function reducer(state, action) {
 // AuthenticationProvider component
 // eslint-disable-next-line react/prop-types
 function AuthenticationProvider({ children }) {
+  const navigate = useNavigate();
   // Use the reducer to manage state
   const [{ user, isAuthenticated }, dispatch] = useReducer(
     reducer,
@@ -81,7 +83,7 @@ function AuthenticationProvider({ children }) {
       // If the request is successful, update the state with the token
       token = response.data.token;
       localStorage.setItem("token", token);
-
+      navigate("/");
     } catch (error) {
       console.error("Failed to login:", error);
       setError("Failed to log in. Please check your email and password");
