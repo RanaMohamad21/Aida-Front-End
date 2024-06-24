@@ -10,9 +10,10 @@ function ProductDetails({product}) {
             <div className="grid grid-cols-[3fr,1fr]">
               <div className=" flex items-center justify-end pr-3  h-[300px]">
                 <img src={selectedImage} className="h-full  contain " />
+                {/* <img src={product.selectedImage} className="h-full  contain " /> */}
               </div>
               {/* minimized images */}
-              <div className="flex items-center justify-center "></div>
+              {/* <div className="flex items-center justify-center "></div> */}
             </div>
             {/* Product Details */}
             <p className=" font-semibold text-2xl mx-auto  w-[70%]">
@@ -22,13 +23,13 @@ function ProductDetails({product}) {
             {/* List of main features */}
             <h1 className=" font-semibold text-xl">Main features</h1>
             <ol className=" list-decimal" start="1">
-              {product.features.map((feature, index) => {
+              {/* {product.features?.map((feature, index) => {
                 return (
                   <li className=" text-black" key={index}>
                     {feature}
                   </li>
                 );
-              })}
+              })} */}
             </ol>
             {/*end: List of main features */}
 
@@ -36,7 +37,7 @@ function ProductDetails({product}) {
             <h1 className=" font-semibold text-xl">Specifications</h1>
             <div className=" md:w-full lg:w-[60%]">
               <table className=" grid grid-cols-2 gap-3 w-[100%] ">
-                {product.specifications.map((specification, index) => {
+                {product.specifications?.map((specification, index) => {
                   return (
                     <tr key={index}>
                       <th className=" bg-IceBlue w-1/2 px-3">

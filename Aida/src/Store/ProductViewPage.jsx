@@ -13,10 +13,11 @@ import background from "../assets/UI/productView.jpeg";
 import dummyImage1 from "../assets/dummy/Product images.png";
 import dummyImage2 from "../assets/dummy/Samsung.png";
 import ProductCard from "../UI/ProductCard";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useShoppingCart } from "../Contexts/ShoppingCartProvider";
 import Searchbar from "../UI/Searchbar";
 import RevenuesDisplay from "../Vendor/RevenuesDisplay";
+import { useAuthentication } from "../Contexts/AuthenticationContext";
 // import Carousel from "react-multi-carousel";
 
 const similarItems = [
@@ -184,6 +185,10 @@ const dummyProduct = {
   availableQuantity: 11,
   rating: 4,
   discount: 0.5,
+  views: 340,
+  subscriptions: 490,
+  sales: 300,
+  reveues: 4000,
   title: "ProSound XG700",
   briefDescription: "Over-Ear Wireless Noise-Cancelling Headphones",
   description:
@@ -202,12 +207,18 @@ const dummyProduct = {
     { name: "Warranty", value: "2 years" },
   ],
   priceBeforeDiscount: 868.11,
+  revenues: 12023,
 };
 
 // This is a reusable page that is viewed by both the vendor and the customer but with different details each,
 function ProductViewPage({ isVendor = false, vendorProduct = {} }) {
-  const [product, setProduct] = useState(isVendor ? vendorProduct : {});
+  const productID = useParams()
+  const [product, setProduct] = useState(
+    isVendor ? vendorProduct : dummyProduct
+  );
+  // const [product, setProduct] = useState(isVendor ? vendorProduct : {});
   const [newReview, setNewReview] = useState("");
+  const {isAuthenticated} = useAuthentication();
   const [newRating, setNewRating] = useState();
   const [commentAdded, setCommentAdded] = useState(false);
   const [reviews, setReviews] = useState(dummyReviews);
@@ -256,14 +267,19 @@ function ProductViewPage({ isVendor = false, vendorProduct = {} }) {
         {/* Product details */}
         <div className="  grid sm:grid-cols-[1fr,4fr] md:grid-cols-[1fr,3fr] mb-5  ">
           {/* Subscribe and add to cart */}
-         <div className=" flex-col">
-         <ProductPriceCard
-            product={product}
-            disable={isVendor}
-            subscription={{ subscribe, setSubscribe }}/>
-            <RevenuesDisplay/>
-
-         </div>
+          <div className=" flex-col">
+            <ProductPriceCard
+              product={product}
+              disable={isVendor}
+              subscription={{ subscribe, setSubscribe }}
+            />
+            {isVendor && <RevenuesDisplay
+              views={product.views}
+              subscriptions={product.subscriptions}
+              sales={product.sales}
+              revenues={product.revenues}
+            />}
+          </div>
           {/* Product Features */}
           <ProductDetails product={product} />
         </div>
@@ -358,37 +374,41 @@ function ProductViewPage({ isVendor = false, vendorProduct = {} }) {
                 ))}
               </CardSlider>
               <div className="flex justify-center w-full">
-                <div
-                  className="relative flex flex-col items-center justify-center text-FlamingoPink rounded-xl mt-2"
-                  style={{
-                    backgroundImage: `url(${background})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    width: "300px",
-                  }}
-                >
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-black opacity-20 rounded-xl"></div>
-                  <div className="relative flex bg-FlamingoPink items-center w-full py-1 h-20 justify-center text-white mb-2">
-                    Total Price
-                  </div>
-                  <button
-                    type="submit"
-                    className={`relative capitalize rounded-2xl px-4 py-2 ${
-                      isVendor || addedOtherProducts
-                        ? "bg-gray text-white cursor-auto"
-                        : "bg-white text-black cursor-pointer"
-                    }`}
-                    disabled={isVendor || addedOtherProducts}
-                  >
-                    {addedOtherProducts ? (
-                      <span>added!</span>
-                    ) : (
-                      <span>Add to cart</span>
-                    )}
-                  </button>
-                </div>
-              </div>
+  <div
+    className="relative flex flex-col items-center justify-center text-FlamingoPink rounded-xl mt-2"
+    style={{
+      backgroundImage: `url(${background})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      width: "300px",
+    }}
+  >
+    {/* Overlay */}
+    <div className="absolute inset-0 bg-black opacity-20 rounded-xl"></div>
+    <div className="relative flex bg-FlamingoPink items-center w-full py-1 h-20 justify-center text-white mb-2">
+    {isAuthenticated? <span> Total Price</span>:<span>Log in to add to cart</span>}
+    </div>
+    {isAuthenticated &&
+    (
+      <button
+        type="submit"
+        className={`relative capitalize rounded-2xl px-4 py-2 ${
+          isVendor || addedOtherProducts
+            ? "bg-gray text-white cursor-auto"
+            : "bg-white text-black cursor-pointer"
+        }`}
+        disabled={isVendor || addedOtherProducts}
+      >
+        {addedOtherProducts ? (
+          <span>added!</span>
+        ) : (
+          <span>Add to cart</span>
+        )}
+      </button>
+    ) }
+  </div>
+</div>
+
             </div>
           </form>
         </Shelf>

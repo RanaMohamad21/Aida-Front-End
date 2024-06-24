@@ -12,6 +12,7 @@ const radioLabel = "text-gray hover:cursor-pointer";
 
 function Signup() {
   // State
+  const [submiting, setSubmiting] = useState(false);
   const [checkedCategories, setCheckedCategories] = useState(
     new Array(categories.length).fill(false)
   );
@@ -51,33 +52,36 @@ function Signup() {
    * @param {React.FormEvent<HTMLFormElement>} e - The form submission event.
    */
   async function handleSubmit(e) {
+    setSubmiting(true);
     e.preventDefault();
-    const { city, street, BuildingNo, apartmentNo, ...formDataWithoutAddress } = formData;
 
-  const address = {
-    city,
-    street,
-    BuildingNo,
-    apartmentNo
-  };
+    const { city, street, BuildingNo, apartmentNo, ...formDataWithoutAddress } =
+      formData;
 
-  
+    const address = {
+      city,
+      street,
+      BuildingNo,
+      apartmentNo,
+    };
+
     // Validate email format
-    const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
-    if (!emailRegex.test(formData.email)) {
-      alert("Please enter a valid email address.");
-      return;
-    }
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    // if (!emailRegex.test(formData.email)) {
+    //   alert("Please enter a valid email address.");
+    //   return;
+    // }
 
     // Validate password format
-    const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
-    if (!passwordRegex.test(formData.password)) {
-      alert("Please enter a valid password format.");
-      return;
-    }
+    // const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+    // if (!passwordRegex.test(formData.password)) {
+    //   alert("Please enter a valid password format.");
+    //   return;
+    // }
     const userData = {
       ...formDataWithoutAddress,
-      address, 
+      address,
     };
 
     // Clear form data
@@ -89,11 +93,11 @@ function Signup() {
       phone: "",
       birthdate: "",
       gender: "",
-      
-        city: "",
-        street: "",
-        BuildingNo: "",
-        apartmentNo: "",
+
+      city: "",
+      street: "",
+      BuildingNo: "",
+      apartmentNo: "",
       user_type: "customer",
     });
 
@@ -378,8 +382,8 @@ function Signup() {
               <input
                 className="text-white bg-FlamingoPink w-1/2  rounded-md h-8 uppercase my-5 cursor-pointer hover:translate-x-[2px] hover:translate-y-[2px] transition-all "
                 type="submit"
-                value="Signup"
-                disabled={!termsChecked}
+                value={`${submiting ? "Submitting" : "Signup"}`}
+                disabled={!termsChecked || submiting}
                 onChange={handleSubmit}
                 required
               />

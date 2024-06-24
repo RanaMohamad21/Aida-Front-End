@@ -5,10 +5,11 @@ import { Link } from "react-router-dom";
 
 import OnSaleCover from "../assets/home/OnSaleHomePage.jpg";
 import { useState } from "react";
-import dummy1 from "../assets/dummy/dummy2.jpg";
-import dummy2 from "../assets/dummy/dummy3.jpeg";
-import dummy3 from "../assets/dummy/dummy4.jpeg";
-import dummy4 from "../assets/dummy/dummy5.jpeg";
+import dummy1 from "../assets/UI/productView.jpeg";
+import dummy2 from "../assets/dummy/dummy2.jpg";
+import dummy3 from "../assets/dummy/dummy3.jpeg";
+import dummy4 from "../assets/dummy/dummy4.jpeg";
+import dummy5 from "../assets/dummy/dummy5.jpeg";
 import CardSlider from "../UI/CardSlider";
 import SeasonalOffers from "../UI/SeasonalOffers";
 // import { useAuthentication } from "../Authentication/AuthenticationContext";
@@ -19,8 +20,8 @@ const largeScreanSimilarProductNumber = 5;
 const mediumScreanSimilarProductNumber = 3;
 
 //** */ Dummy:
-import dummyImage1 from "../assets/dummy/Product images.png";
-import dummyImage2 from "../assets/dummy/Samsung.png";
+import dummyImage1 from "../assets/dummy/Samsung - Copy.png"
+import dummyImage2 from "../assets/dummy/Product images.png";
 import ProductCard from "../UI/ProductCard";
 import Shelf from "../UI/Shelf";
 import Star from "../UI/Star";
@@ -33,15 +34,15 @@ import {
   Mouse2Fill,
   Truck,
 } from "react-bootstrap-icons";
-const dummyImages = [dummy1, dummy2, dummy3, dummy4];
+const dummyImages = [dummy1, dummy2, dummy3, dummy4, dummy5];
 const similarItems = [
   {
     itemID: 0,
     rating: 3.0,
     isBestSeller: true,
-    itemName: "Men's suit",
+    itemName: "ProSound XG700",
     discountValue: 0.05,
-    pricebeforeDiscount: 70000,
+    pricebeforeDiscount: 868.11,
     availableLeft: 10,
     revenues: 12023,
     subscribed: 20,
@@ -57,7 +58,7 @@ const similarItems = [
     availableLeft: 10,
     revenues: 12023,
     subscribed: 20,
-    dummyImage: dummyImage1,
+    dummyImage: dummyImage2,
   },
   {
     itemID: 2,
@@ -69,7 +70,7 @@ const similarItems = [
     availableLeft: 10,
     revenues: 12023,
     subscribed: 20,
-    dummyImage: dummyImage1,
+    dummyImage: dummyImage2,
   },
   {
     itemID: 3,
@@ -81,7 +82,7 @@ const similarItems = [
     availableLeft: 10,
     revenues: 12023,
     subscribed: 20,
-    dummyImage: dummyImage1,
+    dummyImage: dummyImage2,
   },
 
   {
@@ -106,7 +107,7 @@ const similarItems = [
     availableLeft: 10,
     revenues: 12023,
     subscribed: 20,
-    dummyImage: dummyImage2,
+    dummyImage: dummyImage1,
   },
   {
     itemID: 2,
@@ -145,27 +146,6 @@ function HomePage() {
         <Navbar />
       </div>
       <div className=" flex flex-col">
-        {/* <div className=" p-4 font-semibold flex flex-col gap-2">
-          <h1 className=" text-2xl text-FlamingoPink font-semibold">
-            Most of the links are here for now
-          </h1>
-          
-          <Link to="/productviewpage">Product View Page</Link>
-          <Link to="/vendorInfo">Vendor Info</Link>
-          <Link to="/customerprofile">Customer Profile</Link>
-          <Link to="/VendorProductViewPage">Vendor Product View Page</Link>
-          <Link to="/shoppingCart">Shopping Cart Page</Link>
-          <Link to="/shippingAddress">Shipping Address Page</Link>
-          <Link to="/dummyPage">DummyPage</Link>
-          <Link to="/searchpage">Search Page</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">user Sign up</Link>
-          <Link to="/SignUpVendor1">vendor Sign up</Link>
-          <Link to="/VendorShelves">vendor shelves</Link>
-          <Link to="/deletedacount">Delete accont</Link>
-          <Link to="/SettingsDeleteAccount">Settings Delete accont</Link>
-          <Link to="/gtgtgt">Unavailable Page</Link>
-        </div> */}
         {/* Main  home component */}
         <div className=" bg-IceBlue">
           {/* On Sale section */}
@@ -206,10 +186,12 @@ function HomePage() {
               >
                 {similarItems.map((item, index) => (
                   <div key={index} className="">
-                    <ProductCard
+                   <Link to={`/productviewpage/${item.itemID}`}>
+                   <ProductCard
                       dummyItem={item}
                       style={"mr-4 bg-white rounded-xl h-[400px] my-2 p-3"}
                     />
+                   </Link>
                   </div>
                 ))}
               </CardSlider>

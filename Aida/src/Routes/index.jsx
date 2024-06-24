@@ -144,7 +144,7 @@ const routes = [
     ),
   },
   {
-    path: "/productviewpage",
+    path: "/productviewpage/:orderId",
     element: (
       <React.Fragment>
         <ProductViewPage />

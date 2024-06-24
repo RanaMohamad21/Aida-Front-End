@@ -51,14 +51,14 @@ function UpperFooter() {
           <li>Hanan Saeed Mohamad</li>
         </ul>
       </div>
-      <div className="flex flex-col justify-around  ">
+      <div className="flex flex-col justify-around pr-28 ">
         <div className=" w-full flex pr-6 justify-end">
         <div className="border-2 w-[20px]  transition-all duration-200 hover:border-IceBlue flex items-center justify-center pb-1">
           <button onClick={scrollToTop}> &uarr;</button>
         </div>
         </div>
+        <div className=" pr-20"> 
         <p className=" my-3">Categories</p>
-        <div>
           <div className="grid grid-cols-3 gap-2 w-52">
           {iconList.map((icon, index) => {
         const IconComponent = icon.name;
