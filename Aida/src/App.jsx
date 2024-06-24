@@ -12,6 +12,7 @@ import CustomerSubscriptions from "./Customer/CustomerSubscriptions";
 import SettingsPage from "./Customer/SettingsPage";
 import { UserProvider } from "./Customer/UserContext";
 import { VendorProvider } from "./Vendor/VendorContext";
+import { ProductProvider } from "./Contexts/ProductContext";
 import OrderInfo from "./Customer/OrderInfo";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <VendorProvider>
         <VendorSignUpProvider>
           <ShoppingCartProvider>
+            <ProductProvider>
             <BrowserRouter>
               <AuthenticationProvider>
                 <div className="grid grid-rows-[1fr,auto]">
@@ -58,6 +60,7 @@ function App() {
                 </div>
               </AuthenticationProvider>
             </BrowserRouter>
+            </ProductProvider>
           </ShoppingCartProvider>
         </VendorSignUpProvider>
       </VendorProvider>

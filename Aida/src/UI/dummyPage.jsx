@@ -1,4 +1,6 @@
 import "react-multi-carousel/lib/styles.css";
+import ProductCard from "../UI/ProductCard";
+
 
 
   // This is a dummy page, 
@@ -15,6 +17,7 @@ function DummyPage() {
 
   <div>
     {/* put the component you want to test here */}
+    <ProductCard />
   </div>
             </>
      
