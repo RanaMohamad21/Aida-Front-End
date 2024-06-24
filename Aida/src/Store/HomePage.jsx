@@ -101,7 +101,7 @@ function HomePage() {
                 largeScreanSlidesNumber={largeScreanSimilarProductNumber}
                 mediumScreanSlidesNumber={mediumScreanSimilarProductNumber}
               >
-                {similarItems.map((item, index) => (
+                {recommendedProducts?.map((item, index) => (
                   <div key={index} className="">
                    <Link to={`/productviewpage/${item.itemID}`}>
                    <ProductCard
