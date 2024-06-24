@@ -137,7 +137,7 @@ function HomePage() {
 
           {/* Render other shelves similarly */}
           {/* Example: Fashion shelf */}
-          {/* <Shelf shelfName={"Fashion"} icon={<HandbagFill />}>
+          <Shelf shelfName={"Fashion"} icon={<HandbagFill />}>
             <div className="w-screen mx-4 bg-white mt-2">
               <CardSlider
                 styles="w-[90%]"
@@ -150,7 +150,91 @@ function HomePage() {
                 <Link to="/searchpage">Checkout more...</Link>
               </div>
             </div>
-          </Shelf> */}
+          </Shelf>
+          <Shelf shelfName={"Electronic devices"} icon={<Mouse2Fill />}>
+            <div className="w-screen mx-4 bg-white mt-2">
+              <CardSlider
+                styles="w-[90%]"
+                largeScreanSlidesNumber={largeScreanSimilarProductNumber}
+                mediumScreanSlidesNumber={mediumScreanSimilarProductNumber}
+              >
+                {renderLimitedProducts(allProducts)}
+              </CardSlider>
+              <div className="px-6 text-teal hover:text-FlamingoPink hover:italic mb-4">
+                <Link to="/searchpage">Checkout more...</Link>
+              </div>
+            </div>
+          </Shelf>
+          <Shelf shelfName={"Health and wellness"} icon={<Activity />}>
+            <div className="w-screen mx-4 bg-white mt-2">
+              <CardSlider
+                styles="w-[90%]"
+                largeScreanSlidesNumber={largeScreanSimilarProductNumber}
+                mediumScreanSlidesNumber={mediumScreanSimilarProductNumber}
+              >
+                {renderLimitedProducts(allProducts)}
+              </CardSlider>
+              <div className="px-6 text-teal hover:text-FlamingoPink hover:italic mb-4">
+                <Link to="/searchpage">Checkout more...</Link>
+              </div>
+            </div>
+          </Shelf>
+          <Shelf shelfName={"Pet Supplies"} icon={""}>
+            <div className="w-screen mx-4 bg-white mt-2">
+              <CardSlider
+                styles="w-[90%]"
+                largeScreanSlidesNumber={largeScreanSimilarProductNumber}
+                mediumScreanSlidesNumber={mediumScreanSimilarProductNumber}
+              >
+                {renderLimitedProducts(allProducts)}
+              </CardSlider>
+              <div className="px-6 text-teal hover:text-FlamingoPink hover:italic mb-4">
+                <Link to="/searchpage">Checkout more...</Link>
+              </div>
+            </div>
+          </Shelf>
+          <Shelf shelfName={"Books"} icon={<BookFill/>}>
+            <div className="w-screen mx-4 bg-white mt-2">
+              <CardSlider
+                styles="w-[90%]"
+                largeScreanSlidesNumber={largeScreanSimilarProductNumber}
+                mediumScreanSlidesNumber={mediumScreanSimilarProductNumber}
+              >
+                {renderLimitedProducts(allProducts)}
+              </CardSlider>
+              <div className="px-6 text-teal hover:text-FlamingoPink hover:italic mb-4">
+                <Link to="/searchpage">Checkout more...</Link>
+              </div>
+            </div>
+          </Shelf>
+          <Shelf shelfName={"Home essentials"} icon={<HouseFill/>}>
+            <div className="w-screen mx-4 bg-white mt-2">
+              <CardSlider
+                styles="w-[90%]"
+                largeScreanSlidesNumber={largeScreanSimilarProductNumber}
+                mediumScreanSlidesNumber={mediumScreanSimilarProductNumber}
+              >
+                {renderLimitedProducts(allProducts)}
+              </CardSlider>
+              <div className="px-6 text-teal hover:text-FlamingoPink hover:italic mb-4">
+                <Link to="/searchpage">Checkout more...</Link>
+              </div>
+            </div>
+          </Shelf>
+          <Shelf shelfName={"Office Supplies"} icon={<BuildingsFill/>}>
+            <div className="w-screen mx-4 bg-white mt-2">
+              <CardSlider
+                styles="w-[90%]"
+                largeScreanSlidesNumber={largeScreanSimilarProductNumber}
+                mediumScreanSlidesNumber={mediumScreanSimilarProductNumber}
+              >
+                {renderLimitedProducts(allProducts)}
+              </CardSlider>
+              <div className="px-6 text-teal hover:text-FlamingoPink hover:italic mb-4">
+                <Link to="/searchpage">Checkout more...</Link>
+              </div>
+            </div>
+          </Shelf>
 
           {/* Repeat similar pattern for other shelves */}
           {/* Adjust the shelfName, icon, and products accordingly */}
