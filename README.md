@@ -11,7 +11,7 @@ Welcome to the frontend repository for Aida, an innovative e-commerce platform d
 
 ### Design Tool
 
-- [**Figma**]: (https://www.figma.com/file/7WucS5tksVPuTBoKAzhzAo/AIDA_gradProject?type=design&node-id=0%3A1&mode=design&t=0UEAyekgt05gEPAZ-1)
+- [**Figma:**](https://www.figma.com/file/7WucS5tksVPuTBoKAzhzAo/AIDA_gradProject?type=design&node-id=0%3A1&mode=design&t=0UEAyekgt05gEPAZ-1)
 
 ### Frontend
 
